@@ -1,4 +1,4 @@
-// Maxx Sorvetes Bertioga - Script Funcional
+// Maxx Sorvetes Bertioga - Script Final
 
 document.addEventListener('DOMContentLoaded', function() {
     // Smooth Scroll
@@ -22,9 +22,106 @@ document.addEventListener('DOMContentLoaded', function() {
                         top: targetPosition - headerHeight,
                         behavior: 'smooth'
                     });
+                    
+                    // Fechar menu mobile se aberto
+                    closeMobileMenu();
                 }
             });
         });
+    }
+
+    // Menu mobile - CORREÇÃO PRINCIPAL
+    function setupMobileMenu() {
+        const menuToggle = document.querySelector('.menu-toggle');
+        const navMenu = document.querySelector('.nav-menu');
+        
+        if (!menuToggle || !navMenu) return;
+        
+        // Inicialmente o menu deve estar visível
+        navMenu.classList.remove('active');
+        
+        // Toggle do menu
+        menuToggle.addEventListener('click', function(e) {
+            e.stopPropagation();
+            e.preventDefault();
+            
+            if (navMenu.classList.contains('active')) {
+                closeMobileMenu();
+            } else {
+                openMobileMenu();
+            }
+        });
+        
+        // Fechar menu ao clicar fora
+        document.addEventListener('click', function(e) {
+            if (!navMenu.contains(e.target) && !menuToggle.contains(e.target)) {
+                closeMobileMenu();
+            }
+        });
+        
+        // Fechar menu ao clicar em um link
+        navMenu.querySelectorAll('.nav-link').forEach(link => {
+            link.addEventListener('click', function() {
+                setTimeout(closeMobileMenu, 300);
+            });
+        });
+        
+        // Atualizar menu ao redimensionar
+        window.addEventListener('resize', function() {
+            if (window.innerWidth > 991) {
+                // Em desktop, menu sempre visível
+                navMenu.classList.remove('active');
+                navMenu.style.display = 'flex';
+                menuToggle.innerHTML = '<i class="fas fa-bars"></i>';
+                menuToggle.setAttribute('aria-label', 'Abrir menu');
+            } else {
+                // Em mobile, verificar estado
+                if (!navMenu.classList.contains('active')) {
+                    navMenu.style.display = 'none';
+                }
+            }
+        });
+        
+        // Inicializar estado baseado na largura da tela
+        if (window.innerWidth <= 991) {
+            navMenu.style.display = 'none';
+        }
+    }
+    
+    function openMobileMenu() {
+        const navMenu = document.querySelector('.nav-menu');
+        const menuToggle = document.querySelector('.menu-toggle');
+        
+        if (navMenu && menuToggle) {
+            navMenu.classList.add('active');
+            navMenu.style.display = 'flex';
+            menuToggle.innerHTML = '<i class="fas fa-times"></i>';
+            menuToggle.setAttribute('aria-label', 'Fechar menu');
+            
+            // Animar entrada
+            setTimeout(() => {
+                navMenu.style.opacity = '1';
+                navMenu.style.transform = 'translateY(0)';
+            }, 10);
+        }
+    }
+    
+    function closeMobileMenu() {
+        const navMenu = document.querySelector('.nav-menu');
+        const menuToggle = document.querySelector('.menu-toggle');
+        
+        if (navMenu && menuToggle) {
+            navMenu.classList.remove('active');
+            menuToggle.innerHTML = '<i class="fas fa-bars"></i>';
+            menuToggle.setAttribute('aria-label', 'Abrir menu');
+            
+            // Animar saída
+            setTimeout(() => {
+                if (!navMenu.classList.contains('active')) {
+                    navMenu.style.display = 'none';
+                }
+            }, 300);
+        }
     }
 
     // Botões de pedido do WhatsApp
@@ -42,18 +139,18 @@ document.addEventListener('DOMContentLoaded', function() {
                     let message = baseMessage;
                     
                     if (product) {
-                        message += `Gostaria de pedir: ${product}`;
+                        message += `• ${product}`;
                     }
                     
-                    // Adicionar extras específicos
-                    if (product === 'Açaí') {
+                    // Adicionar informações específicas por categoria
+                    if (product.includes('Açaí')) {
                         message += "\n\nAcompanhamentos que gostaria:";
                         message += "\n- Leite em pó";
                         message += "\n- Leite condensado";
                         message += "\n- Calda";
                     }
                     
-                    message += "\n\nPoderia me passar mais informações?";
+                    message += "\n\nPoderia me ajudar com o pedido?";
                     
                     // Animação no botão
                     this.style.transform = 'scale(0.95)';
@@ -76,6 +173,24 @@ document.addEventListener('DOMContentLoaded', function() {
         window.open(whatsappUrl, '_blank');
     }
 
+    // Header scroll effect
+    function setupHeaderScroll() {
+        const header = document.querySelector('.header');
+        
+        if (!header) return;
+        
+        function updateHeader() {
+            if (window.scrollY > 50) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        }
+        
+        window.addEventListener('scroll', updateHeader);
+        updateHeader(); // Chamar inicialmente
+    }
+
     // Animações ao scroll
     function setupScrollAnimations() {
         const observerOptions = {
@@ -86,14 +201,15 @@ document.addEventListener('DOMContentLoaded', function() {
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
-                    entry.target.classList.add('animated');
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
                 }
             });
         }, observerOptions);
 
         // Observar elementos para animar
         const elementsToAnimate = document.querySelectorAll(
-            '.category-card, .mini-category, .delivery-card, .contact-item'
+            '.menu-category, .delivery-card, .contact-card, .contact-message, .hero-features'
         );
         
         elementsToAnimate.forEach(el => {
@@ -104,61 +220,87 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // Efeito 3D na foto do Max
-    function setupMax3DEffect() {
-        const maxPhoto3d = document.querySelector('.max-photo-3d');
-        if (!maxPhoto3d) return;
+    // Efeito de interação na foto do Max
+    function setupMaxInteraction() {
+        const maxPhotoContainer = document.querySelector('.max-photo-container');
+        const orbitingScoops = document.querySelectorAll('.orbiting-scoop');
         
-        maxPhoto3d.addEventListener('mousemove', (e) => {
-            const rect = maxPhoto3d.getBoundingClientRect();
-            const x = e.clientX - rect.left;
-            const y = e.clientY - rect.top;
-            
-            const centerX = rect.width / 2;
-            const centerY = rect.height / 2;
-            
-            const rotateY = ((x - centerX) / centerX) * 10;
-            const rotateX = ((centerY - y) / centerY) * 10;
-            
-            maxPhoto3d.style.transform = `
-                translateY(-15px)
-                rotateX(${rotateX}deg)
-                rotateY(${rotateY}deg)
-            `;
+        if (!maxPhotoContainer) return;
+        
+        maxPhotoContainer.addEventListener('mouseenter', () => {
+            orbitingScoops.forEach(scoop => {
+                scoop.style.animationPlayState = 'paused';
+                scoop.style.transform += ' scale(1.2)';
+            });
         });
         
-        maxPhoto3d.addEventListener('mouseleave', () => {
-            maxPhoto3d.style.transform = 'translateY(0) rotateX(0) rotateY(0)';
+        maxPhotoContainer.addEventListener('mouseleave', () => {
+            orbitingScoops.forEach(scoop => {
+                scoop.style.animationPlayState = 'running';
+                scoop.style.transform = scoop.style.transform.replace(' scale(1.2)', '');
+            });
         });
     }
 
-    // Header scroll effect
-    function setupHeaderScroll() {
-        const header = document.querySelector('.header');
+    // Atualizar menu ativo
+    function setupActiveMenu() {
+        const sections = document.querySelectorAll('section[id]');
+        const navLinks = document.querySelectorAll('.nav-link');
         
-        window.addEventListener('scroll', () => {
-            if (window.scrollY > 50) {
-                header.style.padding = '10px 0';
-                header.style.background = 'rgba(255, 255, 255, 0.98)';
-                header.style.boxShadow = 'var(--shadow-md)';
-            } else {
-                header.style.padding = '15px 0';
-                header.style.background = 'rgba(255, 255, 255, 0.98)';
-                header.style.boxShadow = 'var(--shadow-sm)';
-            }
-        });
+        function updateActiveMenu() {
+            let current = '';
+            
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                
+                if (window.scrollY >= (sectionTop - 100)) {
+                    current = section.getAttribute('id');
+                }
+            });
+            
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === `#${current}`) {
+                    link.classList.add('active');
+                }
+            });
+        }
+        
+        window.addEventListener('scroll', updateActiveMenu);
+        updateActiveMenu(); // Chamar inicialmente
     }
 
     // Inicializar tudo
     function init() {
         setupSmoothScroll();
+        setupMobileMenu();
         setupOrderButtons();
-        setupScrollAnimations();
-        setupMax3DEffect();
         setupHeaderScroll();
+        setupScrollAnimations();
+        setupMaxInteraction();
+        setupActiveMenu();
+        
+        // Adicionar classe para dispositivos touch
+        if ('ontouchstart' in window || navigator.maxTouchPoints > 0) {
+            document.body.classList.add('touch-device');
+        }
         
         console.log('🍦 Maxx Sorvetes Bertioga - Site carregado com sucesso!');
     }
 
-    init();
+    // Iniciar quando o DOM estiver pronto
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', init);
+    } else {
+        init();
+    }
 });
+
+// Inicializar animações de fundo
+(function() {
+    const iceElements = document.querySelectorAll('.ice-element');
+    iceElements.forEach((el, index) => {
+        el.style.animationDelay = `${index * 5}s`;
+    });
+})();
