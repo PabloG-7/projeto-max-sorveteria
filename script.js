@@ -34,38 +34,82 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // ===== MENU MOBILE =====
+    // ===== MENU MOBILE - VERSÃO CORRIGIDA =====
     function setupMobileMenu() {
         const menuToggle = document.querySelector('.menu-toggle');
         const navMenu = document.querySelector('.nav-menu');
         
         if (!menuToggle || !navMenu) return;
         
-        // Inicialmente o menu deve estar visível em desktop
-        if (window.innerWidth > 991) {
-            navMenu.style.display = 'flex';
-        } else {
-            navMenu.style.display = 'none';
+        // Configuração inicial baseada no tamanho da tela
+        function setupInitialState() {
+            if (window.innerWidth > 991) {
+                // Desktop - menu sempre visível
+                navMenu.style.display = 'flex';
+                navMenu.classList.remove('mobile-hidden');
+                menuToggle.classList.remove('active');
+            } else {
+                // Mobile - menu inicialmente oculto
+                if (!navMenu.classList.contains('active')) {
+                    navMenu.style.display = 'none';
+                }
+                navMenu.classList.add('mobile-hidden');
+            }
         }
         
-        // Toggle do menu
+        // Chamar inicialmente
+        setupInitialState();
+        
+        // Toggle do menu - CORREÇÃO PRINCIPAL
         menuToggle.addEventListener('click', function(e) {
             e.stopPropagation();
             
+            // Alternar classe 'active' no toggle
+            this.classList.toggle('active');
+            
+            // Alternar classe 'active' no menu
+            navMenu.classList.toggle('active');
+            
+            // Controlar display
             if (navMenu.classList.contains('active')) {
-                closeMobileMenu();
+                navMenu.style.display = 'flex';
+                // Pequeno delay para garantir a transição
+                setTimeout(() => {
+                    navMenu.style.opacity = '1';
+                    navMenu.style.transform = 'translateY(0)';
+                }, 10);
+                // Bloquear scroll do body
+                document.body.style.overflow = 'hidden';
             } else {
-                openMobileMenu();
+                navMenu.style.opacity = '0';
+                navMenu.style.transform = 'translateY(-10px)';
+                // Esperar pela transição antes de esconder
+                setTimeout(() => {
+                    if (!navMenu.classList.contains('active')) {
+                        navMenu.style.display = 'none';
+                    }
+                    // Restaurar scroll do body
+                    document.body.style.overflow = '';
+                }, 300);
             }
         });
         
-        // Fechar menu ao clicar fora
+        // Fechar menu ao clicar fora - CORREÇÃO
         document.addEventListener('click', function(e) {
             if (window.innerWidth <= 991 && 
                 !navMenu.contains(e.target) && 
                 !menuToggle.contains(e.target) &&
                 navMenu.classList.contains('active')) {
-                closeMobileMenu();
+                
+                menuToggle.classList.remove('active');
+                navMenu.classList.remove('active');
+                navMenu.style.opacity = '0';
+                navMenu.style.transform = 'translateY(-10px)';
+                
+                setTimeout(() => {
+                    navMenu.style.display = 'none';
+                    document.body.style.overflow = '';
+                }, 300);
             }
         });
         
@@ -73,62 +117,44 @@ document.addEventListener('DOMContentLoaded', function() {
         navMenu.querySelectorAll('.nav-link').forEach(link => {
             link.addEventListener('click', function() {
                 if (window.innerWidth <= 991) {
-                    setTimeout(closeMobileMenu, 300);
+                    menuToggle.classList.remove('active');
+                    navMenu.classList.remove('active');
+                    navMenu.style.opacity = '0';
+                    navMenu.style.transform = 'translateY(-10px)';
+                    
+                    setTimeout(() => {
+                        navMenu.style.display = 'none';
+                        document.body.style.overflow = '';
+                    }, 300);
                 }
             });
         });
         
-        // Atualizar menu ao redimensionar
+        // Atualizar ao redimensionar - CORREÇÃO
         window.addEventListener('resize', function() {
             if (window.innerWidth > 991) {
-                // Em desktop, menu sempre visível
-                navMenu.classList.remove('active');
+                // Desktop - resetar tudo
                 navMenu.style.display = 'flex';
-                menuToggle.innerHTML = '<i class="fas fa-bars"></i>';
-                menuToggle.setAttribute('aria-label', 'Abrir menu');
+                navMenu.style.opacity = '1';
+                navMenu.style.transform = 'none';
+                navMenu.classList.remove('active', 'mobile-hidden');
+                menuToggle.classList.remove('active');
+                document.body.style.overflow = '';
             } else {
-                // Em mobile, verificar estado
-                if (!navMenu.classList.contains('active')) {
+                // Mobile - aplicar classe para controle
+                navMenu.classList.add('mobile-hidden');
+                
+                // Se o menu estava aberto, fechar
+                if (navMenu.classList.contains('active')) {
+                    navMenu.classList.remove('active');
+                    menuToggle.classList.remove('active');
                     navMenu.style.display = 'none';
+                    navMenu.style.opacity = '0';
+                    navMenu.style.transform = 'translateY(-10px)';
+                    document.body.style.overflow = '';
                 }
             }
         });
-    }
-    
-    function openMobileMenu() {
-        const navMenu = document.querySelector('.nav-menu');
-        const menuToggle = document.querySelector('.menu-toggle');
-        
-        if (navMenu && menuToggle) {
-            navMenu.style.display = 'flex';
-            setTimeout(() => {
-                navMenu.classList.add('active');
-            }, 10);
-            menuToggle.innerHTML = '<i class="fas fa-times"></i>';
-            menuToggle.setAttribute('aria-label', 'Fechar menu');
-            
-            // Prevenir scroll do body quando menu está aberto
-            document.body.style.overflow = 'hidden';
-        }
-    }
-    
-    function closeMobileMenu() {
-        const navMenu = document.querySelector('.nav-menu');
-        const menuToggle = document.querySelector('.menu-toggle');
-        
-        if (navMenu && menuToggle) {
-            navMenu.classList.remove('active');
-            setTimeout(() => {
-                if (!navMenu.classList.contains('active')) {
-                    navMenu.style.display = 'none';
-                }
-            }, 300);
-            menuToggle.innerHTML = '<i class="fas fa-bars"></i>';
-            menuToggle.setAttribute('aria-label', 'Abrir menu');
-            
-            // Restaurar scroll do body
-            document.body.style.overflow = '';
-        }
     }
 
     // ===== BOTÕES DO WHATSAPP =====
@@ -422,10 +448,10 @@ document.addEventListener('DOMContentLoaded', function() {
         setupFormValidation();
         setupViewCounter();
         
-       // Log de sucesso
-console.log('✅ Max Sorvetes Ibertioga - Site totalmente inicializado!');
-console.log('📞 WhatsApp: (32) 98444-2475');
-console.log('📍 Endereço: R. Rio de Janeiro, 652 - Ibertioga/MG');
+        // Log de sucesso
+        console.log('✅ Max Sorvetes Ibertioga - Site totalmente inicializado!');
+        console.log('📞 WhatsApp: (32) 98444-2475');
+        console.log('📍 Endereço: R. Rio de Janeiro, 652 - Ibertioga/MG');
     }
 
     // ===== INICIAR QUANDO O DOM ESTIVER PRONTO =====
