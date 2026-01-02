@@ -184,12 +184,18 @@ body {
 
 .logo-emoji {
     font-size: 2rem;
-    animation: spinLogo 20s linear infinite;
+    animation: gentlePulse 4s ease-in-out infinite;
+    display: inline-block;
+    transform-origin: center;
 }
 
-@keyframes spinLogo {
-    from { transform: rotate(0deg); }
-    to { transform: rotate(360deg); }
+@keyframes gentlePulse {
+    0%, 100% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.2);
+    }
 }
 
 .logo-text {
