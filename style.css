@@ -79,54 +79,7 @@ body {
     scrollbar-color: var(--roxo-claro) var(--off-white);
 }
 
-/* ===== WHATSAPP BUTTON ===== */
-.whatsapp-btn {
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    z-index: 1000;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 60px;
-    height: 60px;
-    border-radius: 50%;
-    background: var(--gradient-whatsapp);
-    color: white;
-    font-size: 1.5rem;
-    box-shadow: var(--shadow-lg);
-    transition: var(--transition);
-    text-decoration: none;
-    animation: floatWhatsApp 3s ease-in-out infinite;
-    border: none;
-    outline: none;
-}
 
-.whatsapp-btn .btn-text {
-    display: none;
-}
-
-@media (min-width: 768px) {
-    .whatsapp-btn {
-        width: auto;
-        height: auto;
-        padding: 16px 24px;
-        border-radius: 50px;
-    }
-    
-    .whatsapp-btn .btn-text {
-        display: inline;
-        margin-left: 8px;
-        font-size: 0.9rem;
-        font-weight: 600;
-    }
-}
-
-.whatsapp-btn:hover {
-    transform: translateY(-5px) scale(1.05);
-    box-shadow: 0 10px 30px rgba(37, 211, 102, 0.4);
-    background: var(--verde-hover);
-}
 
 @keyframes floatWhatsApp {
     0%, 100% { 
@@ -697,7 +650,7 @@ body {
         0 15px 30px rgba(0, 0, 0, 0.1),
         0 8px 16px rgba(124, 58, 237, 0.1),
         inset 0 0 0 1px rgba(255, 255, 255, 0.5);
-    background: linear-gradient(1deg, #ffe11fd0, #ffbf0096);
+    background: linear-gradient(1deg, #8f1fffd0, #ffbf0096);
     margin: 0 auto;
     z-index: 2;
 }
