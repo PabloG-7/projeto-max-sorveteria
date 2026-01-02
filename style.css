@@ -308,7 +308,7 @@ body {
 /* ===== NOVA HERO SECTION ===== */
 .hero {
     padding: 140px 0 40px;
-    background: linear-gradient(1deg, #ffd16694 0%, #F8F5FF 100%);
+    background: linear-gradient(180deg, #66faff94 0%, #F8F5FF 100%);
     min-height: 100vh;
     display: flex;
     align-items: center;
@@ -697,7 +697,7 @@ body {
         0 15px 30px rgba(0, 0, 0, 0.1),
         0 8px 16px rgba(124, 58, 237, 0.1),
         inset 0 0 0 1px rgba(255, 255, 255, 0.5);
-    background: linear-gradient(135deg, #8d4cffa1, #ffa200);
+    background: linear-gradient(135deg, #ffd000a1, #ffa200);
     margin: 0 auto;
     z-index: 2;
 }
@@ -1496,7 +1496,7 @@ body {
 /* ===== DELIVERY SECTION ATUALIZADA ===== */
 .delivery-section {
     padding: 80px 0;
-    background: linear-gradient(150deg, #ffd16694 0%, #fff9f5 100%);
+    background: linear-gradient(180deg, #ffd16694 0%, #fff9f5 100%);
     position: relative;
     overflow: hidden;
 }
