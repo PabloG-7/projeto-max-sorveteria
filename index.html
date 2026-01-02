@@ -12,14 +12,6 @@
     <link rel="icon" type="image/x-icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🍨</text></svg>">
 </head>
 <body>
-    <!-- WhatsApp Flutuante -->
-    <a href="https://wa.me/5532986262715?text=Oi!%20Vim%20pelo%20site%20da%20Maxx%20Sorvetes%20Bertioga%20e%20gostaria%20de%20fazer%20um%20pedido%20%F0%9F%8D%B8" 
-       class="whatsapp-btn" 
-       target="_blank" 
-       aria-label="Pedir pelo WhatsApp">
-        <i class="fab fa-whatsapp"></i>
-        <span class="btn-text">Pedir Agora</span>
-    </a>
 
     <!-- Header -->
     <header class="header">
@@ -68,6 +60,16 @@
 
     <!-- Hero Section Atualizada -->
     <section class="hero" id="home">
+        <!-- Elementos de fundo minimalistas de sorvete -->
+        <div class="icecream-background">
+            <div class="bg-icecream bg-ice-1">🍦</div>
+            <div class="bg-icecream bg-ice-2">🍨</div>
+            <div class="bg-icecream bg-ice-3">🧊</div>
+            <div class="bg-icecream bg-ice-4">🥥</div>
+            <div class="bg-icecream bg-ice-5">🍧</div>
+            <div class="bg-icecream bg-ice-6">🍓</div>
+        </div>
+        
         <div class="hero-container">
             <div class="hero-content">
                 <!-- Texto e Informações -->
@@ -78,7 +80,6 @@
                             <div class="scoop-1"></div>
                             <div class="scoop-2"></div>
                             <div class="scoop-3"></div>
-                    
                             <div class="cone"></div>
                         </div>
                         <div class="logo-text">
@@ -108,34 +109,32 @@
                     </div>
                 </div>
                 
-               <!-- Foto do cliente com Animações de Sorvete -->
-<div class="hero-photo-section">
-    <div class="photo-container">
-        <!-- Container da foto com efeitos -->
-        <div class="photo-wrapper">
-            <!-- Anéis concêntricos sutis -->
-            <div class="ring ring-1"></div>
-            <div class="ring ring-2"></div>
-            
-            <!-- Foto do cliente -->
-            <div class="client-photo">
-                <img src="3d-maxx (1).png" alt="Max - Maxx Sorvetes Ibertioga" class="client-img">
-                
-                <!-- Overlay gradiente sutil -->
-                <div class="photo-overlay"></div>
-                
-                <!-- Badge minimalista -->
-                <div class="badge-minimal">
-                    <div class="badge-line"></div>
-                    <div class="badge-content">
-                        <span class="badge-name">MAX</span>
-                        <span class="badge-role">Fundador & Sorveteiro</span>
+                <!-- Foto do cliente -->
+                <div class="hero-photo-section">
+                    <div class="photo-container">
+                        <div class="photo-wrapper">
+                            <div class="ring ring-1"></div>
+                            <div class="ring ring-2"></div>
+                            
+                            <!-- Foto do cliente -->
+                            <div class="client-photo">
+                                <img src="3d-maxx (1).png" alt="Max - Maxx Sorvetes Ibertioga" class="client-img">
+                                
+                                <div class="photo-overlay"></div>
+                                
+                                <div class="badge-minimal">
+                                    <div class="badge-line"></div>
+                                    <div class="badge-content">
+                                        <span class="badge-name">MAX</span>
+                                        <span class="badge-role">Fundador & Sorveteiro</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-</div>
     </section>
 
     <!-- Cardápio -->
@@ -439,7 +438,7 @@
         </div>
     </section>
 
-    <!-- Delivery ATUALIZADO -->
+    <!-- Delivery -->
     <section class="delivery-section" id="delivery">
         <div class="container">
             <div class="delivery-content">
@@ -452,8 +451,6 @@
                 </div>
                 
                 <div class="delivery-stats">
-            
-                    
                     <div class="stat-card">
                         <div class="stat-icon">
                             <i class="fas fa-truck"></i>
@@ -530,7 +527,7 @@
         </div>
     </section>
 
-    <!-- Contato -->
+    <!-- Contato ATUALIZADO -->
     <section class="contact-section" id="contato">
         <div class="container">
             <div class="contact-content">
@@ -564,7 +561,8 @@
                             </div>
                             <div class="contact-details">
                                 <h3>Localização</h3>
-                                <p class="contact-number">Ibertioga - MG</p>
+                                <p class="contact-number">Rua Principal, 123 - Centro</p>
+                                <p class="contact-note">Ibertioga - MG</p>
                                 <p class="contact-note">Sorveteria local com delivery</p>
                             </div>
                         </div>
@@ -582,22 +580,28 @@
                     </div>
                     
                     <div class="contact-message">
-                        <h3>Mande uma mensagem agora!</h3>
-                        <p>Clique no botão abaixo para falar diretamente com o Max no WhatsApp e fazer seu pedido.</p>
+                        <h3>Venha nos visitar!</h3>
+                        <p>Estamos localizados no centro de Ibertioga, pronto para te atender com os melhores sorvetes da região.</p>
                         
-                        <div class="contact-actions">
+                        <!-- Google Maps -->
+                        <div class="map-container">
+                            <iframe 
+                                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3746.6784292006784!2d-43.64331502559608!3d-21.09509595639064!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xa1e508297e8db%3A0xce12b664720c60e2!2sIbertioga%2C%20MG%2C%2036235-000!5e0!3m2!1spt-BR!2sbr!4v1710873053777!5m2!1spt-BR!2sbr"
+                                width="100%"
+                                height="300"
+                                style="border:0; border-radius: 12px;"
+                                allowfullscreen=""
+                                loading="lazy"
+                                referrerpolicy="no-referrer-when-downgrade">
+                            </iframe>
+                        </div>
+                        
+                        <div class="contact-actions" style="margin-top: 20px;">
                             <a href="https://wa.me/5532986262715?text=Oi!%20Vim%20pelo%20site%20da%20Maxx%20Sorvetes%20Bertioga%20e%20gostaria%20de%20fazer%20um%20pedido%20%F0%9F%8D%B8" 
                                class="btn-whatsapp-large" 
                                target="_blank">
                                 <i class="fab fa-whatsapp"></i>
-                                Falar com o Max no WhatsApp
-                            </a>
-                            
-                            <a href="https://wa.me/5532986262715?text=Oi%20Max!%20Vim%20pelo%20site%20da%20Maxx%20Sorvetes%20Bertioga%20e%20gostaria%20de%20saber%20mais%20sobre%20os%20produtos%20%F0%9F%8D%B8" 
-                               class="btn-outline" 
-                               target="_blank">
-                                <i class="fas fa-question-circle"></i>
-                                Tirar Dúvidas
+                                Pedir pelo WhatsApp
                             </a>
                         </div>
                     </div>
@@ -606,7 +610,7 @@
         </div>
     </section>
 
-    <!-- Footer -->
+    <!-- Footer ATUALIZADO -->
     <footer class="footer">
         <div class="container">
             <div class="footer-content">
@@ -639,7 +643,7 @@
                     </a>
                     <div class="footer-contact-item">
                         <i class="fas fa-map-marker-alt"></i>
-                        Ibertioga - MG
+                        Rua Principal, 123 - Centro
                     </div>
                     <div class="footer-contact-item">
                         <i class="fas fa-clock"></i>
@@ -649,10 +653,19 @@
             </div>
             
             <div class="footer-bottom">
-                <p>© 2025 Maxx Sorvetes Bertioga. Todos os direitos reservados.</p>
+                <p>© 2025 Maxx Sorvetes Ibertioga. Todos os direitos reservados.</p>
+                <p>Endereço: Rua Principal, 123 - Centro, Ibertioga - MG</p>
             </div>
         </div>
     </footer>
+
+    <!-- Botão WhatsApp Fixo -->
+    <a href="https://wa.me/5532986262715?text=Oi!%20Vim%20pelo%20site%20da%20Maxx%20Sorvetes%20Bertioga%20e%20gostaria%20de%20fazer%20um%20pedido%20%F0%9F%8D%B8" 
+       class="whatsapp-btn" 
+       target="_blank">
+        <i class="fab fa-whatsapp"></i>
+        <span class="btn-text">Pedir Agora</span>
+    </a>
 
     <script src="script.js"></script>
 </body>
