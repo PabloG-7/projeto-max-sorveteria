@@ -651,6 +651,7 @@ body {
         0 8px 16px rgba(124, 58, 237, 0.1),
         inset 0 0 0 1px rgba(255, 255, 255, 0.5);
     background-color: var(--roxo-escuro);
+    border: 3px solid var(--amarelo);
     margin: 0 auto;
     z-index: 2;
 }
