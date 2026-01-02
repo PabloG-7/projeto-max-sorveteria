@@ -30,20 +30,23 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // Menu mobile
+    // Menu mobile - CORRIGIDO E FUNCIONAL
     function setupMobileMenu() {
         const menuToggle = document.querySelector('.menu-toggle');
         const navMenu = document.querySelector('.nav-menu');
         
         if (!menuToggle || !navMenu) return;
         
-        // Inicialmente o menu deve estar visível
-        navMenu.classList.remove('active');
+        // Inicialmente o menu deve estar visível em desktop
+        if (window.innerWidth > 991) {
+            navMenu.style.display = 'flex';
+        } else {
+            navMenu.style.display = 'none';
+        }
         
         // Toggle do menu
         menuToggle.addEventListener('click', function(e) {
             e.stopPropagation();
-            e.preventDefault();
             
             if (navMenu.classList.contains('active')) {
                 closeMobileMenu();
@@ -54,7 +57,10 @@ document.addEventListener('DOMContentLoaded', function() {
         
         // Fechar menu ao clicar fora
         document.addEventListener('click', function(e) {
-            if (!navMenu.contains(e.target) && !menuToggle.contains(e.target)) {
+            if (window.innerWidth <= 991 && 
+                !navMenu.contains(e.target) && 
+                !menuToggle.contains(e.target) &&
+                navMenu.classList.contains('active')) {
                 closeMobileMenu();
             }
         });
@@ -62,7 +68,9 @@ document.addEventListener('DOMContentLoaded', function() {
         // Fechar menu ao clicar em um link
         navMenu.querySelectorAll('.nav-link').forEach(link => {
             link.addEventListener('click', function() {
-                setTimeout(closeMobileMenu, 300);
+                if (window.innerWidth <= 991) {
+                    setTimeout(closeMobileMenu, 300);
+                }
             });
         });
         
@@ -81,11 +89,6 @@ document.addEventListener('DOMContentLoaded', function() {
                 }
             }
         });
-        
-        // Inicializar estado baseado na largura da tela
-        if (window.innerWidth <= 991) {
-            navMenu.style.display = 'none';
-        }
     }
     
     function openMobileMenu() {
@@ -93,16 +96,12 @@ document.addEventListener('DOMContentLoaded', function() {
         const menuToggle = document.querySelector('.menu-toggle');
         
         if (navMenu && menuToggle) {
-            navMenu.classList.add('active');
             navMenu.style.display = 'flex';
+            setTimeout(() => {
+                navMenu.classList.add('active');
+            }, 10);
             menuToggle.innerHTML = '<i class="fas fa-times"></i>';
             menuToggle.setAttribute('aria-label', 'Fechar menu');
-            
-            // Animar entrada
-            setTimeout(() => {
-                navMenu.style.opacity = '1';
-                navMenu.style.transform = 'translateY(0)';
-            }, 10);
         }
     }
     
@@ -112,15 +111,13 @@ document.addEventListener('DOMContentLoaded', function() {
         
         if (navMenu && menuToggle) {
             navMenu.classList.remove('active');
-            menuToggle.innerHTML = '<i class="fas fa-bars"></i>';
-            menuToggle.setAttribute('aria-label', 'Abrir menu');
-            
-            // Animar saída
             setTimeout(() => {
                 if (!navMenu.classList.contains('active')) {
                     navMenu.style.display = 'none';
                 }
             }, 300);
+            menuToggle.innerHTML = '<i class="fas fa-bars"></i>';
+            menuToggle.setAttribute('aria-label', 'Abrir menu');
         }
     }
 
@@ -191,32 +188,23 @@ document.addEventListener('DOMContentLoaded', function() {
         updateHeader(); // Chamar inicialmente
     }
 
-    // Animações ao scroll
+    // ANIMAÇÃO SCROLL REVEAL - NOVA E MELHOR
     function setupScrollAnimations() {
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
-        };
-
-        const observer = new IntersectionObserver((entries) => {
+        const revealElements = document.querySelectorAll('.reveal, .reveal-scale');
+        
+        const revealObserver = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
-                    entry.target.style.opacity = '1';
-                    entry.target.style.transform = 'translateY(0)';
+                    entry.target.classList.add('active');
                 }
             });
-        }, observerOptions);
-
-        // Observar elementos para animar
-        const elementsToAnimate = document.querySelectorAll(
-            '.menu-category, .delivery-card, .contact-card, .contact-message, .hero-info, .hero-photo-section'
-        );
+        }, {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        });
         
-        elementsToAnimate.forEach(el => {
-            el.style.opacity = '0';
-            el.style.transform = 'translateY(20px)';
-            el.style.transition = 'all 0.6s ease-out';
-            observer.observe(el);
+        revealElements.forEach(element => {
+            revealObserver.observe(element);
         });
     }
 
@@ -238,23 +226,9 @@ document.addEventListener('DOMContentLoaded', function() {
                 scoop.style.animationPlayState = 'running';
             });
         });
-        
-        // Animar elementos ao entrar na tela
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('animated');
-                }
-            });
-        }, { threshold: 0.1 });
-        
-        const heroElements = document.querySelectorAll('.hero-info, .hero-photo-section');
-        heroElements.forEach(el => {
-            observer.observe(el);
-        });
     }
 
-    // Atualizar menu ativo
+    // Atualizar menu ativo durante scroll
     function setupActiveMenu() {
         const sections = document.querySelectorAll('section[id]');
         const navLinks = document.querySelectorAll('.nav-link');
@@ -311,6 +285,5 @@ document.addEventListener('DOMContentLoaded', function() {
 
 // Inicializar animações de fundo
 (function() {
-    // Inicializar qualquer animação adicional se necessário
     console.log('Animações inicializadas!');
 })();
