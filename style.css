@@ -308,7 +308,7 @@ body {
 /* ===== NOVA HERO SECTION ===== */
 .hero {
     padding: 140px 0 40px;
-    background: linear-gradient(135deg, #FFF9F5 0%, #F8F5FF 100%);
+    background: linear-gradient(135deg, #ffd16694 0%, #F8F5FF 100%);
     min-height: 100vh;
     display: flex;
     align-items: center;
@@ -1496,7 +1496,7 @@ body {
 /* ===== DELIVERY SECTION ATUALIZADA ===== */
 .delivery-section {
     padding: 80px 0;
-    background: linear-gradient(135deg, #f8f5ff 0%, #fff9f5 100%);
+    background: linear-gradient(135deg, #ffd16694 0%, #fff9f5 100%);
     position: relative;
     overflow: hidden;
 }
