@@ -5,6 +5,56 @@ document.addEventListener('DOMContentLoaded', function() {
     // ===== CONFIGURAÇÃO INICIAL =====
     console.log('🍦 Max Sorvetes Ibertioga - Inicializando...');
     
+    // ===== FUNÇÕES AUXILIARES =====
+    function openMobileMenu() {
+        const navMenu = document.querySelector('.nav-menu');
+        const menuToggle = document.querySelector('.menu-toggle');
+        
+        if (navMenu && menuToggle) {
+            navMenu.style.display = 'flex';
+            setTimeout(() => {
+                navMenu.classList.add('active');
+            }, 10);
+            menuToggle.innerHTML = '<i class="fas fa-times"></i>';
+            menuToggle.setAttribute('aria-label', 'Fechar menu');
+            menuToggle.classList.add('active');
+            
+            // Prevenir scroll do body quando menu está aberto
+            document.body.classList.add('menu-open');
+        }
+    }
+    
+    function closeMobileMenu() {
+        const navMenu = document.querySelector('.nav-menu');
+        const menuToggle = document.querySelector('.menu-toggle');
+        
+        if (navMenu && menuToggle) {
+            navMenu.classList.remove('active');
+            menuToggle.innerHTML = '<i class="fas fa-bars"></i>';
+            menuToggle.setAttribute('aria-label', 'Abrir menu');
+            menuToggle.classList.remove('active');
+            
+            // Esperar pela transição antes de esconder
+            setTimeout(() => {
+                if (!navMenu.classList.contains('active')) {
+                    navMenu.style.display = 'none';
+                }
+            }, 300);
+            
+            // Restaurar scroll do body
+            document.body.classList.remove('menu-open');
+        }
+    }
+    
+    function toggleMobileMenu() {
+        const navMenu = document.querySelector('.nav-menu');
+        if (navMenu && navMenu.classList.contains('active')) {
+            closeMobileMenu();
+        } else {
+            openMobileMenu();
+        }
+    }
+    
     // ===== SMOOTH SCROLL =====
     function setupSmoothScroll() {
         const links = document.querySelectorAll('a[href^="#"]');
@@ -34,7 +84,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // ===== MENU MOBILE - VERSÃO CORRIGIDA =====
+    // ===== MENU MOBILE =====
     function setupMobileMenu() {
         const menuToggle = document.querySelector('.menu-toggle');
         const navMenu = document.querySelector('.nav-menu');
@@ -46,114 +96,67 @@ document.addEventListener('DOMContentLoaded', function() {
             if (window.innerWidth > 991) {
                 // Desktop - menu sempre visível
                 navMenu.style.display = 'flex';
-                navMenu.classList.remove('mobile-hidden');
+                navMenu.classList.remove('active');
                 menuToggle.classList.remove('active');
+                document.body.classList.remove('menu-open');
             } else {
                 // Mobile - menu inicialmente oculto
-                if (!navMenu.classList.contains('active')) {
-                    navMenu.style.display = 'none';
-                }
-                navMenu.classList.add('mobile-hidden');
+                navMenu.style.display = 'none';
+                navMenu.classList.remove('active');
+                menuToggle.classList.remove('active');
             }
         }
         
         // Chamar inicialmente
         setupInitialState();
         
-        // Toggle do menu - CORREÇÃO PRINCIPAL
+        // Toggle do menu
         menuToggle.addEventListener('click', function(e) {
             e.stopPropagation();
-            
-            // Alternar classe 'active' no toggle
-            this.classList.toggle('active');
-            
-            // Alternar classe 'active' no menu
-            navMenu.classList.toggle('active');
-            
-            // Controlar display
-            if (navMenu.classList.contains('active')) {
-                navMenu.style.display = 'flex';
-                // Pequeno delay para garantir a transição
-                setTimeout(() => {
-                    navMenu.style.opacity = '1';
-                    navMenu.style.transform = 'translateY(0)';
-                }, 10);
-                // Bloquear scroll do body
-                document.body.style.overflow = 'hidden';
-            } else {
-                navMenu.style.opacity = '0';
-                navMenu.style.transform = 'translateY(-10px)';
-                // Esperar pela transição antes de esconder
-                setTimeout(() => {
-                    if (!navMenu.classList.contains('active')) {
-                        navMenu.style.display = 'none';
-                    }
-                    // Restaurar scroll do body
-                    document.body.style.overflow = '';
-                }, 300);
-            }
+            toggleMobileMenu();
         });
         
-        // Fechar menu ao clicar fora - CORREÇÃO
+        // Fechar menu ao clicar fora
         document.addEventListener('click', function(e) {
             if (window.innerWidth <= 991 && 
+                navMenu && 
                 !navMenu.contains(e.target) && 
+                menuToggle && 
                 !menuToggle.contains(e.target) &&
                 navMenu.classList.contains('active')) {
-                
-                menuToggle.classList.remove('active');
-                navMenu.classList.remove('active');
-                navMenu.style.opacity = '0';
-                navMenu.style.transform = 'translateY(-10px)';
-                
-                setTimeout(() => {
-                    navMenu.style.display = 'none';
-                    document.body.style.overflow = '';
-                }, 300);
+                closeMobileMenu();
             }
         });
         
-        // Fechar menu ao clicar em um link
-        navMenu.querySelectorAll('.nav-link').forEach(link => {
+        // Fechar menu ao clicar em um link (exceto o botão do WhatsApp)
+        navMenu.querySelectorAll('.nav-link:not([href*="whatsapp"])').forEach(link => {
             link.addEventListener('click', function() {
                 if (window.innerWidth <= 991) {
-                    menuToggle.classList.remove('active');
-                    navMenu.classList.remove('active');
-                    navMenu.style.opacity = '0';
-                    navMenu.style.transform = 'translateY(-10px)';
-                    
-                    setTimeout(() => {
-                        navMenu.style.display = 'none';
-                        document.body.style.overflow = '';
-                    }, 300);
+                    setTimeout(closeMobileMenu, 300);
                 }
             });
         });
         
-        // Atualizar ao redimensionar - CORREÇÃO
+        // Atualizar ao redimensionar
+        let resizeTimer;
         window.addEventListener('resize', function() {
-            if (window.innerWidth > 991) {
-                // Desktop - resetar tudo
-                navMenu.style.display = 'flex';
-                navMenu.style.opacity = '1';
-                navMenu.style.transform = 'none';
-                navMenu.classList.remove('active', 'mobile-hidden');
-                menuToggle.classList.remove('active');
-                document.body.style.overflow = '';
-            } else {
-                // Mobile - aplicar classe para controle
-                navMenu.classList.add('mobile-hidden');
-                
-                // Se o menu estava aberto, fechar
-                if (navMenu.classList.contains('active')) {
+            clearTimeout(resizeTimer);
+            resizeTimer = setTimeout(function() {
+                if (window.innerWidth > 991) {
+                    // Desktop - resetar tudo
+                    navMenu.style.display = 'flex';
                     navMenu.classList.remove('active');
                     menuToggle.classList.remove('active');
-                    navMenu.style.display = 'none';
-                    navMenu.style.opacity = '0';
-                    navMenu.style.transform = 'translateY(-10px)';
-                    document.body.style.overflow = '';
+                    document.body.classList.remove('menu-open');
+                    menuToggle.innerHTML = '<i class="fas fa-bars"></i>';
+                    menuToggle.setAttribute('aria-label', 'Abrir menu');
+                } else {
+                    // Mobile - se estava aberto, manter aberto
+                    if (!navMenu.classList.contains('active')) {
+                        navMenu.style.display = 'none';
+                    }
                 }
-            }
+            }, 250);
         });
     }
 
@@ -433,8 +436,18 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
+    // ===== PREVENIR COMPORTAMENTO PADRÃO DE LINKS # =====
+    function setupLinkPrevention() {
+        document.querySelectorAll('a[href="#"]').forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+            });
+        });
+    }
+
     // ===== INICIALIZAR TUDO =====
     function init() {
+        setupLinkPrevention();
         setupSmoothScroll();
         setupMobileMenu();
         setupOrderButtons();
@@ -452,6 +465,15 @@ document.addEventListener('DOMContentLoaded', function() {
         console.log('✅ Max Sorvetes Ibertioga - Site totalmente inicializado!');
         console.log('📞 WhatsApp: (32) 98444-2475');
         console.log('📍 Endereço: R. Rio de Janeiro, 652 - Ibertioga/MG');
+        
+        // Animar título do hero após inicialização
+        setTimeout(() => {
+            const heroTitle = document.querySelector('.hero-title');
+            if (heroTitle) {
+                heroTitle.style.opacity = '1';
+                heroTitle.style.transform = 'translateY(0)';
+            }
+        }, 500);
     }
 
     // ===== INICIAR QUANDO O DOM ESTIVER PRONTO =====
@@ -489,3 +511,40 @@ window.addEventListener('beforeunload', function() {
     // Você pode adicionar algum código aqui se necessário
     // Por exemplo, enviar uma métrica de saída
 });
+
+// ===== FUNÇÕES DE MENU GLOBAIS =====
+function openMobileMenu() {
+    const navMenu = document.querySelector('.nav-menu');
+    const menuToggle = document.querySelector('.menu-toggle');
+    
+    if (navMenu && menuToggle) {
+        navMenu.style.display = 'flex';
+        setTimeout(() => {
+            navMenu.classList.add('active');
+        }, 10);
+        menuToggle.innerHTML = '<i class="fas fa-times"></i>';
+        menuToggle.setAttribute('aria-label', 'Fechar menu');
+        menuToggle.classList.add('active');
+        document.body.classList.add('menu-open');
+    }
+}
+
+function closeMobileMenu() {
+    const navMenu = document.querySelector('.nav-menu');
+    const menuToggle = document.querySelector('.menu-toggle');
+    
+    if (navMenu && menuToggle) {
+        navMenu.classList.remove('active');
+        menuToggle.innerHTML = '<i class="fas fa-bars"></i>';
+        menuToggle.setAttribute('aria-label', 'Abrir menu');
+        menuToggle.classList.remove('active');
+        
+        setTimeout(() => {
+            if (!navMenu.classList.contains('active')) {
+                navMenu.style.display = 'none';
+            }
+        }, 300);
+        
+        document.body.classList.remove('menu-open');
+    }
+}
