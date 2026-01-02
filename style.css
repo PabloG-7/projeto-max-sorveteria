@@ -697,7 +697,7 @@ body {
         0 15px 30px rgba(0, 0, 0, 0.1),
         0 8px 16px rgba(124, 58, 237, 0.1),
         inset 0 0 0 1px rgba(255, 255, 255, 0.5);
-    background: linear-gradient(135deg, #7c3aeda1, #ffa200);
+    background: linear-gradient(135deg, #8d4cffa1, #ffa200);
     margin: 0 auto;
     z-index: 2;
 }
