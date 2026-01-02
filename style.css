@@ -1898,7 +1898,13 @@ body {
         max-width: 100%;
         padding: 0 30px;
     }
-    
+
+    .mobile-logo {
+        justify-content: center;
+    }
+    .cta-buttons {
+        margin: auto;
+    }
     .menu-toggle {
         display: block;
         order: 2;
@@ -2140,7 +2146,7 @@ body {
 /* Celulares específicos para a nova Hero */
 @media (max-width: 767px) {
     .hero {
-        padding: 120px 0 30px;
+        padding: 120px 0 80px;
         min-height: auto;
     }
     
@@ -2207,7 +2213,7 @@ body {
 /* Celulares muito pequenos (até 375px) */
 @media (max-width: 375px) {
     .hero {
-        padding: 110px 0 20px;
+        padding: 110px 0 70px;
     }
     
     .main-logo {
