@@ -1,4 +1,4 @@
-// Maxx Sorvetes Bertioga - Script Final
+// Maxx Sorvetes Ibertioga - Script Final
 
 document.addEventListener('DOMContentLoaded', function() {
     // Smooth Scroll
@@ -30,7 +30,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // Menu mobile - CORREÇÃO PRINCIPAL
+    // Menu mobile
     function setupMobileMenu() {
         const menuToggle = document.querySelector('.menu-toggle');
         const navMenu = document.querySelector('.nav-menu');
@@ -126,7 +126,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Botões de pedido do WhatsApp
     function setupOrderButtons() {
-        const baseMessage = "Oi! Vim pelo site da Maxx Sorvetes Bertioga e gostaria de fazer um pedido 🍨\n\n";
+        const baseMessage = "Oi! Vim pelo site da Maxx Sorvetes Ibertioga e gostaria de fazer um pedido 🍨\n\n";
         
         document.querySelectorAll('[data-item]').forEach(button => {
             button.addEventListener('click', function(e) {
@@ -209,7 +209,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
         // Observar elementos para animar
         const elementsToAnimate = document.querySelectorAll(
-            '.menu-category, .delivery-card, .contact-card, .contact-message, .hero-features'
+            '.menu-category, .delivery-card, .contact-card, .contact-message, .hero-info, .hero-photo-section'
         );
         
         elementsToAnimate.forEach(el => {
@@ -220,25 +220,37 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // Efeito de interação na foto do Max
+    // Interatividade com a nova foto do Max
     function setupMaxInteraction() {
-        const maxPhotoContainer = document.querySelector('.max-photo-container');
-        const orbitingScoops = document.querySelectorAll('.orbiting-scoop');
+        const photoContainer = document.querySelector('.photo-container');
+        const scoopFloats = document.querySelectorAll('.scoop-float');
         
-        if (!maxPhotoContainer) return;
+        if (!photoContainer) return;
         
-        maxPhotoContainer.addEventListener('mouseenter', () => {
-            orbitingScoops.forEach(scoop => {
+        photoContainer.addEventListener('mouseenter', () => {
+            scoopFloats.forEach(scoop => {
                 scoop.style.animationPlayState = 'paused';
-                scoop.style.transform += ' scale(1.2)';
             });
         });
         
-        maxPhotoContainer.addEventListener('mouseleave', () => {
-            orbitingScoops.forEach(scoop => {
+        photoContainer.addEventListener('mouseleave', () => {
+            scoopFloats.forEach(scoop => {
                 scoop.style.animationPlayState = 'running';
-                scoop.style.transform = scoop.style.transform.replace(' scale(1.2)', '');
             });
+        });
+        
+        // Animar elementos ao entrar na tela
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animated');
+                }
+            });
+        }, { threshold: 0.1 });
+        
+        const heroElements = document.querySelectorAll('.hero-info, .hero-photo-section');
+        heroElements.forEach(el => {
+            observer.observe(el);
         });
     }
 
@@ -286,7 +298,7 @@ document.addEventListener('DOMContentLoaded', function() {
             document.body.classList.add('touch-device');
         }
         
-        console.log('🍦 Maxx Sorvetes Bertioga - Site carregado com sucesso!');
+        console.log('🍦 Maxx Sorvetes Ibertioga - Site carregado com sucesso!');
     }
 
     // Iniciar quando o DOM estiver pronto
@@ -299,8 +311,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
 // Inicializar animações de fundo
 (function() {
-    const iceElements = document.querySelectorAll('.ice-element');
-    iceElements.forEach((el, index) => {
-        el.style.animationDelay = `${index * 5}s`;
-    });
+    // Inicializar qualquer animação adicional se necessário
+    console.log('Animações inicializadas!');
 })();
