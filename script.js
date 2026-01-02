@@ -1,4 +1,4 @@
-// Maxx Sorvetes Ibertioga - Script Final
+// Max Sorvetes Ibertioga - Script Final
 
 document.addEventListener('DOMContentLoaded', function() {
     // Smooth Scroll
@@ -123,7 +123,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Botões de pedido do WhatsApp
     function setupOrderButtons() {
-        const baseMessage = "Oi! Vim pelo site da Maxx Sorvetes Ibertioga e gostaria de fazer um pedido 🍨\n\n";
+        const baseMessage = "Oi! Vim pelo site da Max Sorvetes Ibertioga e gostaria de fazer um pedido 🍨\n\n";
         
         document.querySelectorAll('[data-item]').forEach(button => {
             button.addEventListener('click', function(e) {
@@ -257,6 +257,21 @@ document.addEventListener('DOMContentLoaded', function() {
         updateActiveMenu(); // Chamar inicialmente
     }
 
+    // Função para atualizar todos os links do WhatsApp
+    function updateWhatsAppLinks() {
+        // Atualizar todos os links de WhatsApp no documento
+        const whatsappLinks = document.querySelectorAll('a[href*="whatsapp"]');
+        
+        whatsappLinks.forEach(link => {
+            let href = link.getAttribute('href');
+            if (href) {
+                // Substituir "Maxx%20Sorvetes%20Bertioga" por "Max%20Sorvetes%20Ibertioga"
+                href = href.replace(/Maxx%20Sorvetes%20Bertioga/g, 'Max%20Sorvetes%20Ibertioga');
+                link.setAttribute('href', href);
+            }
+        });
+    }
+
     // Inicializar tudo
     function init() {
         setupSmoothScroll();
@@ -266,13 +281,14 @@ document.addEventListener('DOMContentLoaded', function() {
         setupScrollAnimations();
         setupMaxInteraction();
         setupActiveMenu();
+        updateWhatsAppLinks(); // Atualizar links do WhatsApp
         
         // Adicionar classe para dispositivos touch
         if ('ontouchstart' in window || navigator.maxTouchPoints > 0) {
             document.body.classList.add('touch-device');
         }
         
-        console.log('🍦 Maxx Sorvetes Ibertioga - Site carregado com sucesso!');
+        console.log('🍦 Max Sorvetes Ibertioga - Site carregado com sucesso!');
     }
 
     // Iniciar quando o DOM estiver pronto
@@ -283,14 +299,8 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 });
 
-// Inicializar animações de fundo
-(function() {
-    console.log('Animações inicializadas!');
-})();
-
-
-// CORREÇÃO DO MENU MOBILE
-function setupMobileMenu() {
+// CORREÇÃO DO MENU MOBILE (Função alternativa)
+function setupMobileMenuV2() {
     const menuToggle = document.querySelector('.menu-toggle');
     const navMenu = document.querySelector('.nav-menu');
     
@@ -310,9 +320,9 @@ function setupMobileMenu() {
         e.stopPropagation();
         
         if (navMenu.classList.contains('active')) {
-            closeMobileMenu();
+            closeMobileMenuV2();
         } else {
-            openMobileMenu();
+            openMobileMenuV2();
         }
     });
     
@@ -322,7 +332,7 @@ function setupMobileMenu() {
             !navMenu.contains(e.target) && 
             !menuToggle.contains(e.target) &&
             navMenu.classList.contains('active')) {
-            closeMobileMenu();
+            closeMobileMenuV2();
         }
     });
     
@@ -330,7 +340,7 @@ function setupMobileMenu() {
     navMenu.querySelectorAll('.nav-link').forEach(link => {
         link.addEventListener('click', function() {
             if (window.innerWidth <= 991) {
-                setTimeout(closeMobileMenu, 300);
+                setTimeout(closeMobileMenuV2, 300);
             }
         });
     });
@@ -356,7 +366,7 @@ function setupMobileMenu() {
     });
 }
 
-function openMobileMenu() {
+function openMobileMenuV2() {
     const navMenu = document.querySelector('.nav-menu');
     const menuToggle = document.querySelector('.menu-toggle');
     
@@ -373,7 +383,7 @@ function openMobileMenu() {
     }
 }
 
-function closeMobileMenu() {
+function closeMobileMenuV2() {
     const navMenu = document.querySelector('.nav-menu');
     const menuToggle = document.querySelector('.menu-toggle');
     
@@ -392,16 +402,28 @@ function closeMobileMenu() {
     }
 }
 
-// Inicializar tudo
-function init() {
-    setupSmoothScroll();
-    setupMobileMenu(); // Usar a nova função corrigida
-    setupOrderButtons();
-    setupHeaderScroll();
-    setupScrollAnimations();
-    setupMaxInteraction();
-    setupActiveMenu();
-    setupBackgroundAnimation();
+// ANIMAÇÃO DOS ELEMENTOS DE FUNDO
+function setupBackgroundAnimation() {
+    const bgElements = document.querySelectorAll('.bg-icecream');
     
-    console.log('🍦 Maxx Sorvetes Ibertioga - Site carregado com sucesso!');
+    bgElements.forEach(element => {
+        // Adicionar efeito de parallax suave
+        window.addEventListener('mousemove', (e) => {
+            const x = (e.clientX / window.innerWidth) * 10;
+            const y = (e.clientY / window.innerHeight) * 10;
+            
+            element.style.transform = `translate(${x}px, ${y}px)`;
+        });
+    });
 }
+
+// Inicialização completa
+(function() {
+    console.log('Max Sorvetes Ibertioga - Animações inicializadas!');
+    
+    // Verificar se há elementos de fundo para animar
+    const bgElements = document.querySelectorAll('.bg-icecream');
+    if (bgElements.length > 0) {
+        setupBackgroundAnimation();
+    }
+})();
