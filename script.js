@@ -422,10 +422,10 @@ document.addEventListener('DOMContentLoaded', function() {
         setupFormValidation();
         setupViewCounter();
         
-        // Log de sucesso
-        console.log('✅ Max Sorvetes Ibertioga - Site totalmente inicializado!');
-        console.log('📞 WhatsApp: (32) 98444-2475');
-        console.log('📍 Endereço: R. Rio de Janeiro, 652 - Ibertioga/MG');
+       // Log de sucesso
+console.log('✅ Max Sorvetes Ibertioga - Site totalmente inicializado!');
+console.log('📞 WhatsApp: (32) 98444-2475');
+console.log('📍 Endereço: R. Rio de Janeiro, 652 - Ibertioga/MG');
     }
 
     // ===== INICIAR QUANDO O DOM ESTIVER PRONTO =====
