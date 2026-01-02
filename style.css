@@ -2383,3 +2383,102 @@ section {
 .hero {
     z-index: 2;
 }
+
+/* ===== GOOGLE MAPS CONTAINER ===== */
+.map-container {
+    margin: 25px 0;
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    box-shadow: var(--shadow-md);
+    border: 2px solid rgba(124, 58, 237, 0.1);
+}
+
+.map-container iframe {
+    display: block;
+    width: 100%;
+    height: 300px;
+    border: none;
+}
+
+/* ===== CONTACT SECTION ATUALIZADA ===== */
+.contact-message h3 {
+    font-size: 1.5rem;
+    margin-bottom: 15px;
+    color: var(--preto);
+}
+
+.contact-message p {
+    color: var(--cinza-escuro);
+    margin-bottom: 30px;
+    line-height: 1.6;
+}
+
+/* ===== CORREÇÃO DO MENU MOBILE ===== */
+@media (max-width: 991px) {
+    .nav-menu {
+        position: fixed;
+        top: 70px;
+        left: 0;
+        right: 0;
+        background: white;
+        flex-direction: column;
+        padding: 20px;
+        box-shadow: var(--shadow-lg);
+        border-radius: 0 0 var(--radius-lg) var(--radius-lg);
+        display: none;
+        z-index: 999;
+        max-height: calc(100vh - 70px);
+        overflow-y: auto;
+        opacity: 0;
+        transform: translateY(-20px);
+        transition: all 0.3s ease;
+    }
+    
+    .nav-menu.active {
+        display: flex;
+        opacity: 1;
+        transform: translateY(0);
+    }
+    
+    .nav-link {
+        width: 100%;
+        flex-direction: row;
+        justify-content: flex-start;
+        padding: 15px 20px;
+        border-radius: var(--radius-md);
+        font-size: 1rem;
+        min-width: auto;
+    }
+    
+    .menu-toggle {
+        display: block;
+    }
+}
+
+/* Ajuste do fundo em mobile */
+@media (max-width: 768px) {
+    .bg-icecream {
+        font-size: 2rem;
+        opacity: 0.02;
+    }
+}
+
+/* Melhorias para telas pequenas */
+@media (max-width: 576px) {
+    .contact-grid {
+        gap: 30px;
+    }
+    
+    .contact-card {
+        padding: 20px;
+    }
+    
+    .contact-message {
+        padding: 25px;
+    }
+    
+    .footer-bottom p {
+        font-size: 0.85rem;
+        text-align: center;
+    }
+}

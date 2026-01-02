@@ -287,3 +287,121 @@ document.addEventListener('DOMContentLoaded', function() {
 (function() {
     console.log('Animações inicializadas!');
 })();
+
+
+// CORREÇÃO DO MENU MOBILE
+function setupMobileMenu() {
+    const menuToggle = document.querySelector('.menu-toggle');
+    const navMenu = document.querySelector('.nav-menu');
+    
+    if (!menuToggle || !navMenu) return;
+    
+    // Inicialmente o menu deve estar visível em desktop
+    if (window.innerWidth > 991) {
+        navMenu.style.display = 'flex';
+        navMenu.style.opacity = '1';
+        navMenu.style.transform = 'translateY(0)';
+    } else {
+        navMenu.style.display = 'none';
+    }
+    
+    // Toggle do menu
+    menuToggle.addEventListener('click', function(e) {
+        e.stopPropagation();
+        
+        if (navMenu.classList.contains('active')) {
+            closeMobileMenu();
+        } else {
+            openMobileMenu();
+        }
+    });
+    
+    // Fechar menu ao clicar fora
+    document.addEventListener('click', function(e) {
+        if (window.innerWidth <= 991 && 
+            !navMenu.contains(e.target) && 
+            !menuToggle.contains(e.target) &&
+            navMenu.classList.contains('active')) {
+            closeMobileMenu();
+        }
+    });
+    
+    // Fechar menu ao clicar em um link
+    navMenu.querySelectorAll('.nav-link').forEach(link => {
+        link.addEventListener('click', function() {
+            if (window.innerWidth <= 991) {
+                setTimeout(closeMobileMenu, 300);
+            }
+        });
+    });
+    
+    // Atualizar menu ao redimensionar
+    window.addEventListener('resize', function() {
+        if (window.innerWidth > 991) {
+            // Em desktop, menu sempre visível
+            navMenu.classList.remove('active');
+            navMenu.style.display = 'flex';
+            navMenu.style.opacity = '1';
+            navMenu.style.transform = 'translateY(0)';
+            menuToggle.innerHTML = '<i class="fas fa-bars"></i>';
+            menuToggle.setAttribute('aria-label', 'Abrir menu');
+        } else {
+            // Em mobile, verificar estado
+            if (!navMenu.classList.contains('active')) {
+                navMenu.style.display = 'none';
+                navMenu.style.opacity = '0';
+                navMenu.style.transform = 'translateY(-20px)';
+            }
+        }
+    });
+}
+
+function openMobileMenu() {
+    const navMenu = document.querySelector('.nav-menu');
+    const menuToggle = document.querySelector('.menu-toggle');
+    
+    if (navMenu && menuToggle) {
+        navMenu.style.display = 'flex';
+        setTimeout(() => {
+            navMenu.classList.add('active');
+        }, 10);
+        menuToggle.innerHTML = '<i class="fas fa-times"></i>';
+        menuToggle.setAttribute('aria-label', 'Fechar menu');
+        
+        // Adicionar a classe de prevenção de scroll ao body
+        document.body.style.overflow = 'hidden';
+    }
+}
+
+function closeMobileMenu() {
+    const navMenu = document.querySelector('.nav-menu');
+    const menuToggle = document.querySelector('.menu-toggle');
+    
+    if (navMenu && menuToggle) {
+        navMenu.classList.remove('active');
+        setTimeout(() => {
+            if (!navMenu.classList.contains('active')) {
+                navMenu.style.display = 'none';
+            }
+        }, 300);
+        menuToggle.innerHTML = '<i class="fas fa-bars"></i>';
+        menuToggle.setAttribute('aria-label', 'Abrir menu');
+        
+        // Remover a classe de prevenção de scroll
+        document.body.style.overflow = '';
+    }
+}
+
+// Inicializar tudo
+function init() {
+    setupSmoothScroll();
+    setupMobileMenu(); // Usar a nova função corrigida
+    setupOrderButtons();
+    setupHeaderScroll();
+    setupScrollAnimations();
+    setupMaxInteraction();
+    setupActiveMenu();
+    setupBackgroundAnimation();
+    
+    console.log('🍦 Maxx Sorvetes Ibertioga - Site carregado com sucesso!');
+}
