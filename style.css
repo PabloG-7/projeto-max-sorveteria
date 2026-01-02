@@ -79,16 +79,104 @@ body {
     scrollbar-color: var(--roxo-claro) var(--off-white);
 }
 
+/* ===== NOVOS ESTILOS PARA O BOTÃO DO CARDÁPIO ===== */
+.cardapio-btn-container {
+    text-align: center;
+    margin: 25px 0 40px;
+    padding: 20px;
+    background: linear-gradient(135deg, rgba(124, 58, 237, 0.05), rgba(255, 107, 157, 0.05));
+    border-radius: var(--radius-lg);
+    border: 2px solid rgba(124, 58, 237, 0.1);
+}
 
+.btn-cardapio-imagem {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    background: var(--gradient-secondary);
+    color: white;
+    padding: 16px 35px;
+    border-radius: var(--radius-full);
+    font-weight: 600;
+    font-size: 1.1rem;
+    text-decoration: none;
+    transition: var(--transition);
+    box-shadow: var(--shadow-lg);
+    margin-bottom: 15px;
+}
 
-@keyframes floatWhatsApp {
-    0%, 100% { 
-        transform: translateY(0); 
-        box-shadow: 0 8px 25px rgba(37, 211, 102, 0.3);
+.btn-cardapio-imagem:hover {
+    transform: translateY(-3px) scale(1.05);
+    box-shadow: var(--shadow-xl);
+    background: var(--roxo-escuro);
+}
+
+.cardapio-notice {
+    font-size: 0.95rem;
+    color: var(--cinza-escuro);
+    font-style: italic;
+    margin-top: 10px;
+}
+
+/* Estilos para o Lightbox personalizado */
+.lb-data .lb-caption {
+    font-size: 1.1rem !important;
+    font-weight: 600;
+    color: var(--preto) !important;
+    text-align: center;
+}
+
+.lb-close {
+    border-radius: 50% !important;
+    width: 40px !important;
+    height: 40px !important;
+    line-height: 40px !important;
+    font-size: 1.5rem !important;
+}
+
+.lb-nav a.lb-prev,
+.lb-nav a.lb-next {
+    background: var(--roxo-escuro) !important;
+    border-radius: 50% !important;
+    width: 50px !important;
+    height: 50px !important;
+    line-height: 50px !important;
+}
+
+.lb-loader {
+    border-color: var(--roxo-claro) transparent var(--roxo-claro) transparent !important;
+}
+
+/* Ajustes do Lightbox para mobile */
+@media (max-width: 768px) {
+    .lb-container {
+        padding: 10px !important;
     }
-    50% { 
-        transform: translateY(-10px); 
-        box-shadow: 0 15px 35px rgba(37, 211, 102, 0.5);
+    
+    .lb-image {
+        max-width: 95vw !important;
+        max-height: 70vh !important;
+    }
+    
+    .lb-data .lb-caption {
+        font-size: 0.9rem !important;
+    }
+    
+    .btn-cardapio-imagem {
+        padding: 14px 25px;
+        font-size: 1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .btn-cardapio-imagem {
+        padding: 12px 20px;
+        font-size: 0.9rem;
+    }
+    
+    .cardapio-btn-container {
+        padding: 15px;
+        margin: 20px 0 30px;
     }
 }
 
@@ -950,8 +1038,6 @@ body {
         transform: translate(0, 0) rotate(360deg) scale(1);
     }
 }
-
-
 
 @media (max-width: 767px) {
     @keyframes floatAround {
