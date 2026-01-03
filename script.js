@@ -3,7 +3,7 @@
 document.addEventListener('DOMContentLoaded', function() {
     
     // ===== CONFIGURAÇÃO INICIAL =====
-    console.log('🍦 Max Sorvetes Ibertioga - Inicializando...');
+    console.log('Max Sorvetes Ibertioga - Inicializando...');
     
     // ===== FUNÇÕES AUXILIARES =====
     function openMobileMenu() {
@@ -170,9 +170,10 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // ===== BOTÕES DO WHATSAPP =====
+    // ===== BOTÕES DO WHATSAPP ATUALIZADOS =====
     function setupOrderButtons() {
-        const baseMessage = "Oi! Vim pelo site da Max Sorvetes Ibertioga e gostaria de fazer um pedido 🍨\n\n";
+        // Base message sem emoji
+        const baseMessage = "Olá! Vim pelo site da Max Sorvetes Ibertioga e gostaria de fazer um pedido\n\n";
         
         document.querySelectorAll('[data-item]').forEach(button => {
             button.addEventListener('click', function(e) {
@@ -190,13 +191,47 @@ document.addEventListener('DOMContentLoaded', function() {
                     
                     // Adicionar informações específicas por categoria
                     if (product.includes('Açaí')) {
-                        message += "\n\nAcompanhamentos que gostaria:";
+                        message += "\n\nACOMPANHAMENTOS GRÁTIS (ESCOLHA ATÉ 3):";
                         message += "\n- Leite em pó";
                         message += "\n- Leite condensado";
-                        message += "\n- Calda";
+                        message += "\n- Calda (chocolate ou morango)";
+                        message += "\n\nEXTRAS ADICIONAIS:";
+                        message += "\n- Paçoca + R$2,50";
+                        message += "\n- Granulado + R$2,00";
+                        message += "\n- Granola + R$2,00";
+                        message += "\n- Fini + R$3,00";
+                        message += "\n- Morango + R$4,00";
+                        message += "\n- Banana + R$3,00";
+                        message += "\n- Kiwi + R$4,00";
+                        message += "\n- Nutella + R$5,00";
+                        message += "\n\nPor favor, me informe quais acompanhamentos e extras deseja!";
+                    } 
+                    else if (product.includes('Sorvete')) {
+                        message += "\n\nSABORES DISPONÍVEIS:";
+                        message += "\n- Chocolate";
+                        message += "\n- Morango";
+                        message += "\n- Creme";
+                        message += "\n- Flocos";
+                        message += "\n- Napolitano";
+                        message += "\n\nPor favor, me informe quais sabores deseja!";
                     }
-                    
-                    message += "\n\nPoderia me ajudar com o pedido?";
+                    else if (product.includes('Picolé')) {
+                        message += "\n\nTIPOS DE PICOLÉ:";
+                        message += "\n- Frutas (morango, limão, uva, coco)";
+                        message += "\n- Ao leite (chocolate, creme, flocos)";
+                        message += "\n- Trufado (cobertura premium)";
+                        message += "\n\nPor favor, me informe qual tipo e sabor deseja!";
+                    }
+                    else if (product.includes('Chuchup')) {
+                        message += "\n\nCHUCHUP:";
+                        message += "\n- Pequeno (sabores variados)";
+                        message += "\n- Grande (com mais sabor)";
+                        message += "\n- Ao leite (chocolate especial)";
+                        message += "\n\nPor favor, me informe qual tamanho deseja!";
+                    }
+                    else {
+                        message += "\n\nPoderia me ajudar com o pedido?";
+                    }
                     
                     // Animação no botão
                     this.style.transform = 'scale(0.95)';
@@ -220,7 +255,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     this.style.transform = '';
                 }, 200);
                 
-                console.log('📋 Cardápio visual aberto pelo usuário');
+                console.log('Cardápio visual aberto pelo usuário');
             });
         }
     }
@@ -235,7 +270,7 @@ document.addEventListener('DOMContentLoaded', function() {
         window.open(whatsappUrl, '_blank');
         
         // Log para tracking (opcional)
-        console.log('📱 WhatsApp aberto para pedido');
+        console.log('WhatsApp aberto para pedido');
     }
 
     // ===== HEADER SCROLL EFFECT =====
@@ -322,9 +357,95 @@ document.addEventListener('DOMContentLoaded', function() {
         
         if (whatsappLinks.length === 0) return;
         
+        // Mensagens personalizadas para cada link (sem emojis)
+        const categoryMessages = {
+            'Açaí Completo': `Olá! Vim pelo site da Max Sorvetes Ibertioga e gostaria de pedir Açaí
+
+ACOMPANHAMENTOS GRÁTIS (ESCOLHA ATÉ 3):
+- Leite em pó
+- Leite condensado
+- Calda (chocolate ou morango)
+
+EXTRAS ADICIONAIS:
+- Paçoca + R$2,50
+- Granulado + R$2,00
+- Granola + R$2,00
+- Fini + R$3,00
+- Morango + R$4,00
+- Banana + R$3,00
+- Kiwi + R$4,00
+- Nutella + R$5,00
+
+Tamanhos disponíveis:
+• 300ml - R$15,00
+• 400ml - R$18,00
+• 500ml - R$21,00
+
+Por favor, me informe qual tamanho, acompanhamentos e extras deseja!`,
+            
+            'Sorvete Artesanal': `Olá! Vim pelo site da Max Sorvetes Ibertioga e gostaria de pedir Sorvete
+
+OPÇÕES DISPONÍVEIS:
+• Copinho (2 sabores) - R$6,00
+• Pote 500ml (4 sabores) - R$8,00
+• 3 Bolas na casquinha - R$12,00
+
+SABORES DISPONÍVEIS:
+- Chocolate
+- Morango
+- Creme
+- Flocos
+- Napolitano
+
+Por favor, me informe qual opção e sabores deseja!`,
+            
+            'Picolé': `Olá! Vim pelo site da Max Sorvetes Ibertioga e gostaria de pedir Picolé
+
+TIPOS DE PICOLÉ:
+• Picolé de Frutas - R$2,50
+  (morango, limão, uva, coco)
+• Picolé ao Leite - R$5,50
+  (chocolate, creme, flocos)
+• Picolé Trufado - R$7,00
+  (com cobertura premium)
+
+Por favor, me informe qual tipo e sabor deseja!`,
+            
+            'Chuchup': `Olá! Vim pelo site da Max Sorvetes Ibertioga e gostaria de pedir Chuchup
+
+OPÇÕES DISPONÍVEIS:
+• Chuchup Pequeno - R$0,50
+• Chuchup Grande - R$1,50
+• Chuchup ao Leite - R$3,50
+
+Por favor, me informe qual tamanho deseja!`
+        };
+        
         whatsappLinks.forEach(link => {
             let href = link.getAttribute('href');
             if (href) {
+                // Verificar se é um link com mensagem padrão
+                if (href.includes('text=')) {
+                    // Verificar qual categoria é pelo texto do botão
+                    const buttonText = link.textContent.trim();
+                    let newMessage = "Olá! Vim pelo site da Max Sorvetes Ibertioga e gostaria de fazer um pedido";
+                    
+                    if (buttonText.includes('Açaí')) {
+                        newMessage = categoryMessages['Açaí Completo'];
+                    } else if (buttonText.includes('Sorvete')) {
+                        newMessage = categoryMessages['Sorvete Artesanal'];
+                    } else if (buttonText.includes('Picolé') || buttonText.includes('Picolé')) {
+                        newMessage = categoryMessages['Picolé'];
+                    } else if (buttonText.includes('Chuchup')) {
+                        newMessage = categoryMessages['Chuchup'];
+                    }
+                    
+                    // Atualizar o link com a nova mensagem
+                    const encodedMessage = encodeURIComponent(newMessage);
+                    const newHref = `https://wa.me/553284442475?text=${encodedMessage}`;
+                    link.setAttribute('href', newHref);
+                }
+                
                 // Verificar e corrigir número de telefone
                 if (href.includes('5532986262715')) {
                     href = href.replace('5532986262715', '553284442475');
@@ -442,7 +563,7 @@ document.addEventListener('DOMContentLoaded', function() {
             localStorage.setItem('maxSorvetesViews', views);
             
             // Você pode exibir isso em algum lugar se quiser
-            // console.log(`👁️ Visualizações do site: ${views}`);
+            // console.log(`Visualizações do site: ${views}`);
         }
     }
 
