@@ -55,7 +55,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
     
-    // ===== SMOOTH SCROLL =====
+    // ===== SMOOTH SCROLL COM FECHAMENTO DO MENU =====
     function setupSmoothScroll() {
         const links = document.querySelectorAll('a[href^="#"]');
         
@@ -63,31 +63,37 @@ document.addEventListener('DOMContentLoaded', function() {
             link.addEventListener('click', function(e) {
                 if (this.getAttribute('href') === '#') return;
                 
-                e.preventDefault();
-                
-                const targetId = this.getAttribute('href');
-                const targetElement = document.querySelector(targetId);
-                
-                if (targetElement) {
-                    const headerHeight = document.querySelector('.header').offsetHeight;
-                    const targetPosition = targetElement.getBoundingClientRect().top + window.pageYOffset;
+                // Verificar se é um link interno (não externo)
+                if (this.getAttribute('href').startsWith('#')) {
+                    e.preventDefault();
                     
-                    window.scrollTo({
-                        top: targetPosition - headerHeight,
-                        behavior: 'smooth'
-                    });
+                    const targetId = this.getAttribute('href');
+                    const targetElement = document.querySelector(targetId);
                     
-                    // Fechar menu mobile se aberto
-                    closeMobileMenu();
+                    if (targetElement) {
+                        const headerHeight = document.querySelector('.header').offsetHeight;
+                        const targetPosition = targetElement.getBoundingClientRect().top + window.pageYOffset;
+                        
+                        // Fechar menu mobile se estiver aberto
+                        if (window.innerWidth <= 991) {
+                            closeMobileMenu();
+                        }
+                        
+                        window.scrollTo({
+                            top: targetPosition - headerHeight,
+                            behavior: 'smooth'
+                        });
+                    }
                 }
             });
         });
     }
 
-    // ===== MENU MOBILE =====
+    // ===== MENU MOBILE ATUALIZADO =====
     function setupMobileMenu() {
         const menuToggle = document.querySelector('.menu-toggle');
         const navMenu = document.querySelector('.nav-menu');
+        const navLinks = document.querySelectorAll('.nav-link');
         
         if (!menuToggle || !navMenu) return;
         
@@ -116,6 +122,19 @@ document.addEventListener('DOMContentLoaded', function() {
             toggleMobileMenu();
         });
         
+        // Fechar menu ao clicar em um link (exceto o botão do WhatsApp)
+        navLinks.forEach(link => {
+            // Verificar se é um link interno (começa com #)
+            if (link.getAttribute('href').startsWith('#')) {
+                link.addEventListener('click', function(e) {
+                    if (window.innerWidth <= 991) {
+                        // Adicionar pequeno delay para a animação de scroll
+                        setTimeout(closeMobileMenu, 100);
+                    }
+                });
+            }
+        });
+        
         // Fechar menu ao clicar fora
         document.addEventListener('click', function(e) {
             if (window.innerWidth <= 991 && 
@@ -126,15 +145,6 @@ document.addEventListener('DOMContentLoaded', function() {
                 navMenu.classList.contains('active')) {
                 closeMobileMenu();
             }
-        });
-        
-        // Fechar menu ao clicar em um link (exceto o botão do WhatsApp)
-        navMenu.querySelectorAll('.nav-link:not([href*="whatsapp"])').forEach(link => {
-            link.addEventListener('click', function() {
-                if (window.innerWidth <= 991) {
-                    setTimeout(closeMobileMenu, 300);
-                }
-            });
         });
         
         // Atualizar ao redimensionar
