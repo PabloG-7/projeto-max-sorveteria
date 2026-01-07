@@ -1,4 +1,6 @@
 /* ===== VARIÁVEIS & RESET ===== */
+@import url('https://fonts.googleapis.com/css2?family=Pacifico&family=Inter:wght@300;400;500;600;700&display=swap');
+
 :root {
     --roxo-claro: #B98BC9;
     --roxo-escuro: #7C3AED;
@@ -58,6 +60,22 @@ body.menu-open {
     overflow: hidden;
 }
 
+.no-js .header,
+.no-js .hero {
+    display: none;
+}
+
+/* ===== OTIMIZAÇÃO DE PERFORMANCE ===== */
+img {
+    content-visibility: auto;
+    max-width: 100%;
+    height: auto;
+}
+
+.client-photo, .gallery-img, .map-container iframe {
+    aspect-ratio: auto;
+}
+
 /* ===== SCROLLBAR PERSONALIZADA ===== */
 ::-webkit-scrollbar {
     width: 10px;
@@ -78,10 +96,145 @@ body.menu-open {
     background: var(--roxo-escuro);
 }
 
-/* Para Firefox */
 * {
     scrollbar-width: thin;
     scrollbar-color: var(--roxo-claro) var(--off-white);
+}
+
+/* ===== TOAST NOTIFICATION (para pedidos frequentes) ===== */
+.order-toast {
+    position: fixed;
+    bottom: 100px;
+    right: 25px;
+    background: var(--gradient-secondary);
+    color: white;
+    padding: 15px 20px;
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-xl);
+    z-index: 999;
+    transform: translateX(100%);
+    transition: transform 0.3s ease;
+    max-width: 300px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.order-toast.show {
+    transform: translateX(0);
+}
+
+.order-toast i {
+    font-size: 1.5rem;
+}
+
+.order-toast span {
+    font-size: 0.9rem;
+    line-height: 1.4;
+}
+
+/* ===== ALERTA DE HORÁRIO DE PICO ===== */
+.peak-alert {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0.9);
+    background: white;
+    border-radius: var(--radius-xl);
+    padding: 0;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+    z-index: 9999;
+    opacity: 0;
+    transition: all 0.3s ease;
+    max-width: 400px;
+    width: 90%;
+    overflow: hidden;
+}
+
+.peak-alert.show {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+}
+
+.peak-content {
+    padding: 30px;
+    position: relative;
+}
+
+.peak-close {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background: none;
+    border: none;
+    font-size: 1.2rem;
+    color: var(--cinza-escuro);
+    cursor: pointer;
+    padding: 5px;
+    border-radius: 50%;
+    transition: var(--transition);
+}
+
+.peak-close:hover {
+    background: rgba(124, 58, 237, 0.1);
+    color: var(--roxo-escuro);
+}
+
+.peak-icon {
+    width: 80px;
+    height: 80px;
+    background: linear-gradient(135deg, var(--amarelo), var(--rosa));
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 2rem;
+    margin: 0 auto 20px;
+}
+
+.peak-alert h3 {
+    text-align: center;
+    margin-bottom: 15px;
+    color: var(--preto);
+    font-size: 1.5rem;
+}
+
+.peak-alert p {
+    text-align: center;
+    color: var(--cinza-escuro);
+    margin-bottom: 10px;
+    line-height: 1.5;
+}
+
+.peak-alert .btn-whatsapp {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    background: var(--gradient-whatsapp);
+    color: white;
+    padding: 12px 25px;
+    border-radius: var(--radius-full);
+    text-decoration: none;
+    font-weight: 600;
+    margin-top: 20px;
+    transition: var(--transition);
+}
+
+.peak-alert .btn-whatsapp:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+}
+
+.peak-alert::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 5px;
+    background: linear-gradient(90deg, var(--roxo-claro), var(--rosa));
 }
 
 /* ===== NOVOS ESTILOS PARA O BOTÃO DO CARDÁPIO ===== */
@@ -1914,6 +2067,12 @@ body.menu-open {
     .gallery-img {
         height: 180px;
     }
+    
+    .order-toast {
+        bottom: 80px;
+        right: 15px;
+        max-width: 250px;
+    }
 }
 
 /* Celulares (576px - 767px) */
@@ -2041,6 +2200,17 @@ body.menu-open {
         width: 40px;
         height: 40px;
         font-size: 1.5rem;
+    }
+    
+    .order-toast {
+        bottom: 70px;
+        right: 10px;
+        max-width: 200px;
+        padding: 12px 15px;
+    }
+    
+    .peak-alert {
+        padding: 20px;
     }
 }
 
@@ -2182,6 +2352,13 @@ body.menu-open {
         padding: 15px;
         margin: 20px 0 30px;
     }
+    
+    .order-toast {
+        bottom: 60px;
+        right: 10px;
+        max-width: 180px;
+        font-size: 0.8rem;
+    }
 }
 
 /* Tablets (768px - 991px) */
@@ -2266,11 +2443,6 @@ body.menu-open {
 }
 
 /* ===== CORREÇÕES GERAIS ===== */
-img {
-    max-width: 100%;
-    height: auto;
-}
-
 section {
     position: relative;
     z-index: 1;
@@ -2340,4 +2512,315 @@ section {
 /* Classe para quando o menu está aberto */
 body.menu-open {
     overflow: hidden;
+}
+
+/* ===== SISTEMA DE NOTIFICAÇÕES INTELIGENTES ===== */
+.smart-notification {
+    position: fixed;
+    top: 100px;
+    right: 20px;
+    width: 320px;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(124, 58, 237, 0.2);
+    z-index: 9999;
+    transform: translateX(120%);
+    transition: transform 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    overflow: hidden;
+    border-left: 4px solid var(--roxo-escuro);
+}
+
+.smart-notification.show {
+    transform: translateX(0);
+}
+
+.popular-notification {
+    border-left-color: var(--rosa);
+}
+
+.peak-notification {
+    border-left-color: var(--amarelo);
+}
+
+.notification-header {
+    display: flex;
+    align-items: center;
+    padding: 15px 20px;
+    background: linear-gradient(135deg, rgba(124, 58, 237, 0.05), rgba(255, 107, 157, 0.05));
+    border-bottom: 1px solid rgba(124, 58, 237, 0.1);
+}
+
+.notification-icon {
+    width: 40px;
+    height: 40px;
+    background: var(--gradient-secondary);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    margin-right: 15px;
+    font-size: 1.2rem;
+}
+
+.popular-notification .notification-icon {
+    background: var(--gradient-icecream);
+}
+
+.peak-notification .notification-icon {
+    background: linear-gradient(135deg, var(--amarelo), #FF9A3D);
+}
+
+.notification-header h4 {
+    flex: 1;
+    margin: 0;
+    font-size: 1.1rem;
+    color: var(--preto);
+}
+
+.notification-close {
+    background: none;
+    border: none;
+    color: var(--cinza-escuro);
+    cursor: pointer;
+    padding: 5px;
+    border-radius: 50%;
+    transition: all 0.3s ease;
+}
+
+.notification-close:hover {
+    background: rgba(124, 58, 237, 0.1);
+    color: var(--roxo-escuro);
+}
+
+.notification-body {
+    padding: 20px;
+}
+
+.notification-body p {
+    margin: 0 0 15px 0;
+    color: var(--cinza-escuro);
+    line-height: 1.5;
+    font-size: 0.95rem;
+}
+
+.notification-actions {
+    margin-top: 15px;
+}
+
+.notification-whatsapp-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    background: var(--gradient-whatsapp);
+    color: white;
+    padding: 10px 20px;
+    border-radius: 25px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.9rem;
+    transition: all 0.3s ease;
+    width: 100%;
+}
+
+.notification-whatsapp-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(37, 211, 102, 0.3);
+}
+
+@media (max-width: 768px) {
+    .smart-notification {
+        width: 90%;
+        max-width: 300px;
+        top: 80px;
+        right: 50%;
+        transform: translateX(50%) translateY(-100%);
+    }
+    
+    .smart-notification.show {
+        transform: translateX(50%) translateY(0);
+    }
+}
+
+/* Remove notificações antigas se existirem */
+.order-toast,
+.peak-alert {
+    display: none !important;
+}
+
+/* ===== MOLDURA PONTIAGUDA ELEGANTE ===== */
+.client-photo {
+    position: relative;
+    width: 320px;
+    height: 420px;
+    overflow: hidden;
+    margin: 0 auto;
+    z-index: 2;
+    border-radius: 20px 20px 8px 8px;
+    /* Sombra suave */
+    box-shadow: 
+        0 15px 35px rgba(124, 58, 237, 0.15),
+        0 5px 15px rgba(0, 0, 0, 0.08);
+    background: white;
+    /* Borda com gradiente sutil */
+    border: 3px solid transparent;
+    background-clip: padding-box;
+    position: relative;
+    animation: aparecerSuave 1.5s ease-out;
+}
+
+/* Animação de entrada suave */
+@keyframes aparecerSuave {
+    from {
+        opacity: 0;
+        transform: translateY(30px) scale(0.95);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+/* Borda de gradiente animada */
+.client-photo::before {
+    content: '';
+    position: absolute;
+    top: -3px;
+    left: -3px;
+    right: -3px;
+    bottom: -3px;
+    background: linear-gradient(
+        45deg,
+        var(--roxo-claro),
+        var(--rosa),
+        var(--amarelo),
+        var(--roxo-claro)
+    );
+    background-size: 300% 300%;
+    border-radius: 22px 22px 10px 10px;
+    z-index: -1;
+    animation: moverGradiente 8s ease infinite;
+    opacity: 0.8;
+}
+
+@keyframes moverGradiente {
+    0%, 100% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+}
+
+/* Imagem com corte triangular na base */
+.client-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    /* Forma de triângulo na parte inferior */
+    clip-path: polygon(
+        0 0,
+        100% 0,
+        100% 85%,
+        50% 100%,
+        0 85%
+    );
+    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    filter: brightness(1.02);
+}
+
+/* Efeito hover suave */
+.client-photo:hover .client-img {
+    transform: scale(1.03);
+    filter: brightness(1.05);
+}
+
+.client-photo:hover::before {
+    animation: moverGradiente 4s ease infinite;
+    opacity: 1;
+}
+
+/* Pingos simples e discretos */
+.pingo-decorativo {
+    position: absolute;
+    bottom: -15px;
+    width: 8px;
+    height: 20px;
+    background: linear-gradient(to bottom, var(--roxo-claro), transparent);
+    border-radius: 0 0 4px 4px;
+    opacity: 0.6;
+    animation: pingarSuave 3s ease-in-out infinite;
+}
+
+.pingo-decorativo:nth-child(1) {
+    left: 30%;
+    animation-delay: 0s;
+}
+
+.pingo-decorativo:nth-child(2) {
+    left: 50%;
+    animation-delay: 0.5s;
+}
+
+.pingo-decorativo:nth-child(3) {
+    left: 70%;
+    animation-delay: 1s;
+}
+
+@keyframes pingarSuave {
+    0%, 100% {
+        transform: translateY(0) scaleY(1);
+        opacity: 0.4;
+    }
+    50% {
+        transform: translateY(8px) scaleY(1.3);
+        opacity: 0.8;
+    }
+}
+
+/* Sombra dinâmica */
+.client-photo::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 70%;
+    height: 20px;
+    background: radial-gradient(ellipse at center, 
+        rgba(124, 58, 237, 0.2) 0%,
+        rgba(124, 58, 237, 0.1) 40%,
+        transparent 70%);
+    border-radius: 50%;
+    z-index: -1;
+    animation: pulsarSombra 4s ease-in-out infinite;
+}
+
+@keyframes pulsarSombra {
+    0%, 100% {
+        opacity: 0.5;
+        transform: translateX(-50%) scale(0.95);
+    }
+    50% {
+        opacity: 0.8;
+        transform: translateX(-50%) scale(1.05);
+    }
+}
+
+/* Para telas maiores */
+@media (min-width: 1200px) {
+    .client-photo {
+        width: 350px;
+        height: 460px;
+    }
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+    .client-photo {
+        width: 280px;
+        height: 370px;
+    }
 }

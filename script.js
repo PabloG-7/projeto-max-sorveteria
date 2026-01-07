@@ -1,9 +1,9 @@
-// Max Sorvetes Ibertioga - Script Completo e Otimizado
+// Max Sorvetes Ibertioga - Script Completo Corrigido
 
 document.addEventListener('DOMContentLoaded', function() {
     
     // ===== CONFIGURAÇÃO INICIAL =====
-    console.log('Max Sorvetes Ibertioga - Inicializando...');
+    console.log('Max Sorvetes Ibertioga - Inicializando com melhorias...');
     
     // ===== FUNÇÕES AUXILIARES =====
     function openMobileMenu() {
@@ -18,8 +18,6 @@ document.addEventListener('DOMContentLoaded', function() {
             menuToggle.innerHTML = '<i class="fas fa-times"></i>';
             menuToggle.setAttribute('aria-label', 'Fechar menu');
             menuToggle.classList.add('active');
-            
-            // Prevenir scroll do body quando menu está aberto
             document.body.classList.add('menu-open');
         }
     }
@@ -34,14 +32,11 @@ document.addEventListener('DOMContentLoaded', function() {
             menuToggle.setAttribute('aria-label', 'Abrir menu');
             menuToggle.classList.remove('active');
             
-            // Esperar pela transição antes de esconder
             setTimeout(() => {
                 if (!navMenu.classList.contains('active')) {
                     navMenu.style.display = 'none';
                 }
             }, 300);
-            
-            // Restaurar scroll do body
             document.body.classList.remove('menu-open');
         }
     }
@@ -55,124 +50,234 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
     
-    // ===== SMOOTH SCROLL COM FECHAMENTO DO MENU =====
-    function setupSmoothScroll() {
-        const links = document.querySelectorAll('a[href^="#"]');
+    // ===== SISTEMA DE NOTIFICAÇÕES INTELIGENTES =====
+    function setupSmartNotifications() {
+        console.log('🔄 Configurando sistema de notificações inteligentes...');
         
-        links.forEach(link => {
-            link.addEventListener('click', function(e) {
-                if (this.getAttribute('href') === '#') return;
+        // 1. SISTEMA DE RASTREAMENTO DE CLICKS EM PRODUTOS
+        const productButtons = document.querySelectorAll('[data-item], .item-btn, .btn-category');
+        
+        productButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                const productName = this.getAttribute('data-item') || 
+                                   this.textContent.trim() || 
+                                   this.closest('.menu-item-card')?.querySelector('h4')?.textContent;
                 
-                // Verificar se é um link interno (não externo)
-                if (this.getAttribute('href').startsWith('#')) {
-                    e.preventDefault();
-                    
-                    const targetId = this.getAttribute('href');
-                    const targetElement = document.querySelector(targetId);
-                    
-                    if (targetElement) {
-                        const headerHeight = document.querySelector('.header').offsetHeight;
-                        const targetPosition = targetElement.getBoundingClientRect().top + window.pageYOffset;
-                        
-                        // Fechar menu mobile se estiver aberto
-                        if (window.innerWidth <= 991) {
-                            closeMobileMenu();
-                        }
-                        
-                        window.scrollTo({
-                            top: targetPosition - headerHeight,
-                            behavior: 'smooth'
-                        });
-                    }
+                if (productName) {
+                    trackProductClick(productName);
+                    checkForPopularProduct(productName);
                 }
             });
         });
+        
+        // 2. VERIFICAR HORÁRIO DE PICO QUANDO O USUÁRIO ENTRA
+        setTimeout(() => {
+            checkPeakHours();
+        }, 5000);
     }
-
-    // ===== MENU MOBILE ATUALIZADO =====
-    function setupMobileMenu() {
-        const menuToggle = document.querySelector('.menu-toggle');
-        const navMenu = document.querySelector('.nav-menu');
-        const navLinks = document.querySelectorAll('.nav-link');
-        
-        if (!menuToggle || !navMenu) return;
-        
-        // Configuração inicial baseada no tamanho da tela
-        function setupInitialState() {
-            if (window.innerWidth > 991) {
-                // Desktop - menu sempre visível
-                navMenu.style.display = 'flex';
-                navMenu.classList.remove('active');
-                menuToggle.classList.remove('active');
-                document.body.classList.remove('menu-open');
+    
+    function trackProductClick(productName) {
+        try {
+            let productStats = JSON.parse(sessionStorage.getItem('productStats')) || {};
+            
+            const twoHoursAgo = Date.now() - (2 * 60 * 60 * 1000);
+            Object.keys(productStats).forEach(key => {
+                if (productStats[key].timestamp < twoHoursAgo) {
+                    delete productStats[key];
+                }
+            });
+            
+            if (!productStats[productName]) {
+                productStats[productName] = {
+                    count: 1,
+                    timestamp: Date.now(),
+                    firstClick: Date.now()
+                };
             } else {
-                // Mobile - menu inicialmente oculto
-                navMenu.style.display = 'none';
-                navMenu.classList.remove('active');
-                menuToggle.classList.remove('active');
+                productStats[productName].count++;
+                productStats[productName].lastClick = Date.now();
             }
+            
+            sessionStorage.setItem('productStats', JSON.stringify(productStats));
+            console.log(`📊 Produto rastreado: ${productName} (${productStats[productName].count} cliques)`);
+            
+        } catch (error) {
+            console.error('Erro ao rastrear produto:', error);
+        }
+    }
+    
+    function checkForPopularProduct(productName) {
+        try {
+            const productStats = JSON.parse(sessionStorage.getItem('productStats')) || {};
+            const productData = productStats[productName];
+            
+            if (productData && productData.count >= 1) {
+                const shownNotifications = JSON.parse(sessionStorage.getItem('shownNotifications')) || [];
+                
+                if (!shownNotifications.includes(productName)) {
+                    setTimeout(() => {
+                        showPopularProductNotification(productName, productData.count);
+                        shownNotifications.push(productName);
+                        sessionStorage.setItem('shownNotifications', JSON.stringify(shownNotifications));
+                    }, 1500);
+                }
+            }
+        } catch (error) {
+            console.error('Erro ao verificar produto popular:', error);
+        }
+    }
+    
+    function showPopularProductNotification(productName, clickCount) {
+        const cleanProductName = productName.split(' - ')[0] || productName;
+        
+        const messages = [
+            `🌟 ${cleanProductName} está bombando! Já foi escolhido ${clickCount} vezes hoje.`,
+            `🔥 ${cleanProductName} é um dos mais pedidos! Muitos clientes estão amando.`,
+            `👍 Ótima escolha! O ${cleanProductName} é um dos favoritos dos nossos clientes.`,
+            `💫 ${cleanProductName} está em alta! Nossos clientes adoram este produto.`
+        ];
+        
+        const randomMessage = messages[Math.floor(Math.random() * messages.length)];
+        
+        showSmartNotification({
+            title: 'Produto Popular! 🚀',
+            message: randomMessage,
+            icon: 'fas fa-fire',
+            type: 'popular',
+            duration: 4000
+        });
+    }
+    
+    function checkPeakHours() {
+        const now = new Date();
+        const hour = now.getHours();
+        const day = now.getDay();
+        const minutes = now.getMinutes();
+        
+        const isWeekend = day === 0 || day === 6;
+        let isPeakTime = false;
+        let peakMessage = '';
+        
+        // Fim de semana: 14h às 19h (tarde)
+        if (isWeekend && hour >= 14 && hour < 19) {
+            isPeakTime = true;
+            peakMessage = "Fim de semana à tarde é nosso horário mais movimentado!";
+        }
+        // Toda semana: 18h às 21h (noite)
+        else if (hour >= 18 && hour < 21) {
+            isPeakTime = true;
+            peakMessage = "Noite é horário de pico para pedidos de sorvete!";
+        }
+        // Sábado específico: 15h às 17h (tarde de sábado)
+        else if (day === 6 && hour >= 15 && hour < 17) {
+            isPeakTime = true;
+            peakMessage = "Sábado à tarde é super movimentado! Recomendamos pedir com antecedência.";
         }
         
-        // Chamar inicialmente
-        setupInitialState();
-        
-        // Toggle do menu
-        menuToggle.addEventListener('click', function(e) {
-            e.stopPropagation();
-            toggleMobileMenu();
-        });
-        
-        // Fechar menu ao clicar em um link (exceto o botão do WhatsApp)
-        navLinks.forEach(link => {
-            // Verificar se é um link interno (começa com #)
-            if (link.getAttribute('href').startsWith('#')) {
-                link.addEventListener('click', function(e) {
-                    if (window.innerWidth <= 991) {
-                        // Adicionar pequeno delay para a animação de scroll
-                        setTimeout(closeMobileMenu, 100);
-                    }
-                });
+        if (isPeakTime) {
+            const today = new Date().toDateString();
+            const lastNotification = sessionStorage.getItem('lastPeakNotification');
+            
+            if (lastNotification !== today) {
+                setTimeout(() => {
+                    showPeakHourNotification(peakMessage, hour);
+                    sessionStorage.setItem('lastPeakNotification', today);
+                }, 3000);
             }
-        });
+        }
+    }
+    
+    function showPeakHourNotification(message, currentHour) {
+        const suggestions = [
+            "📱 Use o WhatsApp para garantir seu pedido mais rápido!",
+            "⏰ Peça com 30 minutos de antecedência para evitar esperas.",
+            "✅ Pedidos antecipados garantem seu sorvete na hora que quiser!",
+            "🎯 Escolha seu sabor favorito e garanta antes que acabe!"
+        ];
         
-        // Fechar menu ao clicar fora
-        document.addEventListener('click', function(e) {
-            if (window.innerWidth <= 991 && 
-                navMenu && 
-                !navMenu.contains(e.target) && 
-                menuToggle && 
-                !menuToggle.contains(e.target) &&
-                navMenu.classList.contains('active')) {
-                closeMobileMenu();
-            }
-        });
+        const randomSuggestion = suggestions[Math.floor(Math.random() * suggestions.length)];
         
-        // Atualizar ao redimensionar
-        let resizeTimer;
-        window.addEventListener('resize', function() {
-            clearTimeout(resizeTimer);
-            resizeTimer = setTimeout(function() {
-                if (window.innerWidth > 991) {
-                    // Desktop - resetar tudo
-                    navMenu.style.display = 'flex';
-                    navMenu.classList.remove('active');
-                    menuToggle.classList.remove('active');
-                    document.body.classList.remove('menu-open');
-                    menuToggle.innerHTML = '<i class="fas fa-bars"></i>';
-                    menuToggle.setAttribute('aria-label', 'Abrir menu');
-                } else {
-                    // Mobile - se estava aberto, manter aberto
-                    if (!navMenu.classList.contains('active')) {
-                        navMenu.style.display = 'none';
-                    }
-                }
-            }, 250);
+        showSmartNotification({
+            title: 'Horário de Pico! ⏰',
+            message: `${message} ${randomSuggestion}`,
+            icon: 'fas fa-clock',
+            type: 'peak',
+            duration: 5000,
+            showWhatsApp: true
         });
     }
-
+    
+    function showSmartNotification(options) {
+        const notification = document.createElement('div');
+        notification.className = `smart-notification ${options.type}-notification`;
+        
+        notification.innerHTML = `
+            <div class="notification-header">
+                <div class="notification-icon">
+                    <i class="${options.icon}"></i>
+                </div>
+                <h4>${options.title}</h4>
+                <button class="notification-close">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="notification-body">
+                <p>${options.message}</p>
+                ${options.showWhatsApp ? `
+                <div class="notification-actions">
+                    <a href="https://wa.me/553284442475?text=Oi!%20Vim%20pelo%20site%20da%20Max%20Sorvetes%20Ibertioga%20e%20gostaria%20de%20fazer%20um%20pedido%20antecipado%20para%20evitar%20o%20horário%20de%20pico" 
+                       class="notification-whatsapp-btn" 
+                       target="_blank">
+                        <i class="fab fa-whatsapp"></i> Pedir Antecipado
+                    </a>
+                </div>
+                ` : ''}
+            </div>
+        `;
+        
+        document.body.appendChild(notification);
+        
+        setTimeout(() => {
+            notification.classList.add('show');
+        }, 100);
+        
+        const closeBtn = notification.querySelector('.notification-close');
+        closeBtn.addEventListener('click', () => {
+            notification.classList.remove('show');
+            setTimeout(() => {
+                if (notification.parentNode) {
+                    notification.parentNode.removeChild(notification);
+                }
+            }, 500);
+        });
+        
+        if (options.duration) {
+            setTimeout(() => {
+                if (notification.classList.contains('show')) {
+                    notification.classList.remove('show');
+                    setTimeout(() => {
+                        if (notification.parentNode) {
+                            notification.parentNode.removeChild(notification);
+                        }
+                    }, 500);
+                }
+            }, options.duration);
+        }
+        
+        notification.addEventListener('click', (e) => {
+            if (e.target === notification) {
+                notification.classList.remove('show');
+                setTimeout(() => {
+                    if (notification.parentNode) {
+                        notification.parentNode.removeChild(notification);
+                    }
+                }, 500);
+            }
+        });
+    }
+    
     // ===== BOTÕES DO WHATSAPP ATUALIZADOS =====
     function setupOrderButtons() {
-        // Base message sem emoji
         const baseMessage = "Olá! Vim pelo site da Max Sorvetes Ibertioga e gostaria de fazer um pedido\n\n";
         
         document.querySelectorAll('[data-item]').forEach(button => {
@@ -189,7 +294,6 @@ document.addEventListener('DOMContentLoaded', function() {
                         message += `• ${product}`;
                     }
                     
-                    // Adicionar informações específicas por categoria
                     if (product.includes('Açaí')) {
                         message += "\n\nACOMPANHAMENTOS GRÁTIS (ESCOLHA ATÉ 3):";
                         message += "\n- Leite em pó";
@@ -233,7 +337,6 @@ document.addEventListener('DOMContentLoaded', function() {
                         message += "\n\nPoderia me ajudar com o pedido?";
                     }
                     
-                    // Animação no botão
                     this.style.transform = 'scale(0.95)';
                     setTimeout(() => {
                         this.style.transform = '';
@@ -244,36 +347,125 @@ document.addEventListener('DOMContentLoaded', function() {
             });
         });
         
-        // Adicionar evento ao botão especial do cardápio
         const cardapioBtn = document.querySelector('.btn-cardapio-imagem');
         if (cardapioBtn) {
             cardapioBtn.addEventListener('click', function(e) {
-                // O Lightbox já cuida da abertura da imagem
-                // Mas podemos adicionar um tracking ou animação
                 this.style.transform = 'scale(0.95)';
                 setTimeout(() => {
                     this.style.transform = '';
                 }, 200);
-                
-                console.log('Cardápio visual aberto pelo usuário');
             });
         }
     }
 
-    // ===== ABRIR WHATSAPP =====
     function openWhatsApp(message) {
         const phoneNumber = "553284442475";
         const encodedMessage = encodeURIComponent(message);
         const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodedMessage}`;
         
-        // Abrir em nova aba
         window.open(whatsappUrl, '_blank');
-        
-        // Log para tracking (opcional)
-        console.log('WhatsApp aberto para pedido');
     }
 
-    // ===== HEADER SCROLL EFFECT =====
+    // ===== OUTRAS FUNÇÕES (MANTIDAS IGUAIS) =====
+    function setupMobileMenu() {
+        const menuToggle = document.querySelector('.menu-toggle');
+        const navMenu = document.querySelector('.nav-menu');
+        const navLinks = document.querySelectorAll('.nav-link');
+        
+        if (!menuToggle || !navMenu) return;
+        
+        function setupInitialState() {
+            if (window.innerWidth > 991) {
+                navMenu.style.display = 'flex';
+                navMenu.classList.remove('active');
+                menuToggle.classList.remove('active');
+                document.body.classList.remove('menu-open');
+            } else {
+                navMenu.style.display = 'none';
+                navMenu.classList.remove('active');
+                menuToggle.classList.remove('active');
+            }
+        }
+        
+        setupInitialState();
+        
+        menuToggle.addEventListener('click', function(e) {
+            e.stopPropagation();
+            toggleMobileMenu();
+        });
+        
+        navLinks.forEach(link => {
+            if (link.getAttribute('href').startsWith('#')) {
+                link.addEventListener('click', function(e) {
+                    if (window.innerWidth <= 991) {
+                        setTimeout(closeMobileMenu, 100);
+                    }
+                });
+            }
+        });
+        
+        document.addEventListener('click', function(e) {
+            if (window.innerWidth <= 991 && 
+                navMenu && 
+                !navMenu.contains(e.target) && 
+                menuToggle && 
+                !menuToggle.contains(e.target) &&
+                navMenu.classList.contains('active')) {
+                closeMobileMenu();
+            }
+        });
+        
+        let resizeTimer;
+        window.addEventListener('resize', function() {
+            clearTimeout(resizeTimer);
+            resizeTimer = setTimeout(function() {
+                if (window.innerWidth > 991) {
+                    navMenu.style.display = 'flex';
+                    navMenu.classList.remove('active');
+                    menuToggle.classList.remove('active');
+                    document.body.classList.remove('menu-open');
+                    menuToggle.innerHTML = '<i class="fas fa-bars"></i>';
+                    menuToggle.setAttribute('aria-label', 'Abrir menu');
+                } else {
+                    if (!navMenu.classList.contains('active')) {
+                        navMenu.style.display = 'none';
+                    }
+                }
+            }, 250);
+        });
+    }
+    
+    function setupSmoothScroll() {
+        const links = document.querySelectorAll('a[href^="#"]');
+        
+        links.forEach(link => {
+            link.addEventListener('click', function(e) {
+                if (this.getAttribute('href') === '#') return;
+                
+                if (this.getAttribute('href').startsWith('#')) {
+                    e.preventDefault();
+                    
+                    const targetId = this.getAttribute('href');
+                    const targetElement = document.querySelector(targetId);
+                    
+                    if (targetElement) {
+                        const headerHeight = document.querySelector('.header').offsetHeight;
+                        const targetPosition = targetElement.getBoundingClientRect().top + window.pageYOffset;
+                        
+                        if (window.innerWidth <= 991) {
+                            closeMobileMenu();
+                        }
+                        
+                        window.scrollTo({
+                            top: targetPosition - headerHeight,
+                            behavior: 'smooth'
+                        });
+                    }
+                }
+            });
+        });
+    }
+    
     function setupHeaderScroll() {
         const header = document.querySelector('.header');
         
@@ -288,10 +480,9 @@ document.addEventListener('DOMContentLoaded', function() {
         }
         
         window.addEventListener('scroll', updateHeader);
-        updateHeader(); // Chamar inicialmente
+        updateHeader();
     }
-
-    // ===== ANIMAÇÃO SCROLL REVEAL =====
+    
     function setupScrollAnimations() {
         const revealElements = document.querySelectorAll('.reveal, .reveal-scale');
         
@@ -301,11 +492,6 @@ document.addEventListener('DOMContentLoaded', function() {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
                     entry.target.classList.add('active');
-                    
-                    // Se for a foto do Max, adicionar animação especial
-                    if (entry.target.classList.contains('client-photo')) {
-                        entry.target.style.animation = 'fadeInUp 1s ease-out';
-                    }
                 }
             });
         }, {
@@ -317,8 +503,7 @@ document.addEventListener('DOMContentLoaded', function() {
             revealObserver.observe(element);
         });
     }
-
-    // ===== MENU ATIVO DURANTE SCROLL =====
+    
     function setupActiveMenu() {
         const sections = document.querySelectorAll('section[id]');
         const navLinks = document.querySelectorAll('.nav-link');
@@ -348,105 +533,17 @@ document.addEventListener('DOMContentLoaded', function() {
         }
         
         window.addEventListener('scroll', updateActiveMenu);
-        updateActiveMenu(); // Chamar inicialmente
+        updateActiveMenu();
     }
-
-    // ===== ATUALIZAR LINKS DO WHATSAPP =====
+    
     function updateWhatsAppLinks() {
         const whatsappLinks = document.querySelectorAll('a[href*="whatsapp"]');
         
         if (whatsappLinks.length === 0) return;
         
-        // Mensagens personalizadas para cada link (sem emojis)
-        const categoryMessages = {
-            'Açaí Completo': `Olá! Vim pelo site da Max Sorvetes Ibertioga e gostaria de pedir Açaí
-
-ACOMPANHAMENTOS GRÁTIS (ESCOLHA ATÉ 3):
-- Leite em pó
-- Leite condensado
-- Calda (chocolate ou morango)
-
-EXTRAS ADICIONAIS:
-- Paçoca + R$2,50
-- Granulado + R$2,00
-- Granola + R$2,00
-- Fini + R$3,00
-- Morango + R$4,00
-- Banana + R$3,00
-- Kiwi + R$4,00
-- Nutella + R$5,00
-
-Tamanhos disponíveis:
-• 300ml - R$15,00
-• 400ml - R$18,00
-• 500ml - R$21,00
-
-Por favor, me informe qual tamanho, acompanhamentos e extras deseja!`,
-            
-            'Sorvete Artesanal': `Olá! Vim pelo site da Max Sorvetes Ibertioga e gostaria de pedir Sorvete
-
-OPÇÕES DISPONÍVEIS:
-• Copinho (2 sabores) - R$6,00
-• Pote 500ml (4 sabores) - R$8,00
-• 3 Bolas na casquinha - R$12,00
-
-SABORES DISPONÍVEIS:
-- Chocolate
-- Morango
-- Creme
-- Flocos
-- Napolitano
-
-Por favor, me informe qual opção e sabores deseja!`,
-            
-            'Picolé': `Olá! Vim pelo site da Max Sorvetes Ibertioga e gostaria de pedir Picolé
-
-TIPOS DE PICOLÉ:
-• Picolé de Frutas - R$2,50
-  (morango, limão, uva, coco)
-• Picolé ao Leite - R$5,50
-  (chocolate, creme, flocos)
-• Picolé Trufado - R$7,00
-  (com cobertura premium)
-
-Por favor, me informe qual tipo e sabor deseja!`,
-            
-            'Chuchup': `Olá! Vim pelo site da Max Sorvetes Ibertioga e gostaria de pedir Chuchup
-
-OPÇÕES DISPONÍVEIS:
-• Chuchup Pequeno - R$0,50
-• Chuchup Grande - R$1,50
-• Chuchup ao Leite - R$3,50
-
-Por favor, me informe qual tamanho deseja!`
-        };
-        
         whatsappLinks.forEach(link => {
             let href = link.getAttribute('href');
             if (href) {
-                // Verificar se é um link com mensagem padrão
-                if (href.includes('text=')) {
-                    // Verificar qual categoria é pelo texto do botão
-                    const buttonText = link.textContent.trim();
-                    let newMessage = "Olá! Vim pelo site da Max Sorvetes Ibertioga e gostaria de fazer um pedido";
-                    
-                    if (buttonText.includes('Açaí')) {
-                        newMessage = categoryMessages['Açaí Completo'];
-                    } else if (buttonText.includes('Sorvete')) {
-                        newMessage = categoryMessages['Sorvete Artesanal'];
-                    } else if (buttonText.includes('Picolé') || buttonText.includes('Picolé')) {
-                        newMessage = categoryMessages['Picolé'];
-                    } else if (buttonText.includes('Chuchup')) {
-                        newMessage = categoryMessages['Chuchup'];
-                    }
-                    
-                    // Atualizar o link com a nova mensagem
-                    const encodedMessage = encodeURIComponent(newMessage);
-                    const newHref = `https://wa.me/553284442475?text=${encodedMessage}`;
-                    link.setAttribute('href', newHref);
-                }
-                
-                // Verificar e corrigir número de telefone
                 if (href.includes('5532986262715')) {
                     href = href.replace('5532986262715', '553284442475');
                     link.setAttribute('href', href);
@@ -454,120 +551,29 @@ Por favor, me informe qual tamanho deseja!`
             }
         });
     }
-
-    // ===== ANIMAÇÕES EXTRAS =====
-    function setupExtraAnimations() {
-        // Animar botões quando hover
-        const buttons = document.querySelectorAll('.btn, .item-btn, .btn-category, .btn-delivery');
-        buttons.forEach(btn => {
-            btn.addEventListener('mouseenter', function() {
-                this.style.transform = 'translateY(-2px)';
-            });
-            
-            btn.addEventListener('mouseleave', function() {
-                this.style.transform = '';
-            });
-        });
-        
-        // Efeito de digitação no título (opcional)
-        const heroTitle = document.querySelector('.hero-title');
-        if (heroTitle && !sessionStorage.getItem('titleAnimated')) {
-            setTimeout(() => {
-                heroTitle.style.opacity = '1';
-                heroTitle.style.transform = 'translateY(0)';
-                sessionStorage.setItem('titleAnimated', 'true');
-            }, 300);
-        }
-    }
-
-    // ===== DETECTAR DISPOSITIVO =====
-    function setupDeviceDetection() {
-        if ('ontouchstart' in window || navigator.maxTouchPoints > 0) {
-            document.body.classList.add('touch-device');
-            
-            // Otimizações para dispositivos touch
-            const hoverElements = document.querySelectorAll('.menu-item-card, .contact-card, .stat-card');
-            hoverElements.forEach(el => {
-                el.classList.add('touch-optimized');
-            });
-        } else {
-            document.body.classList.add('desktop-device');
-        }
-    }
-
-    // ===== LAZY LOADING PARA IMAGENS =====
-    function setupLazyLoading() {
-        const images = document.querySelectorAll('img[data-src]');
-        
-        if ('IntersectionObserver' in window) {
-            const imageObserver = new IntersectionObserver((entries, observer) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        const img = entry.target;
-                        img.src = img.dataset.src;
-                        img.removeAttribute('data-src');
-                        observer.unobserve(img);
-                    }
+    
+    function setupLightboxFix() {
+        setTimeout(() => {
+            if (typeof lightbox !== 'undefined') {
+                lightbox.option({
+                    'disableScrolling': false,
+                    'albumLabel': "Imagem %1 de %2",
+                    'fadeDuration': 300,
+                    'resizeDuration': 200
                 });
-            });
-            
-            images.forEach(img => imageObserver.observe(img));
-        } else {
-            // Fallback para navegadores antigos
-            images.forEach(img => {
-                img.src = img.dataset.src;
-            });
-        }
-    }
-
-    // ===== VALIDAÇÃO DE FORMULÁRIOS (se houver no futuro) =====
-    function setupFormValidation() {
-        const forms = document.querySelectorAll('form');
-        
-        forms.forEach(form => {
-            form.addEventListener('submit', function(e) {
-                const requiredFields = form.querySelectorAll('[required]');
-                let isValid = true;
-                
-                requiredFields.forEach(field => {
-                    if (!field.value.trim()) {
-                        isValid = false;
-                        field.style.borderColor = 'var(--rosa)';
-                        
-                        // Remover o destaque após 2 segundos
-                        setTimeout(() => {
-                            field.style.borderColor = '';
-                        }, 2000);
-                    }
-                });
-                
-                if (!isValid) {
-                    e.preventDefault();
-                    alert('Por favor, preencha todos os campos obrigatórios.');
-                }
-            });
-        });
-    }
-
-    // ===== CONTADOR DE VISUALIZAÇÕES (simples) =====
-    function setupViewCounter() {
-        if (localStorage) {
-            let views = localStorage.getItem('maxSorvetesViews');
-            
-            if (!views) {
-                views = 1;
-            } else {
-                views = parseInt(views) + 1;
             }
-            
-            localStorage.setItem('maxSorvetesViews', views);
-            
-            // Você pode exibir isso em algum lugar se quiser
-            // console.log(`Visualizações do site: ${views}`);
-        }
+        }, 1000);
+        
+        document.addEventListener('click', function(e) {
+            if (e.target.matches('a[data-lightbox]')) {
+                const href = e.target.getAttribute('href');
+                if (!href || !href.match(/\.(jpg|jpeg|png|gif|webp)$/i)) {
+                    e.preventDefault();
+                }
+            }
+        });
     }
-
-    // ===== PREVENIR COMPORTAMENTO PADRÃO DE LINKS # =====
+    
     function setupLinkPrevention() {
         document.querySelectorAll('a[href="#"]').forEach(link => {
             link.addEventListener('click', function(e) {
@@ -575,7 +581,7 @@ Por favor, me informe qual tamanho deseja!`
             });
         });
     }
-
+    
     // ===== INICIALIZAR TUDO =====
     function init() {
         setupLinkPrevention();
@@ -586,18 +592,16 @@ Por favor, me informe qual tamanho deseja!`
         setupScrollAnimations();
         setupActiveMenu();
         updateWhatsAppLinks();
-        setupExtraAnimations();
-        setupDeviceDetection();
-        setupLazyLoading();
-        setupFormValidation();
-        setupViewCounter();
+        setupLightboxFix();
+        setupSmartNotifications(); // ← NOVO SISTEMA
         
-        // Log de sucesso
-        console.log('✅ Max Sorvetes Ibertioga - Site totalmente inicializado!');
+        document.documentElement.classList.remove('no-js');
+        document.documentElement.classList.add('js');
+        
+        console.log('✅ Max Sorvetes Ibertioga - Site inicializado!');
         console.log('📞 WhatsApp: (32) 98444-2475');
         console.log('📍 Endereço: R. Rio de Janeiro, 652 - Ibertioga/MG');
         
-        // Animar título do hero após inicialização
         setTimeout(() => {
             const heroTitle = document.querySelector('.hero-title');
             if (heroTitle) {
@@ -616,7 +620,7 @@ Por favor, me informe qual tamanho deseja!`
 
 });
 
-// ===== FUNÇÕES GLOBAIS (se necessário) =====
+// ===== FUNÇÕES GLOBAIS =====
 function scrollToCardapio() {
     const cardapioSection = document.querySelector('#cardapio');
     if (cardapioSection) {
@@ -634,48 +638,5 @@ function openCardapioImage() {
     const cardapioImage = document.querySelector('.btn-cardapio-imagem');
     if (cardapioImage) {
         cardapioImage.click();
-    }
-}
-
-// ===== DETECTAR SAI DA PÁGINA =====
-window.addEventListener('beforeunload', function() {
-    // Você pode adicionar algum código aqui se necessário
-    // Por exemplo, enviar uma métrica de saída
-});
-
-// ===== FUNÇÕES DE MENU GLOBAIS =====
-function openMobileMenu() {
-    const navMenu = document.querySelector('.nav-menu');
-    const menuToggle = document.querySelector('.menu-toggle');
-    
-    if (navMenu && menuToggle) {
-        navMenu.style.display = 'flex';
-        setTimeout(() => {
-            navMenu.classList.add('active');
-        }, 10);
-        menuToggle.innerHTML = '<i class="fas fa-times"></i>';
-        menuToggle.setAttribute('aria-label', 'Fechar menu');
-        menuToggle.classList.add('active');
-        document.body.classList.add('menu-open');
-    }
-}
-
-function closeMobileMenu() {
-    const navMenu = document.querySelector('.nav-menu');
-    const menuToggle = document.querySelector('.menu-toggle');
-    
-    if (navMenu && menuToggle) {
-        navMenu.classList.remove('active');
-        menuToggle.innerHTML = '<i class="fas fa-bars"></i>';
-        menuToggle.setAttribute('aria-label', 'Abrir menu');
-        menuToggle.classList.remove('active');
-        
-        setTimeout(() => {
-            if (!navMenu.classList.contains('active')) {
-                navMenu.style.display = 'none';
-            }
-        }, 300);
-        
-        document.body.classList.remove('menu-open');
     }
 }
