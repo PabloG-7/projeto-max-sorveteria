@@ -730,14 +730,58 @@ img {
 }
 
 .btn-primary {
-    background: var(--preto);
-    color: var(--branco);
+    background: linear-gradient(135deg, var(--amarelo), var(--roxo-escuro));
+    color: white;
+    border: 2px solid transparent;
+    position: relative;
+    z-index: 1;
+    font-weight: 600;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+/* Borda gradiente animada */
+.btn-primary::before {
+    content: '';
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    right: -2px;
+    bottom: -2px;
+    background: linear-gradient(
+        45deg,
+        var(--roxo-claro),
+        var(--rosa),
+        var(--amarelo),
+        var(--roxo-claro)
+    );
+    background-size: 300% 300%;
+    border-radius: var(--radius-md);
+    z-index: -1;
+    animation: borderRotate 3s ease infinite;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+@keyframes borderRotate {
+    0%, 100% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+}
+
+.btn-primary:hover::before {
+    opacity: 1;
 }
 
 .btn-primary:hover {
-    background: var(--roxo-claro);
-    transform: translateY(-2px);
-    box-shadow: var(--shadow-md);
+    background: linear-gradient(135deg, var(--roxo-escuro), var(--preto));
+    transform: translateY(-3px) scale(1.05);
+    box-shadow: 
+        0 10px 25px rgba(124, 58, 237, 0.4),
+        0 0 20px rgba(185, 139, 201, 0.3);
 }
 
 .btn-whatsapp {
@@ -849,83 +893,96 @@ img {
     }
 }
 
-/* Foto do cliente */
+/* Foto do cliente - ESTILOS FINAIS CORRETOS */
 .client-photo {
     position: relative;
-    width: 280px;
-    height: 370px;
-    border-radius: var(--radius-xl);
+    width: 320px;
+    height: 420px;
     overflow: hidden;
-    box-shadow: 
-        0 15px 30px rgba(0, 0, 0, 0.1),
-        0 8px 16px rgba(124, 58, 237, 0.1),
-        inset 0 0 0 1px rgba(255, 255, 255, 0.5);
-    background-color: var(--roxo-escuro);
-    border: 3px solid var(--amarelo);
     margin: 0 auto;
     z-index: 2;
+    border-radius: 20px 20px 8px 8px;
+    box-shadow: 
+        0 15px 35px rgba(124, 58, 237, 0.15),
+        0 5px 15px rgba(0, 0, 0, 0.08);
+    background: white;
+    border: 3px solid transparent;
+    background-clip: padding-box;
+    animation: aparecerSuave 1.5s ease-out;
 }
 
-@media (min-width: 768px) {
-    .client-photo {
-        width: 320px;
-        height: 420px;
+/* Animação de entrada suave */
+@keyframes aparecerSuave {
+    from {
+        opacity: 0;
+        transform: translateY(30px) scale(0.95);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
     }
 }
 
+/* Borda de gradiente animada */
+.client-photo::before {
+    content: '';
+    position: absolute;
+    top: -3px;
+    left: -3px;
+    right: -3px;
+    bottom: -3px;
+    background: linear-gradient(
+        45deg,
+        var(--roxo-claro),
+        var(--rosa),
+        var(--amarelo),
+        var(--roxo-claro)
+    );
+    background-size: 300% 300%;
+    border-radius: 22px 22px 10px 10px;
+    z-index: -1;
+    animation: moverGradiente 8s ease infinite;
+    opacity: 0.8;
+}
+
+@keyframes moverGradiente {
+    0%, 100% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+}
+
+/* Imagem com corte triangular na base */
 .client-img {
     width: 100%;
     height: 100%;
     object-fit: cover;
     object-position: center;
-    transition: var(--transition);
+    clip-path: polygon(
+        0 0,
+        100% 0,
+        100% 85%,
+        50% 100%,
+        0 85%
+    );
+    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    filter: brightness(1.02);
 }
 
+/* Efeito hover suave */
 .client-photo:hover .client-img {
     transform: scale(1.03);
+    filter: brightness(1.05);
 }
 
-/* REMOVER TODOS OS ELEMENTOS ANTIGOS */
-.client-badge,
-.client-badge-on-photo,
-.floating-scoops,
-.ice-drops {
-    display: none !important;
+.client-photo:hover::before {
+    animation: moverGradiente 4s ease infinite;
+    opacity: 1;
 }
 
-/* FOTO COM OVERLAY GRADIENTE */
-.client-photo {
-    position: relative;
-    width: 280px;
-    height: 370px;
-    border-radius: var(--radius-xl);
-    overflow: hidden;
-    box-shadow: 
-        0 10px 40px rgba(124, 58, 237, 0.1),
-        0 5px 15px rgba(0, 0, 0, 0.08);
-    margin: 0 auto;
-    z-index: 2;
-}
-
-@media (min-width: 768px) {
-    .client-photo {
-        width: 320px;
-        height: 420px;
-    }
-}
-
-.client-img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: center;
-    transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.client-photo:hover .client-img {
-    transform: scale(1.05);
-}
-
+/* Foto com overlay gradiente */
 .photo-overlay {
     position: absolute;
     bottom: 0;
@@ -941,7 +998,7 @@ img {
     z-index: 2;
 }
 
-/* BADGE MINIMALISTA E ELEGANTE */
+/* Badge minimalista e elegante */
 .badge-minimal {
     position: absolute;
     bottom: 25px;
@@ -1007,6 +1064,73 @@ img {
     line-height: 1.2;
 }
 
+/* Pingos simples e discretos */
+.pingo-decorativo {
+    position: absolute;
+    bottom: -15px;
+    width: 8px;
+    height: 20px;
+    background: linear-gradient(to bottom, var(--roxo-claro), transparent);
+    border-radius: 0 0 4px 4px;
+    opacity: 0.6;
+    animation: pingarSuave 3s ease-in-out infinite;
+}
+
+.pingo-decorativo:nth-child(1) {
+    left: 30%;
+    animation-delay: 0s;
+}
+
+.pingo-decorativo:nth-child(2) {
+    left: 50%;
+    animation-delay: 0.5s;
+}
+
+.pingo-decorativo:nth-child(3) {
+    left: 70%;
+    animation-delay: 1s;
+}
+
+@keyframes pingarSuave {
+    0%, 100% {
+        transform: translateY(0) scaleY(1);
+        opacity: 0.4;
+    }
+    50% {
+        transform: translateY(8px) scaleY(1.3);
+        opacity: 0.8;
+    }
+}
+
+/* Sombra dinâmica */
+.client-photo::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 70%;
+    height: 20px;
+    background: radial-gradient(ellipse at center, 
+        rgba(124, 58, 237, 0.2) 0%,
+        rgba(124, 58, 237, 0.1) 40%,
+        transparent 70%);
+    border-radius: 50%;
+    z-index: -1;
+    animation: pulsarSombra 4s ease-in-out infinite;
+}
+
+@keyframes pulsarSombra {
+    0%, 100% {
+        opacity: 0.5;
+        transform: translateX(-50%) scale(0.95);
+    }
+    50% {
+        opacity: 0.8;
+        transform: translateX(-50%) scale(1.05);
+    }
+}
+
 /* Animações */
 @keyframes fadeInUp {
     from {
@@ -1016,6 +1140,22 @@ img {
     to {
         opacity: 1;
         transform: translateY(0);
+    }
+}
+
+/* Para telas maiores */
+@media (min-width: 1200px) {
+    .client-photo {
+        width: 350px;
+        height: 460px;
+    }
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+    .client-photo {
+        width: 280px;
+        height: 370px;
     }
 }
 
@@ -2241,8 +2381,8 @@ img {
     }
     
     .client-photo {
-        width: 220px;
-        height: 290px;
+        width: 270px;
+        height: 310px;
     }
     
     .section-title {
@@ -2321,8 +2461,8 @@ img {
     }
     
     .client-photo {
-        width: 220px;
-        height: 290px;
+        width: 270px;
+        height: 310px;
     }
     
     .ring-1 {
@@ -2647,180 +2787,4 @@ body.menu-open {
 .order-toast,
 .peak-alert {
     display: none !important;
-}
-
-/* ===== MOLDURA PONTIAGUDA ELEGANTE ===== */
-.client-photo {
-    position: relative;
-    width: 320px;
-    height: 420px;
-    overflow: hidden;
-    margin: 0 auto;
-    z-index: 2;
-    border-radius: 20px 20px 8px 8px;
-    /* Sombra suave */
-    box-shadow: 
-        0 15px 35px rgba(124, 58, 237, 0.15),
-        0 5px 15px rgba(0, 0, 0, 0.08);
-    background: white;
-    /* Borda com gradiente sutil */
-    border: 3px solid transparent;
-    background-clip: padding-box;
-    position: relative;
-    animation: aparecerSuave 1.5s ease-out;
-}
-
-/* Animação de entrada suave */
-@keyframes aparecerSuave {
-    from {
-        opacity: 0;
-        transform: translateY(30px) scale(0.95);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0) scale(1);
-    }
-}
-
-/* Borda de gradiente animada */
-.client-photo::before {
-    content: '';
-    position: absolute;
-    top: -3px;
-    left: -3px;
-    right: -3px;
-    bottom: -3px;
-    background: linear-gradient(
-        45deg,
-        var(--roxo-claro),
-        var(--rosa),
-        var(--amarelo),
-        var(--roxo-claro)
-    );
-    background-size: 300% 300%;
-    border-radius: 22px 22px 10px 10px;
-    z-index: -1;
-    animation: moverGradiente 8s ease infinite;
-    opacity: 0.8;
-}
-
-@keyframes moverGradiente {
-    0%, 100% {
-        background-position: 0% 50%;
-    }
-    50% {
-        background-position: 100% 50%;
-    }
-}
-
-/* Imagem com corte triangular na base */
-.client-img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: center;
-    /* Forma de triângulo na parte inferior */
-    clip-path: polygon(
-        0 0,
-        100% 0,
-        100% 85%,
-        50% 100%,
-        0 85%
-    );
-    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-    filter: brightness(1.02);
-}
-
-/* Efeito hover suave */
-.client-photo:hover .client-img {
-    transform: scale(1.03);
-    filter: brightness(1.05);
-}
-
-.client-photo:hover::before {
-    animation: moverGradiente 4s ease infinite;
-    opacity: 1;
-}
-
-/* Pingos simples e discretos */
-.pingo-decorativo {
-    position: absolute;
-    bottom: -15px;
-    width: 8px;
-    height: 20px;
-    background: linear-gradient(to bottom, var(--roxo-claro), transparent);
-    border-radius: 0 0 4px 4px;
-    opacity: 0.6;
-    animation: pingarSuave 3s ease-in-out infinite;
-}
-
-.pingo-decorativo:nth-child(1) {
-    left: 30%;
-    animation-delay: 0s;
-}
-
-.pingo-decorativo:nth-child(2) {
-    left: 50%;
-    animation-delay: 0.5s;
-}
-
-.pingo-decorativo:nth-child(3) {
-    left: 70%;
-    animation-delay: 1s;
-}
-
-@keyframes pingarSuave {
-    0%, 100% {
-        transform: translateY(0) scaleY(1);
-        opacity: 0.4;
-    }
-    50% {
-        transform: translateY(8px) scaleY(1.3);
-        opacity: 0.8;
-    }
-}
-
-/* Sombra dinâmica */
-.client-photo::after {
-    content: '';
-    position: absolute;
-    bottom: -10px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 70%;
-    height: 20px;
-    background: radial-gradient(ellipse at center, 
-        rgba(124, 58, 237, 0.2) 0%,
-        rgba(124, 58, 237, 0.1) 40%,
-        transparent 70%);
-    border-radius: 50%;
-    z-index: -1;
-    animation: pulsarSombra 4s ease-in-out infinite;
-}
-
-@keyframes pulsarSombra {
-    0%, 100% {
-        opacity: 0.5;
-        transform: translateX(-50%) scale(0.95);
-    }
-    50% {
-        opacity: 0.8;
-        transform: translateX(-50%) scale(1.05);
-    }
-}
-
-/* Para telas maiores */
-@media (min-width: 1200px) {
-    .client-photo {
-        width: 350px;
-        height: 460px;
-    }
-}
-
-/* Mobile */
-@media (max-width: 768px) {
-    .client-photo {
-        width: 280px;
-        height: 370px;
-    }
 }
