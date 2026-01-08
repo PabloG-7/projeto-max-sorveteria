@@ -584,6 +584,19 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // ===== INICIALIZAR TUDO =====
     function init() {
+           window.addEventListener('load', function() {
+        setTimeout(function() {
+            const pageLoader = document.getElementById('pageLoader');
+            if (pageLoader) {
+                pageLoader.classList.add('hidden');
+                setTimeout(() => {
+                    if (pageLoader.parentNode) {
+                        pageLoader.parentNode.removeChild(pageLoader);
+                    }
+                }, 500);
+            }
+        }, 300);
+    });
         setupLinkPrevention();
         setupSmoothScroll();
         setupMobileMenu();
