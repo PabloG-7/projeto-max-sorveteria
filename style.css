@@ -448,7 +448,7 @@ img {
     background: var(--gradient-whatsapp);
     color: white;
     padding: 10px 20px;
-    border-radius: var(--radius-sm);
+    border-radius: 20px 40px;
     text-decoration: none;
     font-weight: 600;
     font-size: 0.9rem;
@@ -732,6 +732,7 @@ img {
 .btn-primary {
     background: linear-gradient(135deg, var(--amarelo), var(--roxo-escuro));
     color: white;
+    border-radius: 20px 40px;
     border: 2px solid transparent;
     position: relative;
     z-index: 1;
@@ -785,6 +786,7 @@ img {
 }
 
 .btn-whatsapp {
+    border-radius: 20px 40px;
     background: linear-gradient(135deg, #25D366, #128C7E);
     color: var(--branco);
 }
@@ -1354,7 +1356,7 @@ img {
     color: white;
     border: none;
     padding: 10px 20px;
-    border-radius: var(--radius-sm);
+     border-radius: 20px 40px;
     font-weight: 600;
     font-size: 0.9rem;
     cursor: pointer;
