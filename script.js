@@ -581,6 +581,494 @@ document.addEventListener('DOMContentLoaded', function() {
             });
         });
     }
+
+// ===== SISTEMA DE CARRINHO DE AÇAÍ =====
+function setupAcaiCart() {
+    console.log('🛒 Configurando carrinho de açaí...');
+    
+    // Encontrar TODOS os botões de açaí
+    const acaiButtons = document.querySelectorAll('[data-item*="Açaí"], [data-item*="açaí"], .item-btn');
+    
+    acaiButtons.forEach(button => {
+        // Remover todos os event listeners antigos
+        button.replaceWith(button.cloneNode(true));
+    });
+    
+    // Re-selecionar os botões após clonagem
+    const refreshedButtons = document.querySelectorAll('[data-item*="Açaí"], [data-item*="açaí"], .item-btn');
+    
+    refreshedButtons.forEach(button => {
+        button.addEventListener('click', function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            e.stopImmediatePropagation();
+            
+            console.log("🛒 Botão de açaí clicado!");
+            
+            // Verificar se é um botão de açaí pelo texto/data-item
+            const buttonText = this.textContent || '';
+            const dataItem = this.getAttribute('data-item') || '';
+            
+            if (buttonText.includes('Açaí') || buttonText.includes('açaí') || 
+                dataItem.includes('Açaí') || dataItem.includes('açaí')) {
+                
+                const productName = this.getAttribute('data-item') || 'Açaí';
+                const productPrice = extractPrice(productName) || '15.00';
+                
+                openAcaiModal(productName, productPrice);
+                
+                // IMPORTANTE: Não seguir nenhum link
+                return false;
+            }
+        }, true); // Use capture phase
+    });
+    
+    // Também prevenir links WhatsApp dentro de elementos de açaí
+    document.addEventListener('click', function(e) {
+        const clickedElement = e.target;
+        const button = clickedElement.closest('[data-item*="Açaí"], [data-item*="açaí"], .item-btn');
+        
+        if (button) {
+            e.preventDefault();
+            e.stopPropagation();
+            
+            const productName = button.getAttribute('data-item') || 'Açaí';
+            const productPrice = extractPrice(productName) || '15.00';
+            
+            openAcaiModal(productName, productPrice);
+        }
+    }, true);
+}
+
+function extractPrice(text) {
+    const match = text.match(/R\$\s*([\d,]+)/);
+    if (match) {
+        return match[1].replace(',', '.');
+    }
+    return null;
+}
+
+    function openAcaiModal(productName, basePrice) {
+    // Prevenir comportamento padrão
+    if (window.event) {
+        window.event.preventDefault();
+        window.event.stopPropagation();
+    }
+    
+    // Fechar modal anterior se existir
+    const existingModal = document.getElementById('acai-modal');
+    if (existingModal) {
+        existingModal.style.display = 'none';
+    }
+    
+    const modalHTML = `
+        <div class="modal-header">
+            <i class="fas fa-glass-whiskey" style="color: var(--roxo-escuro); font-size: 2rem;"></i>
+            <h3>${productName}</h3>
+            <button class="modal-close" id="modal-close-btn">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        
+        <div class="modal-section">
+            <h4><i class="fas fa-gift"></i> ESCOLHA ATÉ 3 ACOMPANHAMENTOS GRÁTIS</h4>
+            <div class="checkbox-group" id="acompanhamentos-group">
+                <div class="checkbox-item">
+                    <input type="checkbox" id="acomp1" value="Leite em pó">
+                    <label for="acomp1">Leite em pó</label>
+                </div>
+                <div class="checkbox-item">
+                    <input type="checkbox" id="acomp2" value="Leite condensado">
+                    <label for="acomp2">Leite condensado</label>
+                </div>
+                <div class="checkbox-item">
+                    <input type="checkbox" id="acomp3" value="Calda de chocolate">
+                    <label for="acomp3">Calda de chocolate</label>
+                </div>
+                <div class="checkbox-item">
+                    <input type="checkbox" id="acomp4" value="Calda de morango">
+                    <label for="acomp4">Calda de morango</label>
+                </div>
+            </div>
+            <small class="counter" id="acomp-counter">0/3 selecionados</small>
+        </div>
+        
+        <div class="modal-section">
+            <h4><i class="fas fa-plus-circle"></i> EXTRAS (OPCIONAIS)</h4>
+            
+            <div class="skip-option">
+                <input type="radio" name="extras-option" id="skip-extras" value="skip" checked>
+                <span>✅ Não quero extras, só os acompanhamentos grátis</span>
+            </div>
+            
+            <div class="skip-option">
+                <input type="radio" name="extras-option" id="add-extras" value="add">
+                <span>➕ Quero adicionar extras (valores adicionais)</span>
+            </div>
+            
+            <div class="extras-list" id="extras-list" style="display: none;">
+                <div class="checkbox-group">
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="extra1" value="Paçoca" data-price="2.50">
+                        <label for="extra1">Paçoca</label>
+                        <span class="price">+ R$ 2,50</span>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="extra2" value="Granulado" data-price="2.00">
+                        <label for="extra2">Granulado</label>
+                        <span class="price">+ R$ 2,00</span>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="extra3" value="Granola" data-price="2.00">
+                        <label for="extra3">Granola</label>
+                        <span class="price">+ R$ 2,00</span>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="extra4" value="Fini" data-price="3.00">
+                        <label for="extra4">Fini</label>
+                        <span class="price">+ R$ 3,00</span>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="extra5" value="Morango" data-price="4.00">
+                        <label for="extra5">Morango</label>
+                        <span class="price">+ R$ 4,00</span>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="extra6" value="Banana" data-price="3.00">
+                        <label for="extra6">Banana</label>
+                        <span class="price">+ R$ 3,00</span>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="extra7" value="Kiwi" data-price="4.00">
+                        <label for="extra7">Kiwi</label>
+                        <span class="price">+ R$ 4,00</span>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="extra8" value="Nutella" data-price="5.00">
+                        <label for="extra8">Nutella</label>
+                        <span class="price">+ R$ 5,00</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="total-section">
+            <h4>TOTAL DO PEDIDO</h4>
+            <div id="total-price-display">R$ ${parseFloat(basePrice).toFixed(2).replace('.', ',')}</div>
+        </div>
+        
+        <div class="modal-buttons">
+            <button class="btn-cancel" id="btn-cancel-modal">
+                <i class="fas fa-times"></i> Cancelar
+            </button>
+            <button class="btn-confirm" id="btn-confirm-modal">
+                <i class="fab fa-whatsapp"></i> Confirmar Pedido
+            </button>
+        </div>
+    `;
+    
+    const modal = document.getElementById('acai-modal');
+    const modalContent = modal.querySelector('.modal-content');
+    modalContent.innerHTML = modalHTML;
+    modal.style.display = 'flex';
+    
+    // === CONFIGURAR EVENTOS DOS BOTÕES DO MODAL ===
+    
+    // 1. Botão Cancelar
+    document.getElementById('btn-cancel-modal').addEventListener('click', function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        console.log('❌ Botão Cancelar clicado');
+        closeAcaiModal();
+    });
+    
+    // 2. Botão Confirmar
+    document.getElementById('btn-confirm-modal').addEventListener('click', function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        console.log('✅ Botão Confirmar clicado');
+        confirmAcaiOrder(productName, basePrice);
+    });
+    
+    // 3. Botão Fechar (X)
+    document.getElementById('modal-close-btn').addEventListener('click', function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        console.log('❌ Botão Fechar (X) clicado');
+        closeAcaiModal();
+    });
+    
+    // 4. Clicar fora (overlay) para fechar
+    document.querySelector('.modal-overlay').addEventListener('click', function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        console.log('🌫️ Overlay clicado');
+        closeAcaiModal();
+    });
+    
+    // 5. Tecla ESC para fechar
+    function handleEscKey(e) {
+        if (e.key === 'Escape') {
+            console.log('⌨️ Tecla ESC pressionada');
+            closeAcaiModal();
+            document.removeEventListener('keydown', handleEscKey);
+        }
+    }
+    document.addEventListener('keydown', handleEscKey);
+    
+    // === CONFIGURAR EVENTOS DOS CHECKBOXES ===
+    
+    // Contador de acompanhamentos
+    const acompanhamentos = document.querySelectorAll('#acompanhamentos-group input[type="checkbox"]');
+    const counter = document.getElementById('acomp-counter');
+    
+    acompanhamentos.forEach(cb => {
+        cb.addEventListener('change', function() {
+            const checked = document.querySelectorAll('#acompanhamentos-group input[type="checkbox"]:checked');
+            
+            // Limitar a 3
+            if (checked.length > 3) {
+                this.checked = false;
+                return;
+            }
+            
+            counter.textContent = `${checked.length}/3 selecionados`;
+            updateTotal(basePrice);
+        });
+    });
+    
+    // Eventos para opções de extras
+    document.getElementById('skip-extras').addEventListener('change', function() {
+        if (this.checked) {
+            document.getElementById('extras-list').style.display = 'none';
+            // Desmarcar todos os extras
+            document.querySelectorAll('#extras-list input[type="checkbox"]').forEach(cb => {
+                cb.checked = false;
+            });
+            updateTotal(basePrice);
+        }
+    });
+    
+    document.getElementById('add-extras').addEventListener('change', function() {
+        if (this.checked) {
+            document.getElementById('extras-list').style.display = 'block';
+            updateTotal(basePrice);
+        }
+    });
+    
+    // Eventos para checkboxes de extras
+    document.querySelectorAll('#extras-list input[type="checkbox"]').forEach(cb => {
+        cb.addEventListener('change', function() {
+            updateTotal(basePrice);
+        });
+    });
+    
+    // Inicializar total
+    updateTotal(basePrice);
+    
+    console.log('🛒 Modal de açaí aberto com sucesso!');
+}
+
+function setupModalEvents(basePrice) {
+    // Contador de acompanhamentos
+    const acompanhamentos = document.querySelectorAll('#acompanhamentos-group input[type="checkbox"]');
+    const counter = document.getElementById('acomp-counter');
+    
+    acompanhamentos.forEach(cb => {
+        cb.addEventListener('change', function() {
+            const checked = document.querySelectorAll('#acompanhamentos-group input[type="checkbox"]:checked');
+            
+            // Limitar a 3
+            if (checked.length > 3) {
+                this.checked = false;
+                return;
+            }
+            
+            counter.textContent = `${checked.length}/3 selecionados`;
+            updateTotal(basePrice);
+        });
+    });
+    
+    // Checkboxes de extras
+    const extraCheckboxes = document.querySelectorAll('#extras-list input[type="checkbox"]');
+    extraCheckboxes.forEach(cb => {
+        cb.addEventListener('change', () => updateTotal(basePrice));
+    });
+    
+    // Botão fechar
+    const closeBtn = document.querySelector('.modal-close');
+    if (closeBtn) {
+        closeBtn.addEventListener('click', closeAcaiModal);
+    }
+    
+    // Fechar ao clicar fora
+    const overlay = document.querySelector('.modal-overlay');
+    if (overlay) {
+        overlay.addEventListener('click', closeAcaiModal);
+    }
+}
+
+function selectSkipExtras() {
+    document.getElementById('skip-extras').checked = true;
+    document.getElementById('extras-list').style.display = 'none';
+    
+    // Desmarcar todos os extras
+    const extras = document.querySelectorAll('#extras-list input[type="checkbox"]');
+    extras.forEach(cb => cb.checked = false);
+    
+    updateTotal();
+}
+
+function selectAddExtras() {
+    document.getElementById('add-extras').checked = true;
+    document.getElementById('extras-list').style.display = 'block';
+    updateTotal();
+}
+
+function updateTotal(basePrice = 15) {
+    let total = parseFloat(basePrice);
+    
+    // Adicionar valores dos extras
+    const extras = document.querySelectorAll('#extras-list input[type="checkbox"]:checked');
+    extras.forEach(extra => {
+        const price = parseFloat(extra.getAttribute('data-price'));
+        total += price;
+    });
+    
+    // Atualizar display
+    const totalElement = document.getElementById('total-price-display');
+    if (totalElement) {
+        totalElement.textContent = `R$ ${total.toFixed(2).replace('.', ',')}`;
+    }
+}
+
+function closeAcaiModal() {
+    const modal = document.getElementById('acai-modal');
+    modal.style.display = 'none';
+    console.log('🔒 Modal fechado');
+}
+
+function confirmAcaiOrder(productName, basePrice) {
+    console.log('📝 Confirmando pedido de açaí...');
+    
+    // Coletar dados do pedido
+    const acompanhamentos = [];
+    const acompanhamentosCheckboxes = document.querySelectorAll('#acompanhamentos-group input[type="checkbox"]:checked');
+    acompanhamentosCheckboxes.forEach(cb => {
+        acompanhamentos.push(cb.value);
+    });
+    
+    const extras = [];
+    let extrasTotal = 0;
+    const extrasCheckboxes = document.querySelectorAll('#extras-list input[type="checkbox"]:checked');
+    extrasCheckboxes.forEach(cb => {
+        const extraName = cb.value;
+        const extraPrice = parseFloat(cb.getAttribute('data-price'));
+        extras.push(`${extraName} (+ R$ ${extraPrice.toFixed(2).replace('.', ',')})`);
+        extrasTotal += extraPrice;
+    });
+    
+    const total = parseFloat(basePrice) + extrasTotal;
+    
+    // Construir mensagem para WhatsApp
+    let message = `Olá! Vim pelo site da Max Sorvetes Ibertioga e gostaria de fazer um pedido:\n\n`;
+    message += `• ${productName}\n`;
+    
+    if (acompanhamentos.length > 0) {
+        message += `  Acompanhamentos: ${acompanhamentos.join(', ')}\n`;
+    } else {
+        message += `  (Sem acompanhamentos)\n`;
+    }
+    
+    if (extras.length > 0) {
+        message += `  Extras: ${extras.join(', ')}\n`;
+    } else {
+        message += `  (Sem extras adicionais)\n`;
+    }
+    
+    message += `\n💰 Total: R$ ${total.toFixed(2).replace('.', ',')}\n\n`;
+    message += `📍 Endereço para entrega: ___________________\n`;
+    message += `💳 Forma de pagamento: ___________________`;
+    
+    // Fechar modal
+    closeAcaiModal();
+    
+    // Pequeno delay para animação
+    setTimeout(() => {
+        // Abrir WhatsApp
+        const phoneNumber = "553284442475";
+        const encodedMessage = encodeURIComponent(message);
+        const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodedMessage}`;
+        window.open(whatsappUrl, '_blank');
+        console.log('📱 WhatsApp aberto com mensagem do pedido');
+    }, 300);
+}
+
+function extractPrice(text) {
+    const match = text.match(/R\$\s*([\d,]+)/);
+    if (match) {
+        return match[1].replace(',', '.');
+    }
+    return null;
+}
+
+function closeAcaiModal() {
+    const modal = document.getElementById('acai-modal');
+    modal.style.display = 'none';
+}
+
+function confirmAcaiOrder(productName, basePrice) {
+    // Coletar dados do pedido
+    const acompanhamentos = [];
+    const acompanhamentosCheckboxes = document.querySelectorAll('#acompanhamentos-group input[type="checkbox"]:checked');
+    acompanhamentosCheckboxes.forEach(cb => {
+        acompanhamentos.push(cb.value);
+    });
+    
+    const extras = [];
+    let extrasTotal = 0;
+    const extrasCheckboxes = document.querySelectorAll('#extras-list input[type="checkbox"]:checked');
+    extrasCheckboxes.forEach(cb => {
+        const extraName = cb.value;
+        const extraPrice = parseFloat(cb.getAttribute('data-price'));
+        extras.push(`${extraName} (+ R$ ${extraPrice.toFixed(2).replace('.', ',')})`);
+        extrasTotal += extraPrice;
+    });
+    
+    const total = parseFloat(basePrice) + extrasTotal;
+    
+    // Construir mensagem para WhatsApp
+    let message = `Olá! Vim pelo site da Max Sorvetes Ibertioga e gostaria de fazer um pedido:\n\n`;
+    message += `• ${productName}\n`;
+    
+    if (acompanhamentos.length > 0) {
+        message += `  Acompanhamentos: ${acompanhamentos.join(', ')}\n`;
+    }
+    
+    if (extras.length > 0) {
+        message += `  Extras: ${extras.join(', ')}\n`;
+    } else {
+        message += `  (Sem extras adicionais)\n`;
+    }
+    
+    message += `\nTotal: R$ ${total.toFixed(2).replace('.', ',')}\n\n`;
+    message += `Endereço para entrega: ___________________\n`;
+    message += `Forma de pagamento: ___________________`;
+    
+    // Fechar modal
+    closeAcaiModal();
+    
+    // Abrir WhatsApp
+    const phoneNumber = "553284442475";
+    const encodedMessage = encodeURIComponent(message);
+    const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodedMessage}`;
+    
+    // Mostrar confirmação antes de redirecionar
+    setTimeout(() => {
+        window.open(whatsappUrl, '_blank');
+    }, 500);
+}
+
     
     // ===== INICIALIZAR TUDO =====
     function init() {
@@ -594,6 +1082,7 @@ document.addEventListener('DOMContentLoaded', function() {
         updateWhatsAppLinks();
         setupLightboxFix();
         setupSmartNotifications(); // ← NOVO SISTEMA
+         setupAcaiCart();
         
         document.documentElement.classList.remove('no-js');
         document.documentElement.classList.add('js');
