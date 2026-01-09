@@ -2776,371 +2776,287 @@ body.menu-open {
     overflow: hidden;
 }
 
-/* ===== MODAL DE AÇAÍ - MINI VERSÃO ===== */
-
-/* Container principal */
+/* ===== MODAL DE AÇAÍ CORRIGIDO ===== */
 .acai-modal {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    z-index: 99999;
-    display: none;
+    z-index: 99999; /* Z-INDEX ALTÍSSIMO */
+    display: none; /* Começa escondido */
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+.acai-modal[style*="display: flex"] {
+    display: flex !important;
+}
+
+.modal-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
     background: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(5px);
+    z-index: 1;
 }
 
-/* Modal COMPACTÃO */
 .modal-content {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+    position: relative;
     background: white;
-    border-radius: 10px;
-    padding: 15px;
-    width: 95%;
-    max-width: 400px;
-    max-height: 80vh;
+    border-radius: 20px;
+    padding: 30px;
+    max-width: 500px;
+    width: 100%;
+    max-height: 85vh;
     overflow-y: auto;
-    box-shadow: 0 5px 20px rgba(0,0,0,0.15);
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    border: 3px solid var(--roxo-claro);
+    animation: modalSlideIn 0.3s ease-out;
+    z-index: 2;
 }
 
-/* Cabeçalho MINI */
+@keyframes modalSlideIn {
+    from {
+        opacity: 0;
+        transform: translateY(-30px) scale(0.95);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+/* Estrutura do modal */
 .modal-header {
     display: flex;
     align-items: center;
-    margin-bottom: 12px;
-    padding-bottom: 10px;
-    border-bottom: 1px solid #eee;
+    gap: 15px;
+    margin-bottom: 25px;
+    padding-bottom: 15px;
+    border-bottom: 2px solid rgba(124, 58, 237, 0.1);
 }
 
 .modal-header h3 {
+    color: var(--roxo-escuro);
+    font-size: 1.8rem;
     margin: 0;
-    font-size: 18px;
-    color: #333;
-    font-weight: 600;
 }
 
 .modal-close {
     margin-left: auto;
     background: none;
     border: none;
-    width: 28px;
-    height: 28px;
-    border-radius: 50%;
-    font-size: 16px;
-    color: #666;
+    font-size: 1.5rem;
+    color: var(--cinza-escuro);
     cursor: pointer;
+    padding: 8px;
+    border-radius: 50%;
+    transition: all 0.3s ease;
 }
 
-/* Seções COMPACTAS */
+.modal-close:hover {
+    background: rgba(124, 58, 237, 0.1);
+    color: var(--roxo-escuro);
+}
+
+/* Seções do modal */
 .modal-section {
-    margin-bottom: 12px;
-    padding: 12px;
-    background: #f8f8f8;
-    border-radius: 6px;
+    margin-bottom: 25px;
+    padding: 20px;
+    background: var(--off-white);
+    border-radius: 12px;
+    border: 1px solid rgba(124, 58, 237, 0.1);
 }
 
 .modal-section h4 {
-    margin: 0 0 10px 0;
-    font-size: 15px;
-    color: #444;
+    color: var(--roxo-escuro);
+    margin-bottom: 15px;
+    font-size: 1.2rem;
+    display: flex;
+    align-items: center;
+    gap: 10px;
 }
 
-/* Contador MINI */
-.counter {
-    display: inline-block;
-    padding: 2px 6px;
-    background: #7c3aed;
-    color: white;
-    border-radius: 8px;
-    font-size: 11px;
-    font-weight: 600;
-    margin-left: 5px;
-}
-
-/* Checkboxes MINI */
+/* Checkboxes estilizados */
 .checkbox-group {
     display: grid;
-    gap: 6px;
+    gap: 12px;
+    margin-bottom: 15px;
 }
 
 .checkbox-item {
     display: flex;
     align-items: center;
-    gap: 8px;
-    padding: 8px 10px;
+    gap: 12px;
+    padding: 12px 15px;
     background: white;
-    border-radius: 5px;
-    border: 1px solid #ddd;
+    border-radius: 10px;
+    border: 2px solid transparent;
     cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.checkbox-item:hover {
+    border-color: var(--roxo-claro);
+    transform: translateX(5px);
 }
 
 .checkbox-item input[type="checkbox"] {
-    width: 14px;
-    height: 14px;
-    accent-color: #7c3aed;
+    width: 20px;
+    height: 20px;
+    accent-color: var(--roxo-escuro);
+    cursor: pointer;
 }
 
 .checkbox-item label {
     flex: 1;
-    font-size: 13px;
-    color: #333;
+    cursor: pointer;
+    font-weight: 500;
+    color: var(--preto);
 }
 
 .checkbox-item .price {
-    font-size: 13px;
-    color: #e91e63;
-    font-weight: 600;
+    font-weight: 700;
+    color: var(--rosa);
+    font-size: 1rem;
 }
 
-/* Skip MINI */
+/* Opção de pular extras */
 .skip-option {
     display: flex;
     align-items: center;
-    gap: 8px;
-    padding: 10px;
-    background: #f0fff4;
-    border-radius: 5px;
-    border: 1px solid #c6f6d5;
-    margin-bottom: 10px;
+    gap: 12px;
+    padding: 15px;
+    background: rgba(37, 211, 102, 0.1);
+    border-radius: 10px;
+    border: 2px solid transparent;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-bottom: 15px;
+}
+
+.skip-option:hover {
+    border-color: var(--verde-whatsapp);
+    background: rgba(37, 211, 102, 0.15);
 }
 
 .skip-option input[type="radio"] {
-    width: 14px;
-    height: 14px;
-    accent-color: #25d366;
+    width: 20px;
+    height: 20px;
+    accent-color: var(--verde-whatsapp);
+    cursor: pointer;
 }
 
 .skip-option span {
-    font-size: 13px;
-    color: #333;
+    flex: 1;
+    cursor: pointer;
+    font-weight: 600;
+    color: var(--preto);
 }
 
-/* Total MINI */
+/* Contador */
+.counter {
+    display: inline-block;
+    padding: 5px 12px;
+    background: var(--roxo-escuro);
+    color: white;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    font-weight: 600;
+}
+
+/* Total */
 .total-section {
-    background: linear-gradient(135deg, #f8f0ff, #fff0f5);
-    padding: 12px;
-    border-radius: 6px;
-    margin: 12px 0;
+    background: linear-gradient(135deg, rgba(124, 58, 237, 0.1), rgba(255, 107, 157, 0.1));
+    padding: 25px;
+    border-radius: 15px;
     text-align: center;
+    margin: 25px 0;
 }
 
 .total-section h4 {
-    margin: 0 0 4px 0;
-    font-size: 13px;
-    color: #555;
+    color: var(--preto);
+    font-size: 1.5rem;
+    margin-bottom: 10px;
 }
 
 #total-price-display {
-    font-size: 20px;
-    font-weight: 700;
-    color: #7c3aed;
+    font-size: 2.2rem;
+    font-weight: 800;
+    color: var(--roxo-escuro);
+    text-shadow: 0 2px 4px rgba(124, 58, 237, 0.2);
 }
 
-/* Botões MINI */
+/* Botões do modal */
 .modal-buttons {
     display: flex;
-    gap: 8px;
-    margin-top: 12px;
+    gap: 15px;
+    margin-top: 20px;
 }
 
 .btn-cancel, .btn-confirm {
     flex: 1;
-    padding: 12px;
-    border-radius: 6px;
-    font-size: 14px;
-    font-weight: 600;
+    padding: 16px;
+    border-radius: 12px;
+    font-weight: 700;
+    font-size: 1.1rem;
     border: none;
     cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
 }
 
 .btn-cancel {
-    background: #f0f0f0;
-    color: #666;
+    background: rgba(107, 114, 128, 0.1);
+    color: var(--cinza-escuro);
+}
+
+.btn-cancel:hover {
+    background: rgba(107, 114, 128, 0.2);
+    transform: translateY(-3px);
 }
 
 .btn-confirm {
-    background: linear-gradient(135deg, #25d366, #128C7E);
+    background: linear-gradient(135deg, var(--verde-whatsapp), #128C7E);
     color: white;
+    box-shadow: 0 4px 15px rgba(37, 211, 102, 0.3);
 }
 
-/* ===== CELULAR - SUPER COMPACTO ===== */
-@media (max-width: 768px) {
-    .modal-content {
-        padding: 12px;
-        width: 96%;
-        max-height: 85vh;
-        border-radius: 8px;
-    }
-    
-    .modal-header {
-        margin-bottom: 10px;
-        padding-bottom: 8px;
-    }
-    
-    .modal-header h3 {
-        font-size: 16px;
-    }
-    
-    .modal-section {
-        padding: 10px;
-        margin-bottom: 10px;
-    }
-    
-    .modal-section h4 {
-        font-size: 14px;
-        margin-bottom: 8px;
-    }
-    
-    .checkbox-item {
-        padding: 6px 8px;
-        gap: 6px;
-    }
-    
-    .checkbox-item label,
-    .checkbox-item .price,
-    .skip-option span {
-        font-size: 12px;
-    }
-    
-    .skip-option {
-        padding: 8px;
-        margin-bottom: 8px;
-    }
-    
-    #total-price-display {
-        font-size: 18px;
-    }
-    
-    .modal-buttons {
-        gap: 6px;
-    }
-    
-    .btn-cancel, .btn-confirm {
-        padding: 10px;
-        font-size: 13px;
-    }
+.btn-confirm:hover {
+    transform: translateY(-3px) scale(1.05);
+    box-shadow: 0 8px 25px rgba(37, 211, 102, 0.4);
 }
 
-/* ===== CELULAR PEQUENO - MICRO ===== */
-@media (max-width: 480px) {
+/* Responsivo */
+@media (max-width: 600px) {
     .modal-content {
-        padding: 10px;
-        width: 98%;
+        padding: 20px;
         max-height: 90vh;
-        border-radius: 6px;
-    }
-    
-    .modal-header {
-        margin-bottom: 8px;
-        padding-bottom: 6px;
-    }
-    
-    .modal-header h3 {
-        font-size: 15px;
-    }
-    
-    .modal-close {
-        width: 24px;
-        height: 24px;
-        font-size: 14px;
-    }
-    
-    .modal-section {
-        padding: 8px;
-        margin-bottom: 8px;
-    }
-    
-    .modal-section h4 {
-        font-size: 13px;
-        margin-bottom: 6px;
-    }
-    
-    .counter {
-        font-size: 10px;
-        padding: 1px 4px;
-    }
-    
-    .checkbox-group {
-        gap: 4px;
-    }
-    
-    .checkbox-item {
-        padding: 5px 6px;
-        gap: 5px;
-    }
-    
-    .checkbox-item label,
-    .checkbox-item .price,
-    .skip-option span {
-        font-size: 11px;
-    }
-    
-    .checkbox-item input[type="checkbox"],
-    .skip-option input[type="radio"] {
-        width: 12px;
-        height: 12px;
-    }
-    
-    .skip-option {
-        padding: 6px;
-        margin-bottom: 6px;
-    }
-    
-    .total-section {
-        padding: 8px;
-        margin: 8px 0;
-    }
-    
-    .total-section h4 {
-        font-size: 12px;
-    }
-    
-    #total-price-display {
-        font-size: 16px;
     }
     
     .modal-buttons {
         flex-direction: column;
-        gap: 5px;
     }
     
-    .btn-cancel, .btn-confirm {
-        padding: 8px;
-        font-size: 12px;
+    .checkbox-group {
+        grid-template-columns: 1fr;
+    }
+    
+    .acai-modal {
+        padding: 10px;
     }
 }
 
-/* ===== CELULAR MINUSCULO ===== */
-@media (max-width: 360px) {
-    .modal-content {
-        padding: 8px;
-    }
-    
-    .modal-header h3 {
-        font-size: 14px;
-    }
-    
-    .checkbox-item label,
-    .checkbox-item .price {
-        font-size: 10px;
-    }
-    
-    #total-price-display {
-        font-size: 15px;
-    }
-    
-    .btn-cancel, .btn-confirm {
-        padding: 7px;
-        font-size: 11px;
-    }
-}
-
-/* Scrollbar invisível em mobile */
-@media (max-width: 768px) {
-    .modal-content::-webkit-scrollbar {
-        width: 2px;
-    }
+/* IMPORTANTE: Garantir que o modal aparece */
+.acai-modal[style*="display: flex"],
+.acai-modal[style*="display:block"] {
+    display: flex !important;
 }
