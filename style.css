@@ -2776,71 +2776,49 @@ body.menu-open {
     overflow: hidden;
 }
 
-/* ===== MODAL DE AÇAÍ - COMPACTO ===== */
+/* ===== MODAL DE AÇAÍ - MINI VERSÃO ===== */
 
 /* Container principal */
 .acai-modal {
     position: fixed;
     top: 0;
     left: 0;
-    width: 100vw;
-    height: 100vh;
+    width: 100%;
+    height: 100%;
     z-index: 99999;
     display: none;
-    align-items: center;
-    justify-content: center;
     background: rgba(0, 0, 0, 0.7);
-    overflow: hidden;
 }
 
-/* Conteúdo do modal - MENOR */
+/* Modal COMPACTÃO */
 .modal-content {
-    position: relative;
-    background: white;
-    border-radius: 12px;
-    padding: 20px;
-    width: 90%;
-    max-width: 450px; /* MENOR */
-    max-height: 75vh; /* MENOR */
-    overflow-y: auto;
-    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
-    animation: modalAparece 0.3s ease;
-    
-    /* Centralização */
-    position: absolute;
+    position: fixed;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+    background: white;
+    border-radius: 10px;
+    padding: 15px;
+    width: 95%;
+    max-width: 400px;
+    max-height: 80vh;
+    overflow-y: auto;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.15);
 }
 
-@keyframes modalAparece {
-    from {
-        opacity: 0;
-        transform: translate(-50%, -50%) scale(0.95);
-    }
-    to {
-        opacity: 1;
-        transform: translate(-50%, -50%) scale(1);
-    }
-}
-
-/* Cabeçalho COMPACTO */
+/* Cabeçalho MINI */
 .modal-header {
     display: flex;
     align-items: center;
-    margin-bottom: 15px;
-    padding-bottom: 12px;
-    border-bottom: 1px solid #f0f0f0;
-    position: sticky;
-    top: 0;
-    background: white;
-    z-index: 3;
+    margin-bottom: 12px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #eee;
 }
 
 .modal-header h3 {
     margin: 0;
+    font-size: 18px;
     color: #333;
-    font-size: 20px; /* MENOR */
     font-weight: 600;
 }
 
@@ -2848,174 +2826,134 @@ body.menu-open {
     margin-left: auto;
     background: none;
     border: none;
-    width: 32px; /* MENOR */
-    height: 32px; /* MENOR */
+    width: 28px;
+    height: 28px;
     border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
+    font-size: 16px;
     color: #666;
-    font-size: 18px; /* MENOR */
-    transition: 0.2s;
-}
-
-.modal-close:hover {
-    background: #f5f5f5;
+    cursor: pointer;
 }
 
 /* Seções COMPACTAS */
 .modal-section {
-    margin-bottom: 15px; /* MENOR */
-    padding: 15px; /* MENOR */
-    background: #f9f9f9;
-    border-radius: 8px; /* MENOR */
+    margin-bottom: 12px;
+    padding: 12px;
+    background: #f8f8f8;
+    border-radius: 6px;
 }
 
 .modal-section h4 {
-    margin: 0 0 12px 0; /* MENOR */
+    margin: 0 0 10px 0;
+    font-size: 15px;
     color: #444;
-    font-size: 16px; /* MENOR */
-    font-weight: 600;
 }
 
-/* Contador menor */
+/* Contador MINI */
 .counter {
     display: inline-block;
-    padding: 2px 8px; /* MENOR */
+    padding: 2px 6px;
     background: #7c3aed;
     color: white;
-    border-radius: 10px; /* MENOR */
-    font-size: 12px; /* MENOR */
+    border-radius: 8px;
+    font-size: 11px;
     font-weight: 600;
-    margin-left: 6px; /* MENOR */
+    margin-left: 5px;
 }
 
-/* Checkboxes compactos */
+/* Checkboxes MINI */
 .checkbox-group {
     display: grid;
-    gap: 8px; /* MENOR */
+    gap: 6px;
 }
 
 .checkbox-item {
     display: flex;
     align-items: center;
-    gap: 10px; /* MENOR */
-    padding: 10px 12px; /* MENOR */
+    gap: 8px;
+    padding: 8px 10px;
     background: white;
-    border-radius: 6px; /* MENOR */
-    border: 1px solid #e0e0e0;
+    border-radius: 5px;
+    border: 1px solid #ddd;
     cursor: pointer;
-    transition: 0.2s;
-}
-
-.checkbox-item:hover {
-    border-color: #7c3aed;
-    transform: translateX(4px); /* MENOR */
 }
 
 .checkbox-item input[type="checkbox"] {
-    width: 16px; /* MENOR */
-    height: 16px; /* MENOR */
+    width: 14px;
+    height: 14px;
     accent-color: #7c3aed;
-    cursor: pointer;
 }
 
 .checkbox-item label {
     flex: 1;
-    cursor: pointer;
-    font-weight: 500;
+    font-size: 13px;
     color: #333;
-    font-size: 14px; /* MENOR */
 }
 
 .checkbox-item .price {
-    font-weight: 600;
+    font-size: 13px;
     color: #e91e63;
-    font-size: 14px; /* MENOR */
+    font-weight: 600;
 }
 
-/* Opção de pular menor */
+/* Skip MINI */
 .skip-option {
     display: flex;
     align-items: center;
-    gap: 10px; /* MENOR */
-    padding: 12px; /* MENOR */
+    gap: 8px;
+    padding: 10px;
     background: #f0fff4;
-    border-radius: 6px; /* MENOR */
+    border-radius: 5px;
     border: 1px solid #c6f6d5;
-    cursor: pointer;
-    transition: 0.2s;
-    margin-bottom: 12px; /* MENOR */
-}
-
-.skip-option:hover {
-    background: #e6ffed;
-    border-color: #9ae6b4;
+    margin-bottom: 10px;
 }
 
 .skip-option input[type="radio"] {
-    width: 16px; /* MENOR */
-    height: 16px; /* MENOR */
+    width: 14px;
+    height: 14px;
     accent-color: #25d366;
-    cursor: pointer;
 }
 
 .skip-option span {
-    flex: 1;
-    cursor: pointer;
-    font-weight: 500;
+    font-size: 13px;
     color: #333;
-    font-size: 14px; /* MENOR */
 }
 
-/* Total menor */
+/* Total MINI */
 .total-section {
     background: linear-gradient(135deg, #f8f0ff, #fff0f5);
-    padding: 15px; /* MENOR */
-    border-radius: 8px; /* MENOR */
+    padding: 12px;
+    border-radius: 6px;
+    margin: 12px 0;
     text-align: center;
-    margin: 15px 0; /* MENOR */
 }
 
 .total-section h4 {
-    margin: 0 0 6px 0; /* MENOR */
+    margin: 0 0 4px 0;
+    font-size: 13px;
     color: #555;
-    font-size: 14px; /* MENOR */
 }
 
 #total-price-display {
-    font-size: 24px; /* MENOR */
+    font-size: 20px;
     font-weight: 700;
     color: #7c3aed;
 }
 
-/* Botões compactos */
+/* Botões MINI */
 .modal-buttons {
     display: flex;
-    gap: 10px; /* MENOR */
-    margin-top: 15px; /* MENOR */
-    position: sticky;
-    bottom: 0;
-    background: white;
-    padding-top: 12px; /* MENOR */
-    padding-bottom: 5px;
-    z-index: 3;
+    gap: 8px;
+    margin-top: 12px;
 }
 
 .btn-cancel, .btn-confirm {
     flex: 1;
-    padding: 14px; /* MENOR */
-    border-radius: 8px; /* MENOR */
+    padding: 12px;
+    border-radius: 6px;
+    font-size: 14px;
     font-weight: 600;
-    font-size: 15px; /* MENOR */
     border: none;
     cursor: pointer;
-    transition: 0.2s;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 6px; /* MENOR */
 }
 
 .btn-cancel {
@@ -3023,119 +2961,186 @@ body.menu-open {
     color: #666;
 }
 
-.btn-cancel:hover {
-    background: #e0e0e0;
-}
-
 .btn-confirm {
     background: linear-gradient(135deg, #25d366, #128C7E);
     color: white;
 }
 
-.btn-confirm:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(37, 211, 102, 0.3); /* MENOR */
-}
-
-/* RESPONSIVO - Celular */
+/* ===== CELULAR - SUPER COMPACTO ===== */
 @media (max-width: 768px) {
     .modal-content {
-        max-height: 80vh; /* AJUSTADO */
-        width: 95%;
-        padding: 16px; /* MENOR */
-        border-radius: 12px; /* MENOR */
-    }
-    
-    .modal-header h3 {
-        font-size: 18px; /* MENOR */
-    }
-    
-    .modal-section {
-        padding: 12px; /* MENOR */
-    }
-    
-    .modal-buttons {
-        flex-direction: column;
-        gap: 8px; /* MENOR */
-    }
-    
-    .checkbox-item {
-        padding: 8px 10px; /* MENOR */
-    }
-    
-    #total-price-display {
-        font-size: 22px; /* MENOR */
-    }
-}
-
-@media (max-width: 480px) {
-    .modal-content {
-        padding: 14px; /* MENOR */
-        max-height: 85vh; /* AJUSTADO */
-        border-radius: 10px; /* MENOR */
+        padding: 12px;
+        width: 96%;
+        max-height: 85vh;
+        border-radius: 8px;
     }
     
     .modal-header {
-        margin-bottom: 12px; /* MENOR */
-        padding-bottom: 10px; /* MENOR */
-        top: -14px; /* AJUSTADO */
-        margin-top: -14px; /* AJUSTADO */
-        padding-top: 14px; /* AJUSTADO */
+        margin-bottom: 10px;
+        padding-bottom: 8px;
+    }
+    
+    .modal-header h3 {
+        font-size: 16px;
     }
     
     .modal-section {
-        padding: 10px; /* MENOR */
-        margin-bottom: 12px; /* MENOR */
+        padding: 10px;
+        margin-bottom: 10px;
     }
     
-    .btn-cancel, .btn-confirm {
-        padding: 12px; /* MENOR */
-        font-size: 14px; /* MENOR */
+    .modal-section h4 {
+        font-size: 14px;
+        margin-bottom: 8px;
+    }
+    
+    .checkbox-item {
+        padding: 6px 8px;
+        gap: 6px;
     }
     
     .checkbox-item label,
     .checkbox-item .price,
     .skip-option span {
-        font-size: 13px; /* MENOR */
+        font-size: 12px;
     }
     
-    .modal-section h4 {
-        font-size: 15px; /* MENOR */
-    }
-}
-
-/* Para telas muito pequenas */
-@media (max-width: 360px) {
-    .modal-content {
-        padding: 12px; /* MENOR AINDA */
-        width: 98%;
+    .skip-option {
+        padding: 8px;
+        margin-bottom: 8px;
     }
     
-    .checkbox-item {
-        padding: 8px; /* MENOR AINDA */
-        gap: 8px; /* MENOR AINDA */
+    #total-price-display {
+        font-size: 18px;
+    }
+    
+    .modal-buttons {
+        gap: 6px;
     }
     
     .btn-cancel, .btn-confirm {
-        padding: 10px; /* MENOR AINDA */
+        padding: 10px;
+        font-size: 13px;
     }
 }
 
-/* SCROLLBAR FINA */
-.modal-content::-webkit-scrollbar {
-    width: 4px; /* MAIS FINA */
+/* ===== CELULAR PEQUENO - MICRO ===== */
+@media (max-width: 480px) {
+    .modal-content {
+        padding: 10px;
+        width: 98%;
+        max-height: 90vh;
+        border-radius: 6px;
+    }
+    
+    .modal-header {
+        margin-bottom: 8px;
+        padding-bottom: 6px;
+    }
+    
+    .modal-header h3 {
+        font-size: 15px;
+    }
+    
+    .modal-close {
+        width: 24px;
+        height: 24px;
+        font-size: 14px;
+    }
+    
+    .modal-section {
+        padding: 8px;
+        margin-bottom: 8px;
+    }
+    
+    .modal-section h4 {
+        font-size: 13px;
+        margin-bottom: 6px;
+    }
+    
+    .counter {
+        font-size: 10px;
+        padding: 1px 4px;
+    }
+    
+    .checkbox-group {
+        gap: 4px;
+    }
+    
+    .checkbox-item {
+        padding: 5px 6px;
+        gap: 5px;
+    }
+    
+    .checkbox-item label,
+    .checkbox-item .price,
+    .skip-option span {
+        font-size: 11px;
+    }
+    
+    .checkbox-item input[type="checkbox"],
+    .skip-option input[type="radio"] {
+        width: 12px;
+        height: 12px;
+    }
+    
+    .skip-option {
+        padding: 6px;
+        margin-bottom: 6px;
+    }
+    
+    .total-section {
+        padding: 8px;
+        margin: 8px 0;
+    }
+    
+    .total-section h4 {
+        font-size: 12px;
+    }
+    
+    #total-price-display {
+        font-size: 16px;
+    }
+    
+    .modal-buttons {
+        flex-direction: column;
+        gap: 5px;
+    }
+    
+    .btn-cancel, .btn-confirm {
+        padding: 8px;
+        font-size: 12px;
+    }
 }
 
-.modal-content::-webkit-scrollbar-track {
-    background: #f1f1f1;
-    border-radius: 4px;
+/* ===== CELULAR MINUSCULO ===== */
+@media (max-width: 360px) {
+    .modal-content {
+        padding: 8px;
+    }
+    
+    .modal-header h3 {
+        font-size: 14px;
+    }
+    
+    .checkbox-item label,
+    .checkbox-item .price {
+        font-size: 10px;
+    }
+    
+    #total-price-display {
+        font-size: 15px;
+    }
+    
+    .btn-cancel, .btn-confirm {
+        padding: 7px;
+        font-size: 11px;
+    }
 }
 
-.modal-content::-webkit-scrollbar-thumb {
-    background: #c1c1c1;
-    border-radius: 4px;
-}
-
-.modal-content::-webkit-scrollbar-thumb:hover {
-    background: #a1a1a1;
+/* Scrollbar invisível em mobile */
+@media (max-width: 768px) {
+    .modal-content::-webkit-scrollbar {
+        width: 2px;
+    }
 }
