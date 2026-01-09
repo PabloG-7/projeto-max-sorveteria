@@ -2197,7 +2197,7 @@ img {
     }
     
     .section-title {
-        font-size: 2rem;
+        font-size: 2.8rem;
     }
     
     .menu-items-grid {
@@ -2416,7 +2416,7 @@ img {
     }
     
     .section-title {
-        font-size: 1.8rem;
+        font-size: 2.5rem;
         flex-direction: column;
         gap: 10px;
     }
@@ -2776,24 +2776,24 @@ body.menu-open {
     overflow: hidden;
 }
 
-/* ===== MODAL DE AÇAÍ - CLEAN E RESPONSIVO ===== */
-
-/* Container principal */
+/* ===== MODAL DE AÇAÍ CORRIGIDO ===== */
 .acai-modal {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    z-index: 99999;
-    display: none;
+    z-index: 99999; /* Z-INDEX ALTÍSSIMO */
+    display: none; /* Começa escondido */
     align-items: center;
     justify-content: center;
-    padding: 15px;
-    box-sizing: border-box;
+    padding: 20px;
 }
 
-/* Overlay escuro */
+.acai-modal[style*="display: flex"] {
+    display: flex !important;
+}
+
 .modal-overlay {
     position: absolute;
     top: 0;
@@ -2801,102 +2801,92 @@ body.menu-open {
     width: 100%;
     height: 100%;
     background: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(5px);
     z-index: 1;
 }
 
-/* Conteúdo do modal */
 .modal-content {
     position: relative;
     background: white;
-    border-radius: 15px;
-    padding: 25px;
-    width: 100%;
+    border-radius: 20px;
+    padding: 30px;
     max-width: 500px;
-    max-height: 90vh;
+    width: 100%;
+    max-height: 85vh;
     overflow-y: auto;
-    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    border: 3px solid var(--roxo-claro);
+    animation: modalSlideIn 0.3s ease-out;
     z-index: 2;
-    animation: modalAparece 0.3s ease;
 }
 
-@keyframes modalAparece {
+@keyframes modalSlideIn {
     from {
         opacity: 0;
-        transform: translateY(-20px);
+        transform: translateY(-30px) scale(0.95);
     }
     to {
         opacity: 1;
-        transform: translateY(0);
+        transform: translateY(0) scale(1);
     }
 }
 
-/* Cabeçalho */
+/* Estrutura do modal */
 .modal-header {
     display: flex;
     align-items: center;
-    margin-bottom: 20px;
+    gap: 15px;
+    margin-bottom: 25px;
     padding-bottom: 15px;
-    border-bottom: 2px solid #f0f0f0;
+    border-bottom: 2px solid rgba(124, 58, 237, 0.1);
 }
 
 .modal-header h3 {
+    color: var(--roxo-escuro);
+    font-size: 1.8rem;
     margin: 0;
-    color: #333;
-    font-size: 22px;
-    font-weight: 600;
 }
 
 .modal-close {
     margin-left: auto;
     background: none;
     border: none;
-    width: 36px;
-    height: 36px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    font-size: 1.5rem;
+    color: var(--cinza-escuro);
     cursor: pointer;
-    color: #666;
-    font-size: 20px;
-    transition: 0.2s;
+    padding: 8px;
+    border-radius: 50%;
+    transition: all 0.3s ease;
 }
 
 .modal-close:hover {
-    background: #f5f5f5;
+    background: rgba(124, 58, 237, 0.1);
+    color: var(--roxo-escuro);
 }
 
-/* Seções */
+/* Seções do modal */
 .modal-section {
-    margin-bottom: 20px;
-    padding: 18px;
-    background: #f9f9f9;
-    border-radius: 10px;
+    margin-bottom: 25px;
+    padding: 20px;
+    background: var(--off-white);
+    border-radius: 12px;
+    border: 1px solid rgba(124, 58, 237, 0.1);
 }
 
 .modal-section h4 {
-    margin: 0 0 15px 0;
-    color: #444;
-    font-size: 18px;
-    font-weight: 600;
+    color: var(--roxo-escuro);
+    margin-bottom: 15px;
+    font-size: 1.2rem;
+    display: flex;
+    align-items: center;
+    gap: 10px;
 }
 
-/* Contador */
-.counter {
-    display: inline-block;
-    padding: 3px 10px;
-    background: #7c3aed;
-    color: white;
-    border-radius: 12px;
-    font-size: 14px;
-    font-weight: 600;
-    margin-left: 8px;
-}
-
-/* Opções de checkbox */
+/* Checkboxes estilizados */
 .checkbox-group {
     display: grid;
-    gap: 10px;
+    gap: 12px;
+    margin-bottom: 15px;
 }
 
 .checkbox-item {
@@ -2905,21 +2895,21 @@ body.menu-open {
     gap: 12px;
     padding: 12px 15px;
     background: white;
-    border-radius: 8px;
-    border: 1px solid #e0e0e0;
+    border-radius: 10px;
+    border: 2px solid transparent;
     cursor: pointer;
-    transition: 0.2s;
+    transition: all 0.3s ease;
 }
 
 .checkbox-item:hover {
-    border-color: #7c3aed;
+    border-color: var(--roxo-claro);
     transform: translateX(5px);
 }
 
 .checkbox-item input[type="checkbox"] {
-    width: 18px;
-    height: 18px;
-    accent-color: #7c3aed;
+    width: 20px;
+    height: 20px;
+    accent-color: var(--roxo-escuro);
     cursor: pointer;
 }
 
@@ -2927,194 +2917,146 @@ body.menu-open {
     flex: 1;
     cursor: pointer;
     font-weight: 500;
-    color: #333;
-    font-size: 15px;
+    color: var(--preto);
 }
 
 .checkbox-item .price {
-    font-weight: 600;
-    color: #e91e63;
-    font-size: 15px;
+    font-weight: 700;
+    color: var(--rosa);
+    font-size: 1rem;
 }
 
-/* Opção de pular */
+/* Opção de pular extras */
 .skip-option {
     display: flex;
     align-items: center;
     gap: 12px;
     padding: 15px;
-    background: #f0fff4;
-    border-radius: 8px;
-    border: 1px solid #c6f6d5;
+    background: rgba(37, 211, 102, 0.1);
+    border-radius: 10px;
+    border: 2px solid transparent;
     cursor: pointer;
-    transition: 0.2s;
+    transition: all 0.3s ease;
     margin-bottom: 15px;
 }
 
 .skip-option:hover {
-    background: #e6ffed;
-    border-color: #9ae6b4;
+    border-color: var(--verde-whatsapp);
+    background: rgba(37, 211, 102, 0.15);
 }
 
 .skip-option input[type="radio"] {
-    width: 18px;
-    height: 18px;
-    accent-color: #25d366;
+    width: 20px;
+    height: 20px;
+    accent-color: var(--verde-whatsapp);
     cursor: pointer;
 }
 
 .skip-option span {
     flex: 1;
     cursor: pointer;
-    font-weight: 500;
-    color: #333;
-    font-size: 15px;
+    font-weight: 600;
+    color: var(--preto);
+}
+
+/* Contador */
+.counter {
+    display: inline-block;
+    padding: 5px 12px;
+    background: var(--roxo-escuro);
+    color: white;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    font-weight: 600;
 }
 
 /* Total */
 .total-section {
-    background: linear-gradient(135deg, #f8f0ff, #fff0f5);
-    padding: 20px;
-    border-radius: 10px;
+    background: linear-gradient(135deg, rgba(124, 58, 237, 0.1), rgba(255, 107, 157, 0.1));
+    padding: 25px;
+    border-radius: 15px;
     text-align: center;
-    margin: 20px 0;
+    margin: 25px 0;
 }
 
 .total-section h4 {
-    margin: 0 0 8px 0;
-    color: #555;
-    font-size: 16px;
+    color: var(--preto);
+    font-size: 1.5rem;
+    margin-bottom: 10px;
 }
 
 #total-price-display {
-    font-size: 28px;
-    font-weight: 700;
-    color: #7c3aed;
+    font-size: 2.2rem;
+    font-weight: 800;
+    color: var(--roxo-escuro);
+    text-shadow: 0 2px 4px rgba(124, 58, 237, 0.2);
 }
 
-/* Botões */
+/* Botões do modal */
 .modal-buttons {
     display: flex;
-    gap: 12px;
+    gap: 15px;
     margin-top: 20px;
 }
 
 .btn-cancel, .btn-confirm {
     flex: 1;
     padding: 16px;
-    border-radius: 10px;
-    font-weight: 600;
-    font-size: 16px;
+    border-radius: 12px;
+    font-weight: 700;
+    font-size: 1.1rem;
     border: none;
     cursor: pointer;
-    transition: 0.2s;
+    transition: all 0.3s ease;
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 8px;
+    gap: 10px;
 }
 
 .btn-cancel {
-    background: #f0f0f0;
-    color: #666;
+    background: rgba(107, 114, 128, 0.1);
+    color: var(--cinza-escuro);
 }
 
 .btn-cancel:hover {
-    background: #e0e0e0;
+    background: rgba(107, 114, 128, 0.2);
+    transform: translateY(-3px);
 }
 
 .btn-confirm {
-    background: linear-gradient(135deg, #25d366, #128C7E);
+    background: linear-gradient(135deg, var(--verde-whatsapp), #128C7E);
     color: white;
+    box-shadow: 0 4px 15px rgba(37, 211, 102, 0.3);
 }
 
 .btn-confirm:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 5px 15px rgba(37, 211, 102, 0.3);
+    transform: translateY(-3px) scale(1.05);
+    box-shadow: 0 8px 25px rgba(37, 211, 102, 0.4);
 }
 
-/* RESPONSIVO - Celular */
-@media (max-width: 768px) {
-    .acai-modal {
-        padding: 10px;
-        align-items: flex-end;
-    }
-    
+/* Responsivo */
+@media (max-width: 600px) {
     .modal-content {
-        max-height: 85vh;
-        margin-bottom: 40px;
-        border-radius: 20px 20px 15px 15px;
-        animation: modalSobe 0.3s ease;
-    }
-    
-    @keyframes modalSobe {
-        from {
-            opacity: 0;
-            transform: translateY(50px);
-        }
-        to {
-            opacity: 1;
-            transform: translateY(0);
-        }
-    }
-    
-    .modal-header h3 {
-        font-size: 20px;
-    }
-    
-    .modal-section {
-        padding: 15px;
+        padding: 20px;
+        max-height: 90vh;
     }
     
     .modal-buttons {
         flex-direction: column;
     }
     
-    .checkbox-item {
+    .checkbox-group {
+        grid-template-columns: 1fr;
+    }
+    
+    .acai-modal {
         padding: 10px;
     }
-    
-    #total-price-display {
-        font-size: 24px;
-    }
 }
 
-@media (max-width: 480px) {
-    .modal-content {
-        padding: 20px 15px;
-        margin-bottom: 40px;
-    }
-    
-    .modal-header {
-        margin-bottom: 15px;
-        padding-bottom: 12px;
-    }
-    
-    .modal-section {
-        padding: 12px;
-    }
-    
-    .btn-cancel, .btn-confirm {
-        padding: 14px;
-    }
-    
-    .checkbox-item label,
-    .checkbox-item .price,
-    .skip-option span {
-        font-size: 14px;
-    }
-}
-
-/* Tablet */
-@media (min-width: 769px) and (max-width: 1024px) {
-    .modal-content {
-        max-width: 600px;
-    }
-}
-
-/* Para telas grandes */
-@media (min-width: 1200px) {
-    .modal-content {
-        max-width: 550px;
-    }
+/* IMPORTANTE: Garantir que o modal aparece */
+.acai-modal[style*="display: flex"],
+.acai-modal[style*="display:block"] {
+    display: flex !important;
 }
