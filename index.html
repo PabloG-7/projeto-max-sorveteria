@@ -323,8 +323,7 @@
                     <h2 class="hero-title">Ô Trem Bão Sô!<br><span class="highlight">O Sorvete da Cidade</span></h2>
 
 <p class="hero-description">
-        Uai, sô! Aqui o sorvete é feito com carinho de mineiro. 
-    Experimenta e vê se não é o melhor de Ibertioga!
+     Experimenta o melhor sorvete de Ibertioga 🍦
 </p>
                     
                     <div class="cta-buttons">
@@ -383,15 +382,27 @@
 </h2>
                 <p class="section-subtitle">Escolha seus favoritos e peça pelo WhatsApp</p>
                 
-                <!-- Botão para ver cardápio completo com imagem -->
-                <div class="cardapio-btn-container">
-                    <a href="cardapio-max.jpeg" class="btn-cardapio-imagem" data-lightbox="cardapio" data-title="Cardápio Max Sorvetes Ibertioga">
-                        <i class="fas fa-image"></i>
-                        Ver Cardápio Completo
-                    </a>
-                    <p class="cardapio-notice">Clique para ver a imagem completa do nosso cardápio</p>
-                </div>
-            </div>
+              <div class="cardapio-preview-wrapper">
+    
+    <!-- Imagem reduzida -->
+    <div class="preview-container">
+        <img src="cardapio-max.jpeg" 
+             alt="Cardápio"
+             class="preview-img"
+             loading="lazy">
+        <div class="preview-overlay">
+            <a href="cardapio-max.jpeg" 
+               class="preview-btn" 
+               data-lightbox="cardapio"
+               data-title="Cardápio Completo - Max Sorvetes">
+                <i class="fas fa-expand"></i>
+                Ver Completo
+            </a>
+        </div>
+    </div>
+    
+    <p class="preview-hint">Imagem reduzida para melhor visualização</p>
+</div>
             
             <!-- Açaí -->
             <div class="menu-category">
