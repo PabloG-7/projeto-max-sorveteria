@@ -1949,7 +1949,7 @@ img {
     justify-content: space-between;
     align-items: flex-start;
     margin-bottom: 12px;
-    gap: 10px; /* Adiciona espaço controlado entre os elementos */
+    width: 100%;
 }
 
 .item-header h4 {
@@ -1958,7 +1958,10 @@ img {
     margin: 0;
     font-weight: 700;
     line-height: 1.3;
-  
+    /* REMOVE: flex: 1 */
+    /* ADICIONA: */
+    max-width: calc(100% - 100px); /* Deixa espaço para o item-tag */
+    word-break: break-word;
 }
 
 .item-tag {
@@ -1972,7 +1975,8 @@ img {
     text-transform: uppercase;
     border: 1px solid rgba(124, 58, 237, 0.2);
     white-space: nowrap;
-    flex-shrink: 0; 
+    margin-left: 10px;
+    flex-shrink: 0; /* Não deixa encolher */
 }
 
 .item-description {
