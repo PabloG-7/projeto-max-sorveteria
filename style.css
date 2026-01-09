@@ -2776,117 +2776,137 @@ body.menu-open {
     overflow: hidden;
 }
 
-/* ===== MODAL DE AÇAÍ CORRIGIDO ===== */
+/* ===== MODAL DE AÇAÍ - FIXADO E CENTRALIZADO ===== */
+
+/* Container principal - FIXA TUDO */
 .acai-modal {
     position: fixed;
     top: 0;
     left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: 99999; /* Z-INDEX ALTÍSSIMO */
-    display: none; /* Começa escondido */
+    width: 100vw;
+    height: 100vh;
+    z-index: 99999;
+    display: none;
     align-items: center;
     justify-content: center;
-    padding: 20px;
+    background: rgba(0, 0, 0, 0.7);
+    overflow: hidden; /* IMPEDE QUE O FUNDO ROLE */
 }
 
-.acai-modal[style*="display: flex"] {
-    display: flex !important;
-}
-
+/* Overlay mais simples */
 .modal-overlay {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0.7);
-    backdrop-filter: blur(5px);
     z-index: 1;
 }
 
+/* Conteúdo do modal - CENTRALIZADO DE VERDADE */
 .modal-content {
     position: relative;
     background: white;
-    border-radius: 20px;
-    padding: 30px;
+    border-radius: 15px;
+    padding: 25px;
+    width: 90%;
     max-width: 500px;
-    width: 100%;
     max-height: 85vh;
     overflow-y: auto;
-    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
-    border: 3px solid var(--roxo-claro);
-    animation: modalSlideIn 0.3s ease-out;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
     z-index: 2;
+    animation: modalAparece 0.3s ease;
+    margin: auto; /* CENTRALIZA */
+    
+    /* Centraliza vertical e horizontalmente */
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }
 
-@keyframes modalSlideIn {
+@keyframes modalAparece {
     from {
         opacity: 0;
-        transform: translateY(-30px) scale(0.95);
+        transform: translate(-50%, -50%) scale(0.95);
     }
     to {
         opacity: 1;
-        transform: translateY(0) scale(1);
+        transform: translate(-50%, -50%) scale(1);
     }
 }
 
-/* Estrutura do modal */
+/* Cabeçalho */
 .modal-header {
     display: flex;
     align-items: center;
-    gap: 15px;
-    margin-bottom: 25px;
+    margin-bottom: 20px;
     padding-bottom: 15px;
-    border-bottom: 2px solid rgba(124, 58, 237, 0.1);
+    border-bottom: 2px solid #f0f0f0;
+    position: sticky;
+    top: 0;
+    background: white;
+    z-index: 3;
 }
 
 .modal-header h3 {
-    color: var(--roxo-escuro);
-    font-size: 1.8rem;
     margin: 0;
+    color: #333;
+    font-size: 22px;
+    font-weight: 600;
 }
 
 .modal-close {
     margin-left: auto;
     background: none;
     border: none;
-    font-size: 1.5rem;
-    color: var(--cinza-escuro);
-    cursor: pointer;
-    padding: 8px;
+    width: 36px;
+    height: 36px;
     border-radius: 50%;
-    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    color: #666;
+    font-size: 20px;
+    transition: 0.2s;
 }
 
 .modal-close:hover {
-    background: rgba(124, 58, 237, 0.1);
-    color: var(--roxo-escuro);
+    background: #f5f5f5;
 }
 
-/* Seções do modal */
+/* Seções */
 .modal-section {
-    margin-bottom: 25px;
-    padding: 20px;
-    background: var(--off-white);
-    border-radius: 12px;
-    border: 1px solid rgba(124, 58, 237, 0.1);
+    margin-bottom: 20px;
+    padding: 18px;
+    background: #f9f9f9;
+    border-radius: 10px;
 }
 
 .modal-section h4 {
-    color: var(--roxo-escuro);
-    margin-bottom: 15px;
-    font-size: 1.2rem;
-    display: flex;
-    align-items: center;
-    gap: 10px;
+    margin: 0 0 15px 0;
+    color: #444;
+    font-size: 18px;
+    font-weight: 600;
 }
 
-/* Checkboxes estilizados */
+/* Contador */
+.counter {
+    display: inline-block;
+    padding: 3px 10px;
+    background: #7c3aed;
+    color: white;
+    border-radius: 12px;
+    font-size: 14px;
+    font-weight: 600;
+    margin-left: 8px;
+}
+
+/* Opções de checkbox */
 .checkbox-group {
     display: grid;
-    gap: 12px;
-    margin-bottom: 15px;
+    gap: 10px;
 }
 
 .checkbox-item {
@@ -2895,21 +2915,21 @@ body.menu-open {
     gap: 12px;
     padding: 12px 15px;
     background: white;
-    border-radius: 10px;
-    border: 2px solid transparent;
+    border-radius: 8px;
+    border: 1px solid #e0e0e0;
     cursor: pointer;
-    transition: all 0.3s ease;
+    transition: 0.2s;
 }
 
 .checkbox-item:hover {
-    border-color: var(--roxo-claro);
+    border-color: #7c3aed;
     transform: translateX(5px);
 }
 
 .checkbox-item input[type="checkbox"] {
-    width: 20px;
-    height: 20px;
-    accent-color: var(--roxo-escuro);
+    width: 18px;
+    height: 18px;
+    accent-color: #7c3aed;
     cursor: pointer;
 }
 
@@ -2917,146 +2937,207 @@ body.menu-open {
     flex: 1;
     cursor: pointer;
     font-weight: 500;
-    color: var(--preto);
+    color: #333;
+    font-size: 15px;
 }
 
 .checkbox-item .price {
-    font-weight: 700;
-    color: var(--rosa);
-    font-size: 1rem;
+    font-weight: 600;
+    color: #e91e63;
+    font-size: 15px;
 }
 
-/* Opção de pular extras */
+/* Opção de pular */
 .skip-option {
     display: flex;
     align-items: center;
     gap: 12px;
     padding: 15px;
-    background: rgba(37, 211, 102, 0.1);
-    border-radius: 10px;
-    border: 2px solid transparent;
+    background: #f0fff4;
+    border-radius: 8px;
+    border: 1px solid #c6f6d5;
     cursor: pointer;
-    transition: all 0.3s ease;
+    transition: 0.2s;
     margin-bottom: 15px;
 }
 
 .skip-option:hover {
-    border-color: var(--verde-whatsapp);
-    background: rgba(37, 211, 102, 0.15);
+    background: #e6ffed;
+    border-color: #9ae6b4;
 }
 
 .skip-option input[type="radio"] {
-    width: 20px;
-    height: 20px;
-    accent-color: var(--verde-whatsapp);
+    width: 18px;
+    height: 18px;
+    accent-color: #25d366;
     cursor: pointer;
 }
 
 .skip-option span {
     flex: 1;
     cursor: pointer;
-    font-weight: 600;
-    color: var(--preto);
-}
-
-/* Contador */
-.counter {
-    display: inline-block;
-    padding: 5px 12px;
-    background: var(--roxo-escuro);
-    color: white;
-    border-radius: 20px;
-    font-size: 0.9rem;
-    font-weight: 600;
+    font-weight: 500;
+    color: #333;
+    font-size: 15px;
 }
 
 /* Total */
 .total-section {
-    background: linear-gradient(135deg, rgba(124, 58, 237, 0.1), rgba(255, 107, 157, 0.1));
-    padding: 25px;
-    border-radius: 15px;
+    background: linear-gradient(135deg, #f8f0ff, #fff0f5);
+    padding: 20px;
+    border-radius: 10px;
     text-align: center;
-    margin: 25px 0;
+    margin: 20px 0;
 }
 
 .total-section h4 {
-    color: var(--preto);
-    font-size: 1.5rem;
-    margin-bottom: 10px;
+    margin: 0 0 8px 0;
+    color: #555;
+    font-size: 16px;
 }
 
 #total-price-display {
-    font-size: 2.2rem;
-    font-weight: 800;
-    color: var(--roxo-escuro);
-    text-shadow: 0 2px 4px rgba(124, 58, 237, 0.2);
+    font-size: 28px;
+    font-weight: 700;
+    color: #7c3aed;
 }
 
-/* Botões do modal */
+/* Botões - FIXADOS NO FINAL */
 .modal-buttons {
     display: flex;
-    gap: 15px;
+    gap: 12px;
     margin-top: 20px;
+    position: sticky;
+    bottom: 0;
+    background: white;
+    padding-top: 15px;
+    padding-bottom: 5px;
+    z-index: 3;
 }
 
 .btn-cancel, .btn-confirm {
     flex: 1;
     padding: 16px;
-    border-radius: 12px;
-    font-weight: 700;
-    font-size: 1.1rem;
+    border-radius: 10px;
+    font-weight: 600;
+    font-size: 16px;
     border: none;
     cursor: pointer;
-    transition: all 0.3s ease;
+    transition: 0.2s;
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 10px;
+    gap: 8px;
 }
 
 .btn-cancel {
-    background: rgba(107, 114, 128, 0.1);
-    color: var(--cinza-escuro);
+    background: #f0f0f0;
+    color: #666;
 }
 
 .btn-cancel:hover {
-    background: rgba(107, 114, 128, 0.2);
-    transform: translateY(-3px);
+    background: #e0e0e0;
 }
 
 .btn-confirm {
-    background: linear-gradient(135deg, var(--verde-whatsapp), #128C7E);
+    background: linear-gradient(135deg, #25d366, #128C7E);
     color: white;
-    box-shadow: 0 4px 15px rgba(37, 211, 102, 0.3);
 }
 
 .btn-confirm:hover {
-    transform: translateY(-3px) scale(1.05);
-    box-shadow: 0 8px 25px rgba(37, 211, 102, 0.4);
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(37, 211, 102, 0.3);
 }
 
-/* Responsivo */
-@media (max-width: 600px) {
+/* IMPEDE O FUNDO DE ROLAR QUANDO MODAL ABERTO */
+body.modal-aberto {
+    overflow: hidden !important;
+    position: fixed;
+    width: 100%;
+    height: 100%;
+}
+
+/* RESPONSIVO - Celular */
+@media (max-width: 768px) {
     .modal-content {
-        padding: 20px;
         max-height: 90vh;
+        width: 95%;
+        padding: 20px;
+        border-radius: 15px;
+    }
+    
+    .modal-header h3 {
+        font-size: 20px;
+    }
+    
+    .modal-section {
+        padding: 15px;
     }
     
     .modal-buttons {
         flex-direction: column;
     }
     
-    .checkbox-group {
-        grid-template-columns: 1fr;
+    .checkbox-item {
+        padding: 10px;
     }
     
-    .acai-modal {
-        padding: 10px;
+    #total-price-display {
+        font-size: 24px;
+    }
+    
+    .modal-header {
+        position: sticky;
+        top: -25px;
+        margin-top: -20px;
+        padding-top: 20px;
     }
 }
 
-/* IMPORTANTE: Garantir que o modal aparece */
-.acai-modal[style*="display: flex"],
-.acai-modal[style*="display:block"] {
-    display: flex !important;
+@media (max-width: 480px) {
+    .modal-content {
+        padding: 15px;
+        max-height: 95vh;
+    }
+    
+    .modal-header {
+        margin-bottom: 15px;
+        padding-bottom: 12px;
+        top: -15px;
+        margin-top: -15px;
+        padding-top: 15px;
+    }
+    
+    .modal-section {
+        padding: 12px;
+    }
+    
+    .btn-cancel, .btn-confirm {
+        padding: 14px;
+    }
+    
+    .checkbox-item label,
+    .checkbox-item .price,
+    .skip-option span {
+        font-size: 14px;
+    }
+}
+
+/* SCROLLBAR PERSONALIZADA */
+.modal-content::-webkit-scrollbar {
+    width: 6px;
+}
+
+.modal-content::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 10px;
+}
+
+.modal-content::-webkit-scrollbar-thumb {
+    background: #c1c1c1;
+    border-radius: 10px;
+}
+
+.modal-content::-webkit-scrollbar-thumb:hover {
+    background: #a1a1a1;
 }

@@ -1129,3 +1129,46 @@ function openCardapioImage() {
         cardapioImage.click();
     }
 }
+
+// FUNÇÃO PARA ABRIR MODAL
+function abrirModal() {
+    const modal = document.querySelector('.acai-modal');
+    modal.style.display = 'flex';
+    
+    // IMPEDE O FUNDO DE ROLAR
+    document.body.classList.add('modal-aberto');
+    document.body.style.overflow = 'hidden';
+    document.body.style.position = 'fixed';
+    document.body.style.width = '100%';
+    document.body.style.height = '100%';
+}
+
+// FUNÇÃO PARA FECHAR MODAL
+function fecharModal() {
+    const modal = document.querySelector('.acai-modal');
+    modal.style.display = 'none';
+    
+    // PERMITE O FUNDO ROLAR DE NOVO
+    document.body.classList.remove('modal-aberto');
+    document.body.style.overflow = '';
+    document.body.style.position = '';
+    document.body.style.width = '';
+    document.body.style.height = '';
+}
+
+// FECHAR MODAL CLICANDO NO OVERLAY
+document.querySelector('.modal-overlay').addEventListener('click', fecharModal);
+
+// FECHAR MODAL CLICANDO NO BOTÃO X
+document.querySelector('.modal-close').addEventListener('click', fecharModal);
+
+// FECHAR MODAL COM ESC
+document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') {
+        fecharModal();
+    }
+});// Para abrir o modal
+abrirModal();
+
+// Para fechar o modal
+fecharModal();
