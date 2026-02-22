@@ -869,6 +869,30 @@
   }
 
   // =========================
+  // ANIMAÇÃO STAGGER PARA TRUST-CARD
+  // =========================
+  function setupTrustCardsAnimation() {
+    const trustCards = document.querySelectorAll('.trust-card');
+
+    if (trustCards.length > 0) {
+      console.log('🎯 Configurando animação stagger para trust-cards...');
+
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry, index) => {
+          if (entry.isIntersecting) {
+            entry.target.style.transitionDelay = `${index * 120}ms`;
+            entry.target.classList.add('active');
+          }
+        });
+      }, {
+        threshold: 0.2
+      });
+
+      trustCards.forEach(card => observer.observe(card));
+    }
+  }
+
+  // =========================
   // Global functions (compat com HTML)
   // =========================
   window.scrollToCardapio = function scrollToCardapio() {
@@ -902,6 +926,7 @@
     setupLightboxFix();
     setupSmartNotifications();
     setupAcaiCart();
+    setupTrustCardsAnimation(); // <-- NOVA FUNÇÃO ADICIONADA AQUI
 
     document.documentElement.classList.remove("no-js");
     document.documentElement.classList.add("js");
