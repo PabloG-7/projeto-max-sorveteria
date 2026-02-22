@@ -18,11 +18,18 @@
     <meta property="og:title" content="Max Sorvetes Ibertioga 🍨 | Sorveteria em Ibertioga - MG">
     <meta property="og:description" content="Sorvetes, açaí e picolés com delivery rápido em Ibertioga. Peça agora pelo WhatsApp!">
     <meta property="og:url" content="https://maxsorvetesibertioga.com.br">
-    <meta property="og:image" content="https://maxsorvetesibertioga.com.br/capa-max.jpeg">
+    <meta property="og:image" content="https://maxsorvetesibertioga.com.br/img/cardapio-img/cardapio-max.jpeg">
     <meta property="og:locale" content="pt_BR">
 
     <!-- Favicon -->
     <link rel="shortcut icon" href="capa-max.jpeg" type="image/x-icon">
+
+    <!-- MINI-SCRIPT NO HEAD (Remove no-js imediatamente) -->
+    <script>
+        // Remove no-js e adiciona js assim que o script executa (antes do CSS carregar)
+        document.documentElement.classList.remove('no-js');
+        document.documentElement.classList.add('js');
+    </script>
 
     <!-- CSS CRÍTICO INLINE (Obrigatório para prevenir FOUC) -->
     <style>
@@ -167,10 +174,10 @@
     <!-- CSS EXTERNO (carrega normalmente) -->
     <link rel="stylesheet" href="style.css">
     
-    <!-- Font Awesome Icons -->
+    <!-- Font Awesome Icons (única vez no head) -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
-    <!-- Lightbox CSS -->
+    <!-- Lightbox CSS (única vez no head) -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/css/lightbox.min.css">
 
     <!-- Schema Markup para Sorveteria Local -->
@@ -384,14 +391,14 @@
                 
               <div class="cardapio-preview-wrapper">
     
-    <!-- Imagem reduzida -->
+    <!-- Imagem reduzida do cardápio completo (movida para pasta img/cardapio-img) -->
     <div class="preview-container">
-        <img src="cardapio-max.jpeg" 
+        <img src="img/cardapio-img/cardapio-max.jpeg" 
              alt="Cardápio"
              class="preview-img"
              loading="lazy">
         <div class="preview-overlay">
-            <a href="cardapio-max.jpeg" 
+            <a href="img/cardapio-img/cardapio-max.jpeg" 
                class="preview-btn" 
                data-lightbox="cardapio"
                data-title="Cardápio Completo - Max Sorvetes">
@@ -417,7 +424,12 @@
                 </div>
                 
                 <div class="menu-items-grid">
+                    <!-- Açaí 300ml COM FOTO -->
                     <div class="menu-item-card">
+                        <div class="item-media">
+                            <img src="img/cardapio-img/acai-300.jpg" alt="Açaí 300ml" loading="lazy" width="600" height="600">
+                            <span class="item-badge">Popular</span>
+                        </div>
                         <div class="item-header">
                             <h4>Açaí 300ml</h4>
                             <div class="item-tag">Popular</div>
@@ -425,14 +437,19 @@
                         <p class="item-description">Porção individual perfeita para um dia quente</p>
                         <div class="item-footer">
                             <span class="item-price">R$ 15,00</span>
-                            <button class="item-btn" data-item="Açaí 300ml - R$15,00">
+                            <button class="item-btn" data-item="Açaí 300ml - R$15,00" data-acai="1">
                                 <i class="fab fa-whatsapp"></i>
                                 Pedir
                             </button>
                         </div>
                     </div>
                     
+                    <!-- Açaí 400ml COM FOTO -->
                     <div class="menu-item-card">
+                        <div class="item-media">
+                            <img src="img/cardapio-img/acai-400.jpg" alt="Açaí 400ml" loading="lazy" width="600" height="600">
+                            <span class="item-badge">Mais Pedido</span>
+                        </div>
                         <div class="item-header">
                             <h4>Açaí 400ml</h4>
                             <div class="item-tag">Mais Pedido</div>
@@ -440,14 +457,19 @@
                         <p class="item-description">Para matar aquela vontade especial</p>
                         <div class="item-footer">
                             <span class="item-price">R$ 18,00</span>
-                            <button class="item-btn" data-item="Açaí 400ml - R$18,00">
+                            <button class="item-btn" data-item="Açaí 400ml - R$18,00" data-acai="1">
                                 <i class="fab fa-whatsapp"></i>
                                 Pedir
                             </button>
                         </div>
                     </div>
                     
+                    <!-- Açaí 500ml COM FOTO -->
                     <div class="menu-item-card">
+                        <div class="item-media">
+                            <img src="img/cardapio-img/acai-500.jpg" alt="Açaí 500ml" loading="lazy" width="600" height="600">
+                            <span class="item-badge">Família</span>
+                        </div>
                         <div class="item-header">
                             <h4>Açaí 500ml</h4>
                             <div class="item-tag">Família</div>
@@ -455,7 +477,7 @@
                         <p class="item-description">Tamanho família para compartilhar</p>
                         <div class="item-footer">
                             <span class="item-price">R$ 21,00</span>
-                            <button class="item-btn" data-item="Açaí 500ml - R$21,00">
+                            <button class="item-btn" data-item="Açaí 500ml - R$21,00" data-acai="1">
                                 <i class="fab fa-whatsapp"></i>
                                 Pedir
                             </button>
@@ -537,7 +559,12 @@
                 </div>
                 
                 <div class="menu-items-grid">
+                    <!-- Copinho COM FOTO -->
                     <div class="menu-item-card">
+                        <div class="item-media">
+                            <img src="img/cardapio-img/sorvete-copinho.jpg" alt="Sorvete Copinho" loading="lazy" width="600" height="600">
+                            <span class="item-badge">2 sabores</span>
+                        </div>
                         <div class="item-header">
                             <h4>Copinho</h4>
                             <div class="item-tag">2 sabores</div>
@@ -552,7 +579,12 @@
                         </div>
                     </div>
                     
+                    <!-- Pote COM FOTO -->
                     <div class="menu-item-card">
+                        <div class="item-media">
+                            <img src="img/cardapio-img/sorvete-pote.jpg" alt="Sorvete Pote" loading="lazy" width="600" height="600">
+                            <span class="item-badge">4 sabores</span>
+                        </div>
                         <div class="item-header">
                             <h4>Pote</h4>
                             <div class="item-tag">4 sabores</div>
@@ -567,7 +599,12 @@
                         </div>
                     </div>
                     
+                    <!-- 3 Bolas COM FOTO -->
                     <div class="menu-item-card">
+                        <div class="item-media">
+                            <img src="img/cardapio-img/sorvete-3bolas.jpg" alt="Sorvete 3 Bolas" loading="lazy" width="600" height="600">
+                            <span class="item-badge">Na casquinha</span>
+                        </div>
                         <div class="item-header">
                             <h4>3 Bolas</h4>
                             <div class="item-tag">Na casquinha</div>
@@ -597,7 +634,11 @@
                 </div>
                 
                 <div class="menu-items-simple">
-                    <div class="simple-item">
+                    <!-- Picolé de Frutas COM FOTO -->
+                    <div class="simple-item with-image">
+                        <div class="simple-image">
+                            <img src="img/cardapio-img/picole-frutas.jpg" alt="Picolé de Frutas" loading="lazy" width="80" height="80">
+                        </div>
                         <div class="simple-info">
                             <h4>Picolé de Frutas</h4>
                             <p>Morango, limão, uva e coco</p>
@@ -605,7 +646,11 @@
                         <div class="simple-price">R$ 2,50</div>
                     </div>
                     
-                    <div class="simple-item">
+                    <!-- Picolé ao Leite COM FOTO -->
+                    <div class="simple-item with-image">
+                        <div class="simple-image">
+                            <img src="img/cardapio-img/picole-leite.jpg" alt="Picolé ao Leite" loading="lazy" width="80" height="80">
+                        </div>
                         <div class="simple-info">
                             <h4>Picolé ao Leite</h4>
                             <p>Chocolate, creme e flocos</p>
@@ -613,7 +658,11 @@
                         <div class="simple-price">R$ 5,50</div>
                     </div>
                     
-                    <div class="simple-item">
+                    <!-- Picolé Trufado COM FOTO -->
+                    <div class="simple-item with-image">
+                        <div class="simple-image">
+                            <img src="img/cardapio-img/picole-trufado.jpg" alt="Picolé Trufado" loading="lazy" width="80" height="80">
+                        </div>
                         <div class="simple-info">
                             <h4>Picolé Trufado</h4>
                             <p>Com cobertura premium</p>
@@ -643,7 +692,11 @@
                 </div>
                 
                 <div class="menu-items-simple">
-                    <div class="simple-item">
+                    <!-- Chuchup Pequeno COM FOTO -->
+                    <div class="simple-item with-image">
+                        <div class="simple-image">
+                            <img src="img/cardapio-img/chuchup-pequeno.jpg" alt="Chuchup Pequeno" loading="lazy" width="80" height="80">
+                        </div>
                         <div class="simple-info">
                             <h4>Chuchup Pequeno</h4>
                             <p>Sabores variados</p>
@@ -651,7 +704,11 @@
                         <div class="simple-price">R$ 0,50</div>
                     </div>
                     
-                    <div class="simple-item">
+                    <!-- Chuchup Grande COM FOTO -->
+                    <div class="simple-item with-image">
+                        <div class="simple-image">
+                            <img src="img/cardapio-img/chuchup-grande.jpg" alt="Chuchup Grande" loading="lazy" width="80" height="80">
+                        </div>
                         <div class="simple-info">
                             <h4>Chuchup Grande</h4>
                             <p>Com mais sabor</p>
@@ -659,7 +716,11 @@
                         <div class="simple-price">R$ 1,50</div>
                     </div>
                     
-                    <div class="simple-item">
+                    <!-- Chuchup ao Leite COM FOTO -->
+                    <div class="simple-item with-image">
+                        <div class="simple-image">
+                            <img src="img/cardapio-img/chuchup-leite.jpg" alt="Chuchup ao Leite" loading="lazy" width="80" height="80">
+                        </div>
                         <div class="simple-info">
                             <h4>Chuchup ao Leite</h4>
                             <p>Chocolate especial</p>
@@ -691,7 +752,7 @@
             
             <div class="establishment-gallery">
                 <div class="gallery-grid">
-                    <!-- Foto 1 -->
+                    <!-- Foto 1 (CORRIGIDO: caminho com pasta img/) -->
                     <a href="img/galeria1-max.jpeg" class="gallery-item" data-lightbox="estabelecimento" data-title="Max Sorvetes Ibertioga - Freezer de Armazenamento">
                         <div class="gallery-img">
                             <img src="img/galeria1-max.jpeg" alt="Fachada da Max Sorvetes Ibertioga" loading="lazy">
@@ -703,7 +764,7 @@
                         <p class="gallery-caption">Freezer de Armazenamento</p>
                     </a>
                     
-                    <!-- Foto 2 -->
+                    <!-- Foto 2 (CORRIGIDO: caminho com pasta img/) -->
                     <a href="img/galeria2-max.jpeg" class="gallery-item" data-lightbox="estabelecimento" data-title="Max Sorvetes Ibertioga - Interno do Estabelecimento">
                         <div class="gallery-img">
                             <img src="img/galeria2-max.jpeg" alt="Interior da Max Sorvetes Ibertioga" loading="lazy">
@@ -715,7 +776,7 @@
                         <p class="gallery-caption">Ambiente Interno</p>
                     </a>
                     
-                    <!-- Foto 3 -->
+                    <!-- Foto 3 (CORRIGIDO: caminho com pasta img/) -->
                     <a href="img/galeria3-max.jpeg" class="gallery-item" data-lightbox="estabelecimento" data-title="Max Sorvetes Ibertioga - Balcão de Sorvetes">
                         <div class="gallery-img">
                             <img src="img/galeria3-max.jpeg" alt="Balcão de sorvetes da Max Sorvetes" loading="lazy">
@@ -727,7 +788,7 @@
                         <p class="gallery-caption">Balcão de Sorvetes</p>
                     </a>
                     
-                    <!-- Foto 4 -->
+                    <!-- Foto 4 (CORRIGIDO: caminho com pasta img/) -->
                     <a href="img/galeria4-max.jpeg" class="gallery-item" data-lightbox="estabelecimento" data-title="Max Sorvetes Ibertioga - Ambiente de Atendimento">
                         <div class="gallery-img">
                             <img src="img/galeria4-max.jpeg" alt="Área de atendimento da Max Sorvetes" loading="lazy">
@@ -949,21 +1010,15 @@
         </div>
     </footer>
 
-    <!-- Font Awesome Icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
-    <!-- Lightbox CSS -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/css/lightbox.min.css">
-
     <!-- Lightbox JS -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/js/lightbox-plus-jquery.min.js"></script>
     
     <!-- Script Principal -->
     <script src="script.js"></script>
     
-    <!-- Configuração do Lightbox -->
+    <!-- Configuração do Lightbox (única) -->
     <script>
-        // Configuração do Lightbox
+        // Configuração do Lightbox (mantida no HTML)
         lightbox.option({
             'resizeDuration': 200,
             'wrapAround': true,
@@ -975,10 +1030,6 @@
             'disableScrolling': true,
             'positionFromTop': 100
         });
-        
-        // Remover classe no-js quando JS estiver ativo
-        document.documentElement.classList.remove('no-js');
-        document.documentElement.classList.add('js');
     </script>
 
     <!-- Modal do Carrinho de Açaí -->

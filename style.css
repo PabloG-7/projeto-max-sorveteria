@@ -4040,3 +4040,230 @@ body.menu-open {
         border-width: 2px;
     }
 }
+/* =========================================================
+   CARD COM IMAGEM (AÇAÍ / SORVETES) — TOPO DO CARD
+   ========================================================= */
+
+.menu-item-card{
+  overflow: hidden;
+}
+
+.item-media{
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  margin-bottom: 12px;
+
+  border-radius: 14px;
+  overflow: hidden;
+  background: rgba(124, 58, 237, 0.06);
+}
+
+.item-media img{
+  width: 100%;
+  height: 120%;
+  display: block;
+
+  object-fit: cover;
+  object-position: center;
+
+  transform: scale(1.02);
+  transition: transform .22s ease, filter .22s ease;
+}
+
+.menu-item-card:hover .item-media img{
+  transform: scale(1.08);
+  filter: saturate(1.05) contrast(1.03);
+}
+
+.item-badge{
+  position: absolute;
+  top: 10px;
+  left: 10px;
+
+  padding: 6px 10px;
+  border-radius: 999px;
+
+  font-size: 12px;
+  font-weight: 700;
+
+  color: #5B21B6;
+  background: rgba(255, 255, 255, 0.90);
+  border: 1px solid rgba(124, 58, 237, 0.15);
+  backdrop-filter: blur(6px);
+}
+
+
+/* =========================================================
+   PICOLÉ + CHUCHUP (menu-items-simple) — VISUAL PREMIUM
+   HTML: .simple-item.with-image > .simple-image img + .simple-info + .simple-price
+   ========================================================= */
+
+/* lista com respiro */
+.menu-category .menu-items-simple{
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  margin-top: 16px;
+}
+
+/* card “linha premium” */
+.menu-category .menu-items-simple .simple-item.with-image{
+  display: grid;
+  grid-template-columns: 92px 1fr auto;
+  align-items: center;
+  gap: 16px;
+
+  padding: 14px 16px;
+  border-radius: 18px;
+
+  background: rgba(255, 255, 255, 0.85);
+  border: 1px solid rgba(124, 58, 237, 0.10);
+  box-shadow: 0 8px 24px rgba(17, 24, 39, 0.06);
+
+  transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease;
+}
+
+.menu-category .menu-items-simple .simple-item.with-image:hover{
+  transform: translateY(-2px);
+  border-color: rgba(124, 58, 237, 0.22);
+  box-shadow: 0 14px 34px rgba(17, 24, 39, 0.10);
+}
+
+/* área da imagem (capsule) */
+.menu-category .menu-items-simple .simple-image{
+  width: 92px;
+  height: 70px;
+
+  border-radius: 18px;
+  overflow: hidden;
+  position: relative;
+
+  border: 1px solid rgba(124, 58, 237, 0.14);
+  background: linear-gradient(
+    180deg,
+    rgba(124, 58, 237, 0.06),
+    rgba(255, 255, 255, 0.70)
+  );
+}
+
+.menu-category .menu-items-simple .simple-image img{
+  width: 100% !important;
+  height: 100% !important;
+
+  display: block;
+  object-fit: cover;
+
+  transform: scale(1.02);
+  transition: transform .25s ease;
+}
+
+.menu-category .menu-items-simple .simple-item.with-image:hover .simple-image img{
+  transform: scale(1.06);
+}
+
+/* tipografia */
+.menu-category .menu-items-simple .simple-info h4{
+  margin: 0;
+  font-size: 1.02rem;
+  font-weight: 800;
+  letter-spacing: -0.2px;
+  color: #111827;
+}
+
+.menu-category .menu-items-simple .simple-info p{
+  margin: 4px 0 0;
+  font-size: 0.90rem;
+  line-height: 1.25;
+  color: #6B7280;
+}
+
+/* preço em pill */
+.menu-category .menu-items-simple .simple-price{
+  white-space: nowrap;
+
+  font-weight: 900;
+  font-size: 0.95rem;
+  color: #7C3AED;
+
+  padding: 10px 12px;
+  border-radius: 999px;
+
+  border: 1px solid rgba(124, 58, 237, 0.18);
+  background: rgba(124, 58, 237, 0.08);
+  box-shadow: 0 6px 16px rgba(124, 58, 237, 0.10);
+}
+
+
+/* =========================================================
+   MOBILE — EMPILHA E FICA LINDO (VOCÊ DISSE QUE TÁ TOP)
+   ========================================================= */
+
+@media (max-width: 600px){
+  .menu-category .menu-items-simple .simple-item.with-image{
+    grid-template-columns: 84px 1fr;
+    grid-template-rows: auto auto;
+    gap: 12px;
+    padding: 14px;
+  }
+
+  .menu-category .menu-items-simple .simple-image{
+    width: 84px;
+    height: 64px;
+    border-radius: 16px;
+  }
+
+  .menu-category .menu-items-simple .simple-price{
+    grid-column: 1 / -1;
+    justify-self: flex-start;
+    padding: 9px 12px;
+  }
+}
+
+
+/* =========================================================
+   AÇÃO DO BOTÃO (PEDIR PICOLÉ / CHUCHUP)
+   ========================================================= */
+
+.menu-category .category-action{
+  margin-top: 14px;
+  display: flex;
+  justify-content: center;
+}
+
+.menu-category .category-action .btn-category{
+  border-radius: 999px;
+  padding: 12px 18px;
+  box-shadow: 0 10px 26px rgba(17, 24, 39, 0.10);
+}
+
+
+/* =========================================================
+   DESKTOP — AUMENTAR IMAGEM (PICOLÉ / CHUCHUP)
+   ========================================================= */
+
+@media (min-width: 1024px){
+  .menu-category .menu-items-simple .simple-item.with-image{
+    grid-template-columns: 140px 1fr auto;
+    padding: 18px 20px;
+  }
+
+  .menu-category .menu-items-simple .simple-image{
+    width: 140px;
+    height: 110px;
+    border-radius: 22px;
+  }
+
+  .menu-category .menu-items-simple .simple-info h4{
+    font-size: 1.15rem;
+  }
+
+  .menu-category .menu-items-simple .simple-info p{
+    font-size: 0.95rem;
+  }
+
+  .menu-category .menu-items-simple .simple-price{
+    font-size: 1.05rem;
+    padding: 12px 16px;
+  }
+}
