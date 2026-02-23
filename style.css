@@ -5233,3 +5233,179 @@ body.menu-open {
         max-width: 260px;
     }
 }
+/* ===== HEADER SIMPLES E FUNCIONAL ===== */
+.header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background: white;
+    z-index: 1000;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+}
+
+.container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.navbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 70px;
+}
+
+/* Logo */
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+}
+
+.logo-emoji {
+    font-size: 1.8rem;
+}
+
+.logo-title {
+    font-family: 'Pacifico', cursive;
+    font-size: 1.4rem;
+    color: #7C3AED;
+    margin: 0;
+}
+
+.logo-subtitle {
+    font-size: 0.7rem;
+    color: #6B7280;
+    margin: 0;
+}
+
+/* Menu */
+.nav-menu {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.nav-link {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 16px;
+    border-radius: 30px;
+    font-weight: 500;
+    font-size: 0.9rem;
+    color: #4B5563;
+    text-decoration: none;
+    transition: all 0.2s;
+}
+
+.nav-link i {
+    font-size: 1rem;
+    color: #9D7AED;
+}
+
+.nav-link:hover {
+    background: #f3f4f6;
+    color: #7C3AED;
+}
+
+.nav-link.active {
+    background: #7C3AED;
+    color: white;
+}
+
+.nav-link.active i {
+    color: white;
+}
+
+/* Botão WhatsApp */
+.cta-btn {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: #25D366;
+    color: white;
+    padding: 8px 20px;
+    border-radius: 30px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.9rem;
+    margin-left: 10px;
+    transition: all 0.2s;
+}
+
+.cta-btn:hover {
+    background: #128C7E;
+}
+
+/* Menu Toggle (só aparece no mobile) */
+.menu-toggle {
+    display: none;
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    color: #7C3AED;
+    cursor: pointer;
+    padding: 8px;
+}
+
+/* ===== RESPONSIVO ===== */
+@media (max-width: 768px) {
+    .menu-toggle {
+        display: block;
+    }
+
+    .nav-menu {
+        position: fixed;
+        top: 70px;
+        left: 0;
+        width: 100%;
+        background: white;
+        flex-direction: column;
+        padding: 20px;
+        gap: 10px;
+        box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        display: none;
+    }
+
+    .nav-menu.active {
+        display: flex;
+    }
+
+    .nav-link {
+        width: 100%;
+        padding: 12px 20px;
+        justify-content: flex-start;
+    }
+
+    .nav-link i {
+        width: 24px;
+    }
+
+    .cta-btn {
+        margin-left: 0;
+        padding: 8px 16px;
+    }
+
+    .cta-btn span {
+        display: none;
+    }
+}
+
+@media (max-width: 480px) {
+    .logo-title {
+        font-size: 1.2rem;
+    }
+    
+    .logo-emoji {
+        font-size: 1.5rem;
+    }
+    
+    .logo-subtitle {
+        display: none;
+    }
+}
