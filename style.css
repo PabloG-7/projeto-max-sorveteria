@@ -4911,7 +4911,7 @@ body.menu-open {
 /* ===== HERO SECTION - CLEAN & MODERNO ===== */
 .hero {
     padding: 120px 0 80px;
-    background: linear-gradient(135deg, #fdffb9 0%, #f8f0ff 100%);
+    background: linear-gradient(135deg, #ffe9b9 0%, #f8f0ff 100%);
     min-height: 100vh;
     display: flex;
     align-items: center;
