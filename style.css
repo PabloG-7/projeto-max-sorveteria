@@ -4414,3 +4414,497 @@ body.menu-open {
     transition: none !important;
   }
 }
+
+/* ===== HERO SECTION - RESPONSIVA E CENTRALIZADA ===== */
+.hero {
+    padding: 100px 0 60px;
+    background: linear-gradient(
+        135deg,
+        rgba(102, 250, 255, 0.6) 0%,
+        rgba(248, 245, 255, 0.9) 50%,
+        rgba(248, 245, 255, 1) 100%
+    );
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+    isolation: isolate;
+}
+
+/* Container do hero */
+.hero-container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+    position: relative;
+    z-index: 1;
+}
+
+/* Conteúdo principal - CENTRALIZADO */
+.hero-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 40px;
+    text-align: center;
+}
+
+/* Para desktop, volta ao grid */
+@media (min-width: 992px) {
+    .hero-content {
+        display: grid;
+        grid-template-columns: 1.2fr 1fr;
+        gap: 60px;
+        align-items: center;
+        text-align: left;
+    }
+}
+
+/* Texto e informações - CENTRALIZADO */
+.hero-info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+@media (min-width: 992px) {
+    .hero-info {
+        align-items: flex-start;
+        text-align: left;
+        margin: 0;
+    }
+}
+
+/* Logo mobile centralizada */
+.mobile-logo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+@media (min-width: 768px) {
+    .mobile-logo {
+        flex-direction: row;
+        justify-content: center;
+    }
+}
+
+@media (min-width: 992px) {
+    .mobile-logo {
+        justify-content: flex-start;
+    }
+}
+
+/* Ícone do sorvete */
+.logo-icon {
+    position: relative;
+    width: 70px;
+    height: 70px;
+    flex-shrink: 0;
+}
+
+.cone {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 35px;
+    height: 45px;
+    background: linear-gradient(135deg, #E0B16D, #C8963E);
+    clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+    border-radius: 0 0 4px 4px;
+    z-index: 1;
+}
+
+.scoop-1, .scoop-2, .scoop-3 {
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    left: 50%;
+    transform: translateX(-50%);
+    animation: scoopFloat 3s ease-in-out infinite;
+}
+
+.scoop-1 {
+    bottom: 25px;
+    background: linear-gradient(135deg, #4A9EFF, #6BB5FF);
+    animation-delay: 0s;
+    z-index: 5;
+}
+
+.scoop-2 {
+    bottom: 45px;
+    background: linear-gradient(135deg, var(--roxo-escuro), #9D7AED);
+    animation-delay: 0.2s;
+    z-index: 4;
+}
+
+.scoop-3 {
+    bottom: 65px;
+    background: linear-gradient(135deg, var(--amarelo), #FFD166);
+    animation-delay: 0.4s;
+    z-index: 3;
+}
+
+@keyframes scoopFloat {
+    0%, 100% { transform: translateX(-50%) translateY(0); }
+    50% { transform: translateX(-50%) translateY(-8px); }
+}
+
+/* Texto do logo */
+.logo-text {
+    text-align: center;
+}
+
+@media (min-width: 768px) {
+    .logo-text {
+        text-align: left;
+    }
+}
+
+.main-logo {
+    font-family: 'Pacifico', cursive;
+    font-size: clamp(1.8rem, 5vw, 2.5rem);
+    color: var(--preto);
+    line-height: 1;
+    margin: 0;
+}
+
+.location-text {
+    font-size: clamp(0.9rem, 2.5vw, 1rem);
+    font-weight: 600;
+    color: var(--roxo-escuro);
+    margin-top: 5px;
+}
+
+/* Título principal */
+.hero-title {
+    font-family: 'Inter', sans-serif;
+    font-weight: 800;
+    font-size: clamp(1.8rem, 6vw, 2.8rem);
+    color: var(--preto);
+    margin-bottom: 15px;
+    line-height: 1.2;
+    width: 100%;
+}
+
+.hero-title .highlight {
+    font-family: 'Pacifico', cursive;
+    color: var(--amarelo);
+    display: block;
+    font-size: clamp(2rem, 7vw, 3.2rem);
+    font-weight: 400;
+    margin-top: 5px;
+}
+
+/* Descrição - balão de fala */
+.hero-description {
+    background: #FFF9F5;
+    border: 2px solid var(--amarelo);
+    padding: 1.2rem 1.5rem;
+    border-radius: 20px;
+    max-width: 90%;
+    margin: 0 auto 25px;
+    position: relative;
+    font-size: clamp(0.95rem, 3vw, 1.15rem);
+    color: #5C4033;
+    line-height: 1.5;
+    text-align: center;
+    font-weight: 500;
+    font-style: italic;
+    box-shadow: 0 6px 20px rgba(139, 69, 19, 0.15);
+}
+
+.hero-description::before {
+    content: '';
+    position: absolute;
+    bottom: -20px;
+    left: 50%;
+    transform: translateX(-50%);
+    border-width: 10px;
+    border-style: solid;
+    border-color: var(--amarelo) transparent transparent transparent;
+}
+
+@media (min-width: 992px) {
+    .hero-description {
+        max-width: 500px;
+        margin: 0 0 25px;
+        text-align: left;
+    }
+    
+    .hero-description::before {
+        left: 30px;
+        transform: none;
+    }
+}
+
+/* Botões - CENTRALIZADOS */
+.cta-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    width: 100%;
+    max-width: 350px;
+    margin: 0 auto;
+}
+
+@media (min-width: 768px) {
+    .cta-buttons {
+        flex-direction: row;
+        max-width: 500px;
+        justify-content: center;
+    }
+}
+
+@media (min-width: 992px) {
+    .cta-buttons {
+        justify-content: flex-start;
+        margin: 0;
+    }
+}
+
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 14px 24px;
+    border-radius: 50px;
+    font-weight: 700;
+    font-size: 0.95rem;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    border: none;
+    cursor: pointer;
+    white-space: nowrap;
+    width: 100%;
+}
+
+@media (min-width: 768px) {
+    .btn {
+        width: auto;
+        padding: 16px 32px;
+        font-size: 1rem;
+    }
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, var(--amarelo), #FF9D3D, var(--roxo-escuro));
+    color: white;
+}
+
+.btn-whatsapp {
+    background: linear-gradient(135deg, #25D366, #128C7E);
+    color: white;
+}
+
+.btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+}
+
+/* Foto do cliente - CENTRALIZADA */
+.hero-photo-section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    order: -1;
+}
+
+@media (min-width: 992px) {
+    .hero-photo-section {
+        order: 1;
+        justify-content: flex-end;
+    }
+}
+
+.photo-container {
+    position: relative;
+    max-width: 280px;
+    width: 100%;
+}
+
+@media (min-width: 768px) {
+    .photo-container {
+        max-width: 350px;
+    }
+}
+
+@media (min-width: 992px) {
+    .photo-container {
+        max-width: 400px;
+    }
+}
+
+.photo-wrapper {
+    position: relative;
+    padding: 15px;
+}
+
+.client-photo {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 3/4;
+    max-width: 280px;
+    margin: 0 auto;
+    border-radius: 20px 20px 8px 8px;
+    overflow: hidden;
+    box-shadow: 0 15px 35px rgba(124, 58, 237, 0.2);
+}
+
+@media (min-width: 768px) {
+    .client-photo {
+        max-width: 320px;
+    }
+}
+
+.client-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    clip-path: polygon(0 0, 100% 0, 100% 85%, 50% 100%, 0 85%);
+}
+
+/* Anéis decorativos */
+.ring {
+    position: absolute;
+    border-radius: 50%;
+    border: 1.5px solid;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    animation: ringPulse 3s ease-in-out infinite;
+}
+
+.ring-1 {
+    width: clamp(240px, 50vw, 320px);
+    height: clamp(240px, 50vw, 320px);
+    border-color: rgba(185, 139, 201, 0.15);
+}
+
+.ring-2 {
+    width: clamp(280px, 55vw, 360px);
+    height: clamp(280px, 55vw, 360px);
+    border-color: rgba(124, 58, 237, 0.1);
+    animation-delay: 0.5s;
+}
+
+@keyframes ringPulse {
+    0%, 100% { opacity: 0.5; transform: translate(-50%, -50%) scale(0.95); }
+    50% { opacity: 0.8; transform: translate(-50%, -50%) scale(1.05); }
+}
+
+/* Badge */
+.badge-minimal {
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+    z-index: 10;
+    background: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(10px);
+    border-radius: 10px;
+    padding: 12px 15px;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.badge-line {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 3px;
+    height: 100%;
+    background: linear-gradient(to bottom, var(--roxo-claro), var(--rosa));
+    border-radius: 10px 0 0 10px;
+}
+
+.badge-content {
+    padding-left: 10px;
+}
+
+.badge-name {
+    font-size: clamp(1rem, 3vw, 1.2rem);
+    font-weight: 800;
+    color: white;
+    display: block;
+    line-height: 1.2;
+}
+
+.badge-role {
+    font-size: clamp(0.7rem, 2vw, 0.8rem);
+    color: rgba(255, 255, 255, 0.9);
+}
+
+/* Pingos decorativos */
+.pingo-decorativo {
+    position: absolute;
+    bottom: -10px;
+    width: 6px;
+    height: 15px;
+    background: linear-gradient(to bottom, var(--roxo-claro), transparent);
+    border-radius: 0 0 4px 4px;
+    opacity: 0.5;
+    animation: pingarSuave 3s ease-in-out infinite;
+}
+
+.pingo-decorativo:nth-child(1) { left: 30%; animation-delay: 0s; }
+.pingo-decorativo:nth-child(2) { left: 50%; animation-delay: 0.5s; }
+.pingo-decorativo:nth-child(3) { left: 70%; animation-delay: 1s; }
+
+@keyframes pingarSuave {
+    0%, 100% { transform: translateY(0); opacity: 0.4; }
+    50% { transform: translateY(8px); opacity: 0.8; }
+}
+
+/* Ajustes para mobile pequeno */
+@media (max-width: 375px) {
+    .hero {
+        padding: 80px 0 40px;
+    }
+    
+    .hero-title {
+        font-size: 1.6rem;
+    }
+    
+    .hero-title .highlight {
+        font-size: 1.8rem;
+    }
+    
+    .hero-description {
+        padding: 1rem;
+        font-size: 0.9rem;
+    }
+    
+    .btn {
+        padding: 12px 20px;
+        font-size: 0.9rem;
+    }
+    
+    .client-photo {
+        max-width: 240px;
+    }
+    
+    .badge-minimal {
+        bottom: 15px;
+        left: 15px;
+        padding: 8px 12px;
+    }
+}
+
+/* Redução de movimento */
+@media (prefers-reduced-motion: reduce) {
+    .ring, .pingo-decorativo, .scoop-1, .scoop-2, .scoop-3 {
+        animation: none !important;
+    }
+}
