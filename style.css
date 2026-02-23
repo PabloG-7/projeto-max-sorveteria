@@ -4908,10 +4908,10 @@ body.menu-open {
         animation: none !important;
     }
 }
-/* ===== HERO SECTION - CLEAN & MODERNO ===== */
+/* ===== HERO SECTION - PREMIUM MODERNO ===== */
 .hero {
-    padding: 120px 0 80px;
-    background: linear-gradient(135deg, #ffe9b9 0%, #f8f0ff 100%);
+    padding: 140px 0 100px;
+    background: linear-gradient(145deg, #ffe9b9 0%, #f3e8ff 100%);
     min-height: 100vh;
     display: flex;
     align-items: center;
@@ -4919,12 +4919,24 @@ body.menu-open {
     overflow: hidden;
 }
 
+/* Elementos decorativos flutuantes */
+.hero::after {
+    content: '✦ ✦ ✦';
+    position: absolute;
+    top: 20%;
+    right: 5%;
+    font-size: 2rem;
+    color: rgba(124, 58, 237, 0.1);
+    transform: rotate(15deg);
+    white-space: nowrap;
+}
+
 /* Container */
 .hero-container {
     width: 100%;
-    max-width: 1200px;
+    max-width: 1280px;
     margin: 0 auto;
-    padding: 0 20px;
+    padding: 0 24px;
     position: relative;
     z-index: 2;
 }
@@ -4934,14 +4946,14 @@ body.menu-open {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 40px;
+    gap: 50px;
 }
 
 @media (min-width: 992px) {
     .hero-content {
         display: grid;
-        grid-template-columns: 1.2fr 1fr;
-        gap: 60px;
+        grid-template-columns: 1.2fr 0.9fr;
+        gap: 80px;
         align-items: center;
     }
 }
@@ -4949,8 +4961,9 @@ body.menu-open {
 /* Informações */
 .hero-info {
     text-align: center;
-    max-width: 600px;
+    max-width: 650px;
     margin: 0 auto;
+    animation: fadeInUp 1s ease;
 }
 
 @media (min-width: 992px) {
@@ -4960,19 +4973,20 @@ body.menu-open {
     }
 }
 
-/* Logo */
+/* Logo com animação */
 .mobile-logo {
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 15px;
-    margin-bottom: 25px;
+    margin-bottom: 30px;
 }
 
 @media (min-width: 768px) {
     .mobile-logo {
         flex-direction: row;
         justify-content: center;
+        gap: 20px;
     }
 }
 
@@ -4984,9 +4998,11 @@ body.menu-open {
 
 .logo-icon {
     position: relative;
-    width: 70px;
-    height: 70px;
+    width: 80px;
+    height: 80px;
     flex-shrink: 0;
+    filter: drop-shadow(0 10px 15px rgba(124, 58, 237, 0.2));
+    animation: float 3s ease-in-out infinite;
 }
 
 .cone {
@@ -4994,111 +5010,153 @@ body.menu-open {
     bottom: 0;
     left: 50%;
     transform: translateX(-50%);
-    width: 35px;
-    height: 45px;
-    background: linear-gradient(135deg, #E0B16D, #C8963E);
+    width: 40px;
+    height: 50px;
+    background: linear-gradient(145deg, #E0B16D, #B37B3A);
     clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
-    border-radius: 0 0 4px 4px;
+    border-radius: 0 0 6px 6px;
     z-index: 1;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
 }
 
 .scoop-1, .scoop-2, .scoop-3 {
     position: absolute;
-    width: 40px;
-    height: 40px;
+    width: 45px;
+    height: 45px;
     border-radius: 50%;
     left: 50%;
     transform: translateX(-50%);
+    transition: transform 0.3s ease;
 }
 
 .scoop-1 {
-    bottom: 25px;
-    background: linear-gradient(135deg, #4A9EFF, #6BB5FF);
+    bottom: 28px;
+    background: linear-gradient(145deg, #4A9EFF, #2173e5);
     z-index: 5;
+    box-shadow: 0 4px 8px rgba(74, 158, 255, 0.3);
 }
 
 .scoop-2 {
-    bottom: 45px;
-    background: linear-gradient(135deg, #7C3AED, #9D7AED);
+    bottom: 50px;
+    background: linear-gradient(145deg, #7C3AED, #5B21B6);
     z-index: 4;
+    box-shadow: 0 4px 8px rgba(124, 58, 237, 0.3);
 }
 
 .scoop-3 {
-    bottom: 65px;
-    background: linear-gradient(135deg, #FFB347, #FFD166);
+    bottom: 72px;
+    background: linear-gradient(145deg, #FFB347, #F59E0B);
     z-index: 3;
+    box-shadow: 0 4px 8px rgba(255, 179, 71, 0.3);
+}
+
+.logo-icon:hover .scoop-1 {
+    transform: translateX(-50%) translateY(-5px);
+}
+
+.logo-icon:hover .scoop-2 {
+    transform: translateX(-50%) translateY(-3px);
+}
+
+.logo-icon:hover .scoop-3 {
+    transform: translateX(-50%) translateY(-2px);
 }
 
 .main-logo {
     font-family: 'Pacifico', cursive;
-    font-size: clamp(2rem, 5vw, 2.5rem);
-    color: #7C3AED;
+    font-size: clamp(2.2rem, 5vw, 2.8rem);
+    background: linear-gradient(135deg, #7C3AED, #FFB347);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
     line-height: 1;
     margin: 0;
+    position: relative;
 }
 
 .location-text {
-    font-size: 0.95rem;
+    font-size: 1rem;
     font-weight: 600;
-    color: #6B7280;
-    letter-spacing: 2px;
-    margin-top: 5px;
+    color: #5B21B6;
+    letter-spacing: 3px;
+    margin-top: 8px;
+    display: inline-block;
+    padding: 4px 12px;
+    background: rgba(255, 255, 255, 0.3);
+    backdrop-filter: blur(5px);
+    border-radius: 30px;
 }
 
-/* Título */
+/* Título com destaque */
 .hero-title {
     font-weight: 800;
-    font-size: clamp(2rem, 6vw, 3rem);
-    color: #1F2937;
+    font-size: clamp(2.2rem, 6vw, 3.2rem);
+    color: #000000e8;
     margin-bottom: 20px;
     line-height: 1.2;
 }
 
 .hero-title .highlight {
     font-family: 'Pacifico', cursive;
-    color: #FFB347;
+    background: linear-gradient(135deg, #FFB347, #FF8C42);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
     display: block;
-    font-size: clamp(2.2rem, 7vw, 3.5rem);
-    margin-top: 5px;
+    font-size: clamp(2.4rem, 7vw, 3.8rem);
+    margin-top: 8px;
+    animation: glow 3s ease-in-out infinite;
 }
 
-/* Descrição */
+/* Descrição com estilo premium */
 .hero-description {
-    background: white;
+    background: rgba(255, 255, 255, 0.9);
+    backdrop-filter: blur(10px);
     border-left: 4px solid #7C3AED;
-    padding: 1.5rem 2rem;
-    border-radius: 12px;
+    padding: 1.8rem 2.2rem;
+    border-radius: 20px;
     max-width: 90%;
-    margin: 0 auto 30px;
-    font-size: clamp(1rem, 3vw, 1.15rem);
-    color: #4B5563;
-    line-height: 1.6;
+    margin: 0 auto 35px;
+    font-size: clamp(1.05rem, 3vw, 1.2rem);
+    color: #374151;
+    line-height: 1.7;
     text-align: center;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+    box-shadow: 0 20px 35px -10px rgba(124, 58, 237, 0.15);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    position: relative;
+    overflow: hidden;
+}
+
+.hero-description::before {
+    content: '"';
+    position: absolute;
+    top: -20px;
+    left: 10px;
+    font-size: 8rem;
+    color: rgba(124, 58, 237, 0.1);
+    font-family: serif;
 }
 
 @media (min-width: 992px) {
     .hero-description {
-        max-width: 500px;
-        margin: 0 0 30px;
+        max-width: 550px;
+        margin: 0 0 35px;
         text-align: left;
     }
 }
 
-/* Botões */
+/* Botões com efeitos modernos */
 .cta-buttons {
     display: flex;
     flex-direction: column;
-    gap: 15px;
+    gap: 16px;
     width: 100%;
-    max-width: 400px;
+    max-width: 450px;
     margin: 0 auto;
 }
 
 @media (min-width: 768px) {
     .cta-buttons {
         flex-direction: row;
-        max-width: 500px;
+        max-width: 550px;
         justify-content: center;
     }
 }
@@ -5114,16 +5172,19 @@ body.menu-open {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    gap: 10px;
-    padding: 16px 28px;
-    border-radius: 50px;
+    gap: 12px;
+    padding: 18px 32px;
+    border-radius: 60px;
     font-weight: 600;
-    font-size: 1rem;
+    font-size: 1.05rem;
     text-decoration: none;
-    transition: all 0.3s ease;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     border: none;
     cursor: pointer;
     width: 100%;
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
 }
 
 @media (min-width: 768px) {
@@ -5132,30 +5193,51 @@ body.menu-open {
     }
 }
 
+.btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+    transition: left 0.5s ease;
+    z-index: -1;
+}
+
+.btn:hover::before {
+    left: 100%;
+}
+
 .btn-primary {
-    background: #7C3AED;
+    background: linear-gradient(145deg, #7C3AED, #5B21B6);
     color: white;
-    box-shadow: 0 4px 12px rgba(124,58,237,0.3);
+    box-shadow: 0 8px 20px rgba(124, 58, 237, 0.3);
 }
 
 .btn-whatsapp {
-    background: #25D366;
+    background: linear-gradient(145deg, #25D366, #128C7E);
     color: white;
-    box-shadow: 0 4px 12px rgba(37,211,102,0.3);
+    box-shadow: 0 8px 20px rgba(37, 211, 102, 0.25);
 }
 
 .btn:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+    transform: translateY(-5px) scale(1.02);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
 }
 
-/* Foto */
+.btn:active {
+    transform: translateY(-2px) scale(0.98);
+}
+
+/* Foto com efeitos avançados */
 .hero-photo-section {
     display: flex;
     justify-content: center;
     align-items: center;
     width: 100%;
     order: -1;
+    animation: fadeInRight 1s ease;
 }
 
 @media (min-width: 992px) {
@@ -5168,69 +5250,180 @@ body.menu-open {
 .client-photo {
     position: relative;
     width: 100%;
-    max-width: 300px;
-    border-radius: 20px;
+    max-width: 350px;
+    border-radius: 30px 30px 30px 30px;
     overflow: hidden;
-    box-shadow: 0 20px 30px -10px rgba(124,58,237,0.3);
+    box-shadow: 
+        0 30px 40px -20px rgba(124, 58, 237, 0.4),
+        0 0 0 2px rgba(255, 255, 255, 0.5) inset;
+    transition: transform 0.3s ease;
 }
 
 @media (min-width: 768px) {
     .client-photo {
-        max-width: 350px;
+        max-width: 400px;
     }
+}
+
+.client-photo:hover {
+    transform: scale(1.02);
 }
 
 .client-img {
     width: 100%;
     height: auto;
     display: block;
+    transition: transform 0.5s ease;
 }
 
-/* Badge simples */
-.badge-minimal {
+.client-photo:hover .client-img {
+    transform: scale(1.05);
+}
+
+/* Badge com design premium */
+.badge-premium {
     position: absolute;
-    bottom: 20px;
-    left: 20px;
-    background: rgba(255,255,255,0.9);
-    border-radius: 8px;
-    padding: 10px 15px;
-    border-left: 3px solid #7C3AED;
+    bottom: 25px;
+    left: 25px;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(5px);
+    border-radius: 16px;
+    padding: 14px 20px;
+    border-left: 4px solid #7C3AED;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    animation: slideInLeft 0.5s ease;
 }
 
 .badge-name {
-    font-size: 1.1rem;
+    font-size: 1.2rem;
     font-weight: 700;
     color: #1F2937;
     display: block;
+    margin-bottom: 4px;
 }
 
 .badge-role {
-    font-size: 0.8rem;
+    font-size: 0.85rem;
     color: #6B7280;
+    display: flex;
+    align-items: center;
+    gap: 5px;
 }
 
-/* Anéis simples */
+.badge-role::before {
+    content: '⭐';
+    font-size: 0.9rem;
+}
+
+/* Anéis decorativos */
 .ring-1, .ring-2 {
-    display: none;
+    position: absolute;
+    border-radius: 50%;
+    border: 2px dashed rgba(124, 58, 237, 0.3);
+    animation: spin 20s linear infinite;
 }
 
-/* Responsivo */
+.ring-1 {
+    top: -20px;
+    right: -20px;
+    width: 150px;
+    height: 150px;
+}
+
+.ring-2 {
+    bottom: -30px;
+    left: -30px;
+    width: 200px;
+    height: 200px;
+    animation-direction: reverse;
+}
+
+/* Animações */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeInRight {
+    from {
+        opacity: 0;
+        transform: translateX(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes slideInLeft {
+    from {
+        opacity: 0;
+        transform: translateX(-30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes float {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-10px);
+    }
+}
+
+@keyframes glow {
+    0%, 100% {
+        filter: drop-shadow(0 0 5px rgba(255, 179, 71, 0.5));
+    }
+    50% {
+        filter: drop-shadow(0 0 20px rgba(255, 179, 71, 0.8));
+    }
+}
+
+@keyframes spin {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* Responsivo refinado */
 @media (max-width: 480px) {
     .hero {
-        padding: 100px 0 60px;
+        padding: 110px 0 70px;
     }
     
     .hero-description {
-        padding: 1.2rem 1.5rem;
+        padding: 1.5rem 1.8rem;
     }
     
     .btn {
-        padding: 14px 20px;
-        font-size: 0.95rem;
+        padding: 16px 24px;
+        font-size: 1rem;
     }
     
     .client-photo {
-        max-width: 260px;
+        max-width: 280px;
+    }
+    
+    .badge-premium {
+        padding: 10px 15px;
+    }
+    
+    .badge-name {
+        font-size: 1rem;
     }
 }
 /* ===== HEADER SIMPLES E FUNCIONAL ===== */
