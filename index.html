@@ -274,6 +274,419 @@
     ]
   }
   </script>
+  
+  <!-- ESTILOS PARA HARMONIZAR AS CORES COM O INÍCIO DO SITE -->
+  <style>
+       /* ===== VARIÁVEIS DE CORES HARMONIZADAS COM O INÍCIO ===== */
+    :root {
+        --roxo-principal: #7C3AED;
+        --roxo-claro: #B98BC9;
+        --roxo-escuro: #5B21B6;
+        --laranja: #FFB347;
+        --laranja-claro: #FFD966;
+        --verde-whatsapp: #25D366;
+        --verde-hover: #128C7E;
+        --off-white: #FFF9F5;
+        --cinza-claro: #F3F4F6;
+        --cinza-medio: #E5E7EB;
+        --cinza-texto: #6B7280;
+        --preto-suave: #1F2937;
+        --gradient-primary: linear-gradient(135deg, var(--roxo-principal), var(--roxo-claro), var(--laranja));
+        --gradient-secondary: linear-gradient(135deg, var(--laranja), var(--laranja-claro));
+    }
+    
+    /* ===== HEADER COM CORES HARMONIZADAS ===== */
+    .header {
+        background: rgba(255, 255, 255, 0.98);
+        border-bottom: 1px solid rgba(124, 58, 237, 0.1);
+    }
+    
+    .logo-title {
+        color: var(--roxo-principal);
+    }
+    
+    .nav-link i {
+        color: var(--roxo-claro);
+    }
+    
+    .nav-link:hover {
+        color: var(--roxo-principal);
+    }
+    
+    .nav-link:hover i {
+        color: var(--roxo-principal);
+    }
+    
+    /* CORREÇÃO: Menu ativo - ícone branco no fundo roxo */
+    .nav-link.active {
+        color: white !important;
+        background: var(--roxo-principal);
+    }
+    
+    .nav-link.active i {
+        color: white !important;
+    }
+    
+    .nav-link.active::after {
+        background: var(--laranja);
+    }
+    
+    .menu-toggle {
+        color: var(--roxo-principal);
+        border-color: rgba(124, 58, 237, 0.2);
+    }
+    
+    .menu-toggle:hover {
+        background: rgba(124, 58, 237, 0.05);
+        border-color: var(--roxo-claro);
+    }
+    
+    .menu-toggle.active {
+        background: var(--roxo-principal);
+        color: white;
+    }
+    
+    /* ===== TRUST STRIP COM CORES HARMONIZADAS ===== */
+    .trust-card {
+        border: 1px solid rgba(124, 58, 237, 0.1);
+    }
+    
+    .trust-card:hover {
+        border-color: var(--laranja);
+    }
+    
+    .trust-ico {
+        background: linear-gradient(135deg, var(--roxo-principal), var(--roxo-claro));
+    }
+    
+    .trust-txt strong {
+        color: var(--roxo-escuro);
+    }
+    
+    /* ===== CARDÁPIO COM CORES HARMONIZADAS ===== */
+    .section-title {
+        color: var(--roxo-escuro);
+    }
+    
+    .section-title i {
+        color: var(--laranja);
+    }
+    
+    .menu-category {
+        border: 2px solid rgba(124, 58, 237, 0.1);
+    }
+    
+    .menu-category:hover {
+        border-color: rgba(185, 139, 201, 0.4);
+    }
+    
+    .category-icon {
+        background: linear-gradient(135deg, var(--roxo-principal), var(--laranja));
+    }
+    
+    .category-title {
+        color: var(--roxo-escuro);
+    }
+    
+    .category-title::after {
+        background: linear-gradient(90deg, var(--roxo-claro), var(--laranja));
+    }
+    
+    .menu-item-card {
+        border: 2px solid rgba(124, 58, 237, 0.1);
+    }
+    
+    .menu-item-card::before {
+        background: linear-gradient(90deg, var(--roxo-claro), var(--laranja));
+    }
+    
+    .menu-item-card:hover {
+        border-color: rgba(185, 139, 201, 0.4);
+    }
+    
+    .item-tag {
+        background: rgba(124, 58, 237, 0.1);
+        color: var(--roxo-principal);
+        border: 1px solid rgba(124, 58, 237, 0.2);
+    }
+    
+    .item-price {
+        color: var(--roxo-principal);
+    }
+    
+    .item-price::before {
+        color: var(--roxo-claro);
+    }
+    
+    .item-btn {
+        background: linear-gradient(135deg, var(--verde-whatsapp), var(--verde-hover));
+    }
+    
+    .extra-card:hover {
+        border-color: var(--roxo-claro);
+    }
+    
+    .extra-price {
+        color: var(--laranja);
+    }
+    
+    .simple-item {
+        border: 2px solid rgba(124, 58, 237, 0.1);
+    }
+    
+    .simple-item:hover {
+        border-color: var(--roxo-claro);
+    }
+    
+    .simple-price {
+        color: var(--laranja);
+    }
+    
+    .btn-category {
+        background: linear-gradient(135deg, var(--roxo-principal), var(--roxo-claro));
+    }
+    
+    .preview-container {
+        border: 2px solid var(--roxo-claro);
+    }
+    
+    /* CORREÇÃO: Botão "Ver Completo" do cardápio */
+    .preview-btn {
+        background: var(--roxo-principal) !important;
+        color: white !important;
+        border: 2px solid white;
+    }
+    
+    .preview-btn i {
+        color: white !important;
+    }
+    
+    .preview-btn:hover {
+        background: var(--roxo-escuro) !important;
+    }
+    
+    /* ===== ESTABELECIMENTO COM CORES HARMONIZADAS ===== */
+    .establishment-section::before {
+        background: linear-gradient(90deg, var(--roxo-claro), var(--laranja), var(--laranja-claro));
+    }
+    
+    .establishment-gallery {
+        border: 2px solid rgba(124, 58, 237, 0.1);
+    }
+    
+    .gallery-overlay {
+        background: rgba(124, 58, 237, 0.8);
+    }
+    
+    .gallery-caption {
+        color: var(--roxo-escuro);
+    }
+    
+    .gallery-note i {
+        color: var(--roxo-principal);
+    }
+    
+    /* ===== DELIVERY COM CORES HARMONIZADAS ===== */
+    .delivery-section {
+        background: linear-gradient(180deg, rgba(255, 209, 102, 0.3) 0%, #fff9f5 100%);
+    }
+    
+    .stat-card {
+        border: 2px solid rgba(124, 58, 237, 0.1);
+    }
+    
+    .stat-card:hover {
+        border-color: var(--roxo-claro);
+    }
+    
+    .stat-icon {
+        background: linear-gradient(135deg, var(--roxo-principal), var(--roxo-claro));
+    }
+    
+    .delivery-process {
+        border: 2px solid rgba(124, 58, 237, 0.1);
+    }
+    
+    .step-number {
+        background: linear-gradient(135deg, var(--roxo-principal), var(--roxo-claro));
+    }
+    
+    .delivery-cta {
+        background: linear-gradient(135deg, var(--roxo-principal), var(--roxo-claro));
+    }
+    
+    .btn-delivery {
+        color: var(--roxo-principal);
+    }
+    
+    /* ===== CONTATO COM CORES HARMONIZADAS ===== */
+    .contact-card {
+        background: var(--off-white);
+        border: 1px solid var(--cinza-medio);
+    }
+    
+    .contact-card:hover {
+        border-color: var(--roxo-claro);
+    }
+    
+    .contact-icon {
+        background: linear-gradient(135deg, var(--roxo-principal), var(--laranja));
+    }
+    
+    .contact-link {
+        color: var(--verde-whatsapp);
+    }
+    
+    .contact-link:hover {
+        color: var(--verde-hover);
+    }
+    
+    .contact-message {
+        background: linear-gradient(135deg, rgba(124, 58, 237, 0.05), rgba(255, 179, 71, 0.05));
+        border: 2px solid rgba(124, 58, 237, 0.1);
+    }
+    
+    .map-container {
+        border: 2px solid rgba(124, 58, 237, 0.1);
+    }
+    
+    /* ===== FOOTER COM CORES HARMONIZADAS ===== */
+    .footer {
+        background: var(--roxo-escuro);
+    }
+    
+    .footer-logo h3 {
+        color: white;
+    }
+    
+    .footer-link:hover {
+        color: var(--laranja);
+    }
+    
+    .footer-contact-item:hover {
+        color: var(--laranja);
+    }
+    
+    /* ===== MODAL AÇAÍ COM CORES HARMONIZADAS ===== */
+    .modal-content {
+        border: 3px solid var(--laranja);
+    }
+    
+    .modal-header h3 {
+        color: var(--roxo-escuro);
+    }
+    
+    .modal-close:hover {
+        background: rgba(124, 58, 237, 0.1);
+        color: var(--roxo-principal);
+    }
+    
+    .modal-section {
+        background: #f8f5ff;
+    }
+    
+    .modal-section h4 {
+        color: var(--roxo-escuro);
+    }
+    
+    .checkbox-item input {
+        accent-color: var(--roxo-principal);
+    }
+    
+    .checkbox-item .price {
+        color: var(--laranja);
+    }
+    
+    .skip-option {
+        background: rgba(255, 179, 71, 0.1);
+    }
+    
+    .skip-option input {
+        accent-color: var(--laranja);
+    }
+    
+    .counter {
+        background: var(--roxo-principal);
+    }
+    
+    /* CORREÇÃO: Total do pedido no modal */
+    .total-section {
+        background: linear-gradient(135deg, var(--roxo-principal), var(--laranja));
+    }
+    
+    .total-section h4,
+    #total-price-display {
+        color: white !important;
+    }
+    
+    .btn-confirm {
+        background: linear-gradient(135deg, var(--verde-whatsapp), var(--verde-hover));
+    }
+    
+    /* ===== NOTIFICAÇÕES COM CORES HARMONIZADAS ===== */
+    .smart-notification {
+        border-left: 4px solid;
+    }
+    
+    .popular-notification {
+        border-color: var(--laranja);
+    }
+    
+    .peak-notification {
+        border-color: var(--roxo-principal);
+    }
+    
+    .notification-icon {
+        background: linear-gradient(135deg, var(--roxo-principal), var(--laranja));
+    }
+    
+    .notification-header h4 {
+        color: var(--roxo-escuro);
+    }
+    
+    .notification-whatsapp-btn {
+        background: var(--verde-whatsapp);
+    }
+    
+    .notification-whatsapp-btn:hover {
+        background: var(--verde-hover);
+    }
+    
+    /* ===== BOTÕES WHATSAPP ===== */
+    .cta-btn {
+        background: var(--verde-whatsapp);
+    }
+    
+    .cta-btn:hover {
+        background: var(--verde-hover);
+    }
+    
+    .btn-whatsapp {
+        background: linear-gradient(135deg, var(--verde-whatsapp), var(--verde-hover));
+    }
+    
+    .btn-primary {
+        background: linear-gradient(135deg, var(--laranja), #FF9D3D, var(--roxo-principal));
+    }
+    
+    /* ===== MENU MOBILE COM CORES HARMONIZADAS ===== */
+    @media (max-width: 991px) {
+        .nav-menu {
+            background: white;
+            border: 1px solid rgba(124, 58, 237, 0.1);
+        }
+        
+        /* CORREÇÃO: Menu mobile - link ativo */
+        .nav-link.active {
+            background: var(--roxo-principal);
+            color: white !important;
+        }
+        
+        .nav-link.active i {
+            color: white !important;
+        }
+    }
+  </style>
 </head>
 <body>
     
