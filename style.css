@@ -2619,78 +2619,38 @@ h2 {
   }
 }
 
-/* ========== SCROLL REVEAL ANIMATIONS ========== */
+/* ========== SCROLL REVEAL SIMPLES E LEVE ========== */
 .reveal {
   opacity: 0;
-  visibility: hidden;
-  transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  transform: translateY(30px);
+  transition: all 0.5s ease-out;
 }
 
 .reveal.active {
   opacity: 1;
-  visibility: visible;
-}
-
-/* Direções de entrada */
-.reveal-fade-up {
-  transform: translateY(40px);
-}
-
-.reveal-fade-up.active {
   transform: translateY(0);
 }
 
-.reveal-fade-down {
-  transform: translateY(-40px);
+/* Otimização para mobile - animação mais rápida e sem delay */
+@media (max-width: 768px) {
+  .reveal {
+    transition-duration: 0.3s;
+  }
+  
+  .reveal.active {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
-.reveal-fade-down.active {
-  transform: translateY(0);
+/* Para quem prefere menos animação (acessibilidade) */
+@media (prefers-reduced-motion: reduce) {
+  .reveal {
+    transition: none;
+    opacity: 1;
+    transform: none;
+  }
 }
-
-.reveal-fade-left {
-  transform: translateX(40px);
-}
-
-.reveal-fade-left.active {
-  transform: translateX(0);
-}
-
-.reveal-fade-right {
-  transform: translateX(-40px);
-}
-
-.reveal-fade-right.active {
-  transform: translateX(0);
-}
-
-.reveal-scale {
-  transform: scale(0.95);
-}
-
-.reveal-scale.active {
-  transform: scale(1);
-}
-
-.reveal-rotate {
-  transform: rotate(-5deg) scale(0.95);
-}
-
-.reveal-rotate.active {
-  transform: rotate(0) scale(1);
-}
-
-/* Atrasos para elementos em sequência */
-.delay-1 { transition-delay: 0.1s; }
-.delay-2 { transition-delay: 0.2s; }
-.delay-3 { transition-delay: 0.3s; }
-.delay-4 { transition-delay: 0.4s; }
-.delay-5 { transition-delay: 0.5s; }
-
-/* Durações diferentes */
-.duration-fast { transition-duration: 0.4s; }
-.duration-normal { transition-duration: 0.6s; }
-.duration-slow { transition-duration: 0.8s; }
 
 /* ========== SCROLLBAR PERSONALIZADA ========== */
 

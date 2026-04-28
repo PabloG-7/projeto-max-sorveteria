@@ -183,6 +183,12 @@
 
   function openAcaiModal(productName, basePrice) {
     if (!modal) return;
+    
+    // Fecha menu mobile se estiver aberto
+    if (menu && menu.classList.contains("open")) {
+      setMenu(false);
+    }
+    
     const price = basePrice || 15;
     const content = modal.querySelector(".modal-content");
     if (!content) return;
@@ -335,117 +341,50 @@
     }
   });
 
-  // Header scroll effect
-const header = document.querySelector('.site-header');
-if (header) {
-  window.addEventListener('scroll', () => {
-    if (window.scrollY > 50) {
-      header.classList.add('scrolled');
-    } else {
-      header.classList.remove('scrolled');
-    }
-  });
-}
-
-// ========== SCROLL REVEAL ==========
-(function() {
-  // Seleciona todos os elementos que terão animação
-  const revealElements = document.querySelectorAll(
-    '.hero, .trust-grid article, .category, .product-card, .gallery-item, .steps article, .contact-cards article, .map-card'
-  );
-  
-  // Configurações
-  const config = {
-    threshold: 0.1, // 10% do elemento visível
-    rootMargin: '0px 0px -50px 0px' // Dispara um pouco antes
-  };
-  
-  // Adiciona as classes de reveal nos elementos
-  revealElements.forEach((element, index) => {
-    // Adiciona classe base reveal
-    element.classList.add('reveal');
-    
-    // Define tipo de animação baseado na posição ou tipo do elemento
-    if (element.classList.contains('hero')) {
-      element.classList.add('reveal-fade-up');
-    } 
-    else if (element.classList.contains('trust-grid') && element.tagName === 'ARTICLE') {
-      element.classList.add('reveal-fade-up');
-      element.classList.add(`delay-${(index % 5) + 1}`);
-    }
-    else if (element.classList.contains('category')) {
-      element.classList.add('reveal-fade-left');
-    }
-    else if (element.classList.contains('product-card')) {
-      element.classList.add('reveal-scale');
-      element.classList.add(`delay-${(index % 4) + 1}`);
-    }
-    else if (element.classList.contains('gallery-item')) {
-      element.classList.add('reveal-fade-up');
-      element.classList.add(`delay-${(index % 4) + 1}`);
-    }
-    else if (element.classList.contains('steps') && element.tagName === 'ARTICLE') {
-      element.classList.add('reveal-fade-right');
-      element.classList.add(`delay-${(index % 3) + 1}`);
-    }
-    else if (element.classList.contains('contact-cards') && element.tagName === 'ARTICLE') {
-      element.classList.add('reveal-fade-left');
-      element.classList.add(`delay-${(index % 3) + 1}`);
-    }
-    else if (element.classList.contains('map-card')) {
-      element.classList.add('reveal-fade-right');
-    }
-    else {
-      element.classList.add('reveal-fade-up');
-    }
-  });
-  
-  // Adiciona animação para os headings das seções
-  const sectionHeadings = document.querySelectorAll('.section-heading');
-  sectionHeadings.forEach((heading) => {
-    heading.classList.add('reveal', 'reveal-fade-down');
-  });
-  
-  // Adiciona animação para o footer
-  const footer = document.querySelector('.footer');
-  if (footer) {
-    footer.classList.add('reveal', 'reveal-fade-up');
-  }
-  
-  // Observer para detectar quando os elementos entram na tela
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('active');
-        
-        // Opcional: depois que animar, pode parar de observar (melhora performance)
-        observer.unobserve(entry.target);
+  // ========== HEADER SCROLL EFFECT ==========
+  const header = document.querySelector('.site-header');
+  if (header) {
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 50) {
+        header.classList.add('scrolled');
+      } else {
+        header.classList.remove('scrolled');
       }
     });
-  }, config);
-  
-  // Observa cada elemento
-  revealElements.forEach(element => {
-    observer.observe(element);
-  });
-  
-  // Observa os headings
-  sectionHeadings.forEach(heading => {
-    observer.observe(heading);
-  });
-  
-  if (footer) {
-    observer.observe(footer);
   }
-  
-  // Suporte para dispositivos que não tem IntersectionObserver
-  if (!window.IntersectionObserver) {
-    // Fallback: mostra todos os elementos imediatamente
-    document.querySelectorAll('.reveal').forEach(el => {
-      el.classList.add('active');
+
+  // ========== SCROLL REVEAL LEVE ==========
+  (function() {
+    // Verifica se o navegador suporta IntersectionObserver
+    if (!window.IntersectionObserver) {
+      document.querySelectorAll('.reveal').forEach(el => el.classList.add('active'));
+      return;
+    }
+    
+    // Seleciona os elementos que vão animar
+    const elements = document.querySelectorAll(
+      '.category, .product-card, .gallery-item, .steps article, .contact-cards article, .section-heading'
+    );
+    
+    // Adiciona classe reveal
+    elements.forEach(el => el.classList.add('reveal'));
+    
+    // Cria o observer
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('active');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, {
+      threshold: 0.1,
+      rootMargin: '0px 0px -30px 0px'
     });
-  }
-})();
+    
+    // Observa os elementos
+    elements.forEach(el => observer.observe(el));
+  })();
 
   // ========== INICIALIZAR GALERIA ==========
   initGallery();
