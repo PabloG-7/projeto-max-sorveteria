@@ -2734,3 +2734,126 @@ html {
     background-position: 0% 50%;
   }
 }
+
+/* ===== WHATSAPP FLOATING BUTTON ===== */
+.whatsapp-float {
+  position: fixed;
+  bottom: 28px;
+  right: 28px;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #25d366 0%, #128C7E 100%);
+  color: #fff;
+  text-decoration: none;
+  box-shadow: 0 6px 24px rgba(37, 211, 102, 0.4);
+  transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  animation: pulse-wpp 2.5s ease-in-out infinite;
+}
+
+.whatsapp-float i {
+  font-size: 32px;
+  color: #fff;
+  transition: transform 0.3s ease;
+}
+
+.whatsapp-float:hover {
+  transform: scale(1.1) translateY(-4px);
+  box-shadow: 0 10px 32px rgba(37, 211, 102, 0.5);
+}
+
+.whatsapp-float:hover i {
+  transform: scale(1.05);
+}
+
+.whatsapp-float:active {
+  transform: scale(0.92);
+}
+
+/* Badge de notificação (opcional) */
+.whatsapp-float::after {
+  content: '1';
+  position: absolute;
+  top: -6px;
+  right: -6px;
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #ff3b30;
+  color: #fff;
+  font-size: 11px;
+  font-weight: 700;
+  border-radius: 50%;
+  border: 2px solid #fff;
+  box-shadow: 0 2px 8px rgba(255, 59, 48, 0.3);
+  animation: pulse-badge 2s ease-in-out infinite;
+}
+
+/* Animação de pulsação do botão */
+@keyframes pulse-wpp {
+  0%, 100% {
+    box-shadow: 0 6px 24px rgba(37, 211, 102, 0.4);
+  }
+  50% {
+    box-shadow: 0 6px 24px rgba(37, 211, 102, 0.6), 0 0 0 12px rgba(37, 211, 102, 0.08);
+  }
+}
+
+/* Animação da badge */
+@keyframes pulse-badge {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.08);
+  }
+}
+
+/* ===== RESPONSIVIDADE ===== */
+@media (max-width: 768px) {
+  .whatsapp-float {
+    bottom: 20px;
+    right: 20px;
+    width: 56px;
+    height: 56px;
+  }
+  
+  .whatsapp-float i {
+    font-size: 28px;
+  }
+  
+  .whatsapp-float::after {
+    width: 20px;
+    height: 20px;
+    font-size: 10px;
+    top: -4px;
+    right: -4px;
+  }
+}
+
+@media (max-width: 480px) {
+  .whatsapp-float {
+    bottom: 16px;
+    right: 16px;
+    width: 50px;
+    height: 50px;
+  }
+  
+  .whatsapp-float i {
+    font-size: 24px;
+  }
+  
+  .whatsapp-float::after {
+    width: 18px;
+    height: 18px;
+    font-size: 9px;
+    top: -3px;
+    right: -3px;
+  }
+}
