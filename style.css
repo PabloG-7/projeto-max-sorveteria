@@ -2177,6 +2177,67 @@ button { font: inherit; cursor: pointer; border: none; background: none; }
 .reveal.active { opacity: 1; transform: translateY(0); }
 @media (prefers-reduced-motion: reduce) { .reveal { opacity: 1; transform: none; transition: none; } }
 
-/* ============================================
-   ❌ IMAGE FALLBACK REMOVIDO — NÃO USAR MAIS
-   ============================================ */
+/* ===== X DO MODAL DA GALERIA ===== */
+
+.modal-gallery .gallery-close {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+
+  z-index: 999999;
+
+  width: 46px;
+  height: 46px;
+
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+
+  padding: 0;
+
+  background: rgba(0, 0, 0, 0.75) !important;
+  color: #fff !important;
+
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  border-radius: 50%;
+
+  cursor: pointer;
+
+  font-size: 20px;
+  line-height: 1;
+
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.35);
+
+  transition: all 0.2s ease;
+}
+
+.modal-gallery .gallery-close i {
+  display: block !important;
+  color: #fff !important;
+  font-size: 20px;
+  line-height: 1;
+}
+
+.modal-gallery .gallery-close:hover {
+  background: var(--purple) !important;
+  transform: rotate(90deg);
+}
+
+/* CELULAR */
+@media (max-width: 768px) {
+  .modal-gallery .gallery-close {
+    position: fixed;
+
+    top: 18px;
+    right: 18px;
+
+    width: 42px;
+    height: 42px;
+
+    font-size: 18px;
+  }
+
+  .modal-gallery .gallery-close i {
+    font-size: 18px;
+  }
+}
