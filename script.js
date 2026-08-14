@@ -32,13 +32,16 @@
     if (!menu || !menuToggle) return;
     menu.classList.toggle("open", open);
     menuToggle.setAttribute("aria-expanded", String(open));
-    menuToggle.innerHTML = open ? '<i class="fa-solid fa-xmark"></i>' : '<i class="fa-solid fa-bars"></i>';
+    // CORRIGIDO: fa-regular → fa-solid
+    menuToggle.innerHTML = open
+      ? '<i class="fa-solid fa-xmark"></i>'
+      : '<i class="fa-solid fa-bars"></i>';
     document.body.classList.toggle("menu-open", open);
   }
 
   menuToggle?.addEventListener("click", () => setMenu(!menu?.classList.contains("open")));
 
-  // Scroll suave nos links âncora
+  // Scroll suave
   document.querySelectorAll('a[href^="#"]').forEach((link) => {
     link.addEventListener("click", (event) => {
       const id = link.getAttribute("href");
@@ -51,7 +54,7 @@
     });
   });
 
-  // Atualizar link ativo no scroll
+  // Link ativo
   const sections = [...document.querySelectorAll("main section[id]")];
   const navLinks = [...document.querySelectorAll(".nav-link")];
 
@@ -73,7 +76,7 @@
     return match ? Number(match[1].replace(".", "").replace(",", ".")) : 0;
   }
 
-  // ========== MODAL CARDÁPIO ==========
+  // ===== CARDÁPIO MODAL =====
   function openCardapioModal() {
     if (!cardapioModal) return;
     cardapioModal.classList.add("open");
@@ -95,14 +98,14 @@
     });
   }
 
-  // ========== MODAL GALERIA ==========
+  // ===== GALERIA =====
   function initGallery() {
     const items = document.querySelectorAll(".gallery-item");
-    galleryImages = Array.from(items).map(item => ({
+    galleryImages = Array.from(items).map((item) => ({
       src: item.dataset.image,
-      title: item.dataset.title
+      title: item.dataset.title,
     }));
-    
+
     items.forEach((item, index) => {
       item.addEventListener("click", () => {
         currentImageIndex = index;
@@ -147,11 +150,10 @@
     updateGalleryImage();
   }
 
-  // Eventos da galeria
   galleryPrev?.addEventListener("click", prevImage);
   galleryNext?.addEventListener("click", nextImage);
 
-  // ========== MODAL AÇAÍ ==========
+  // ===== AÇAÍ MODAL =====
   document.addEventListener("click", (event) => {
     const button = event.target.closest("button[data-item]");
     if (!button) return;
@@ -183,12 +185,11 @@
 
   function openAcaiModal(productName, basePrice) {
     if (!modal) return;
-    
-    // Fecha menu mobile se estiver aberto
+
     if (menu && menu.classList.contains("open")) {
       setMenu(false);
     }
-    
+
     const price = basePrice || 15;
     const content = modal.querySelector(".modal-content");
     if (!content) return;
@@ -196,7 +197,7 @@
     content.innerHTML = `
       <div class="modal-header">
         <div>
-          <p class="eyebrow">Monte seu açaí</p>
+          <span class="section-tag">✦ Monte seu açaí</span>
           <h3>${productName}</h3>
         </div>
         <button class="modal-close" type="button" data-close-modal aria-label="Fechar"><i class="fa-solid fa-xmark"></i></button>
@@ -205,9 +206,13 @@
       <div class="modal-section">
         <h4>Escolha até 3 acompanhamentos grátis</h4>
         <div class="choice-list" data-free-list>
-          ${["Leite em pó", "Leite condensado", "Calda de chocolate", "Calda de morango"].map((item) => `
+          ${["Leite em pó", "Leite condensado", "Calda de chocolate", "Calda de morango"]
+            .map(
+              (item) => `
             <label><span>${item}</span><input type="checkbox" value="${item}"></label>
-          `).join("")}
+          `
+            )
+            .join("")}
         </div>
       </div>
 
@@ -224,10 +229,14 @@
             ["Morango", 4],
             ["Banana", 3],
             ["Kiwi", 4],
-            ["Nutella", 5]
-          ].map(([item, extraPrice]) => `
+            ["Nutella", 5],
+          ]
+            .map(
+              ([item, extraPrice]) => `
             <label><span>${item}</span><span>+ ${formatMoney(extraPrice)} <input type="checkbox" value="${item}" data-price="${extraPrice}"></span></label>
-          `).join("")}
+          `
+            )
+            .join("")}
         </div>
       </div>
 
@@ -260,8 +269,10 @@
   function updateTotal() {
     if (!modal) return;
     const basePrice = Number(modal.dataset.basePrice || 0);
-    const total = [...modal.querySelectorAll("[data-extra-list] input:checked")]
-      .reduce((sum, input) => sum + Number(input.dataset.price || 0), basePrice);
+    const total = [...modal.querySelectorAll("[data-extra-list] input:checked")].reduce(
+      (sum, input) => sum + Number(input.dataset.price || 0),
+      basePrice
+    );
     const totalNode = modal.querySelector("[data-total]");
     if (totalNode) totalNode.textContent = formatMoney(total);
   }
@@ -299,7 +310,9 @@
       const free = [...modal.querySelectorAll("[data-free-list] input:checked")].map((input) => input.value);
       const extras = [...modal.querySelectorAll("[data-extra-list] input:checked")];
       const extrasTotal = extras.reduce((sum, input) => sum + Number(input.dataset.price || 0), 0);
-      const extrasText = extras.map((input) => `${input.value} (+ ${formatMoney(Number(input.dataset.price || 0))})`);
+      const extrasText = extras.map(
+        (input) => `${input.value} (+ ${formatMoney(Number(input.dataset.price || 0))})`
+      );
 
       let message = `Olá! Vim pelo site da Max Sorvetes Ibertioga e gostaria de fazer um pedido:\n\n`;
       message += `• ${product}\n`;
@@ -313,7 +326,7 @@
     }
   });
 
-  // ========== FECHAR MODAIS COM CLICK NO OVERLAY ==========
+  // ===== FECHAR MODAIS =====
   document.addEventListener("click", (event) => {
     if (event.target.closest("[data-close-cardapio]")) {
       closeCardapioModal();
@@ -323,7 +336,7 @@
     }
   });
 
-  // ========== TECLAS DE NAVEGAÇÃO ==========
+  // ===== TECLAS =====
   document.addEventListener("keydown", (event) => {
     if (event.key === "Escape") {
       setMenu(false);
@@ -331,61 +344,45 @@
       closeCardapioModal();
       closeGalleryModal();
     }
-    
+
     if (galleryModal?.classList.contains("open")) {
-      if (event.key === "ArrowLeft") {
-        prevImage();
-      } else if (event.key === "ArrowRight") {
-        nextImage();
-      }
+      if (event.key === "ArrowLeft") prevImage();
+      if (event.key === "ArrowRight") nextImage();
     }
   });
 
-  // ========== HEADER SCROLL EFFECT ==========
-  const header = document.querySelector('.site-header');
+  // ===== HEADER SCROLL =====
+  const header = document.querySelector(".site-header");
   if (header) {
-    window.addEventListener('scroll', () => {
-      if (window.scrollY > 50) {
-        header.classList.add('scrolled');
-      } else {
-        header.classList.remove('scrolled');
-      }
+    window.addEventListener("scroll", () => {
+      header.classList.toggle("scrolled", window.scrollY > 50);
     });
   }
 
-  // ========== SCROLL REVEAL LEVE ==========
-  (function() {
-    // Verifica se o navegador suporta IntersectionObserver
-    if (!window.IntersectionObserver) {
-      document.querySelectorAll('.reveal').forEach(el => el.classList.add('active'));
-      return;
-    }
-    
-    // Seleciona os elementos que vão animar
+  // ===== SCROLL REVEAL =====
+  if (window.IntersectionObserver) {
     const elements = document.querySelectorAll(
-      '.category, .product-card, .gallery-item, .steps article, .contact-cards article, .section-heading'
+      ".menu-section, .menu-item, .gallery-item, .step, .contact-card, .section-header"
     );
-    
-    // Adiciona classe reveal
-    elements.forEach(el => el.classList.add('reveal'));
-    
-    // Cria o observer
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('active');
-          observer.unobserve(entry.target);
-        }
-      });
-    }, {
-      threshold: 0.1,
-      rootMargin: '0px 0px -30px 0px'
-    });
-    
-    // Observa os elementos
-    elements.forEach(el => observer.observe(el));
-  })();
+    elements.forEach((el) => el.classList.add("reveal"));
 
-  // ========== INICIALIZAR GALERIA ==========
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("active");
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.1, rootMargin: "0px 0px -30px 0px" }
+    );
+
+    elements.forEach((el) => observer.observe(el));
+  } else {
+    document.querySelectorAll(".reveal").forEach((el) => el.classList.add("active"));
+  }
+
+  // ===== INICIALIZAR GALERIA =====
   initGallery();
 })();

@@ -8,7 +8,7 @@
   <meta name="keywords" content="sorveteria em ibertioga, sorvete ibertioga, açaí ibertioga, picolé ibertioga, max sorvetes, delivery sorvete">
   <meta name="author" content="Max Sorvetes Ibertioga">
   <meta name="robots" content="index, follow">
-  <meta name="theme-color" content="#fff7ed">
+  <meta name="theme-color" content="#f5f3ff">
   <link rel="canonical" href="https://maxsorvetesibertioga.com.br/">
 
   <meta property="og:type" content="website">
@@ -27,13 +27,12 @@
   <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
   <link rel="manifest" href="/site.webmanifest">
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
-  <!-- Preload da imagem principal -->
   <link rel="preload" as="image" href="3d-maxx-(1).webp" fetchpriority="high">
 
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Pacifico&display=swap">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,800;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
   <link rel="stylesheet" href="style.css">
 
@@ -69,552 +68,421 @@
 </head>
 <body>
   <header class="site-header">
-  <div class="container nav">
-    <a class="brand" href="#home" aria-label="Max Sorvetes Ibertioga">
-      <span class="brand-text">
-        <strong>Max Sorvetes</strong>
-        <small>Ibertioga - MG</small>
-      </span>
-    </a>
+    <div class="container nav">
+      <a class="brand" href="#home">
+        <span class="brand-icon">🍦</span>
+        <span class="brand-text">
+          <strong>Max Sorvetes</strong>
+          <small>Ibertioga</small>
+        </span>
+      </a>
 
-    <button class="menu-toggle" type="button" aria-label="Abrir menu" aria-expanded="false">
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z" fill="currentColor"/>
-      </svg>
-    </button>
+      <button class="menu-toggle" type="button" aria-label="Abrir menu">
+        <i class="fa-solid fa-bars"></i>
+      </button>
 
-    <nav class="nav-menu" aria-label="Navegação principal">
-      <a href="#home" class="nav-link active">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M12 3L2 9l10 6 10-6-10-6z" stroke="currentColor" stroke-width="1.8" fill="none"/>
-          <path d="M12 3v18" stroke="currentColor" stroke-width="1.8"/>
-          <path d="M2 15l10 6 10-6" stroke="currentColor" stroke-width="1.8" fill="none"/>
-        </svg>
-        <span>Início</span>
-      </a>
-      <a href="#cardapio" class="nav-link">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M4 6h16v2H4V6zm0 5h16v2H4v-2zm0 5h10v2H4v-2z" fill="currentColor"/>
-          <path d="M18 16l3-3-3-3" stroke="currentColor" stroke-width="1.8" fill="none"/>
-          <path d="M18 19v-3" stroke="currentColor" stroke-width="1.8"/>
-        </svg>
-        <span>Cardápio</span>
-      </a>
-      <a href="#estabelecimento" class="nav-link">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V9z" stroke="currentColor" stroke-width="1.8" fill="none"/>
-          <path d="M9 22V12h6v10" stroke="currentColor" stroke-width="1.8" fill="none"/>
-        </svg>
-        <span>Estabelecimento</span>
-      </a>
-      <a href="#delivery" class="nav-link">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <circle cx="7" cy="19" r="2" stroke="currentColor" stroke-width="1.8" fill="none"/>
-          <circle cx="17" cy="19" r="2" stroke="currentColor" stroke-width="1.8" fill="none"/>
-          <path d="M1 3h3l2 10h13l3-6h-4" stroke="currentColor" stroke-width="1.8" fill="none"/>
-          <path d="M6 7h12" stroke="currentColor" stroke-width="1.8"/>
-        </svg>
-        <span>Delivery</span>
-      </a>
-      <a href="#contato" class="nav-link">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" stroke="currentColor" stroke-width="1.8" fill="none"/>
-          <path d="M22 6L12 13 2 6" stroke="currentColor" stroke-width="1.8" fill="none"/>
-        </svg>
-        <span>Contato</span>
-      </a>
-      <!-- SÓ ISSO 👇 - LINK DO WHATSAPP NO MENU -->
-      <a class="nav-link" href="https://wa.me/553284442475?text=Oi!%20Vim%20pelo%20site%20da%20Max%20Sorvetes%20Ibertioga%20e%20gostaria%20de%20fazer%20um%20pedido" target="_blank" rel="noopener">
+      <nav class="nav-menu">
+        <a href="#home" class="nav-link active">Início</a>
+        <a href="#cardapio" class="nav-link">Cardápio</a>
+        <a href="#estabelecimento" class="nav-link">Galeria</a>
+        <a href="#delivery" class="nav-link">Delivery</a>
+        <a href="#contato" class="nav-link">Contato</a>
+        <a href="https://wa.me/553284442475?text=Oi!%20Vim%20pelo%20site%20da%20Max%20Sorvetes%20Ibertioga%20e%20gostaria%20de%20fazer%20um%20pedido" target="_blank" class="nav-link nav-wpp">
+          <i class="fa-brands fa-whatsapp"></i> WhatsApp
+        </a>
+      </nav>
+
+      <a class="header-cta" href="https://wa.me/553284442475?text=Oi!%20Vim%20pelo%20site%20da%20Max%20Sorvetes%20Ibertioga%20e%20gostaria%20de%20fazer%20um%20pedido" target="_blank">
         <i class="fa-brands fa-whatsapp"></i>
-        <span>WhatsApp</span>
+        <span>Pedir</span>
       </a>
-    </nav>
-
-    <a class="header-cta" href="https://wa.me/553284442475?text=Oi!%20Vim%20pelo%20site%20da%20Max%20Sorvetes%20Ibertioga%20e%20gostaria%20de%20fazer%20um%20pedido" target="_blank" rel="noopener">
-      <i class="fa-brands fa-whatsapp" style="font-size: 18px;"></i>
-      <span>Pedir agora</span>
-    </a>
-  </div>
-</header>
+    </div>
+  </header>
 
   <main>
+    <!-- ===== HERO ===== -->
     <section class="hero" id="home">
-  <div class="container hero-grid">
-    <div class="hero-copy">
-      <p class="eyebrow">
-        <span class="eyebrow-line"></span>
-        Sorveteria local em Ibertioga
-      </p>
-      <h1>O melhor sorvete de Ibertioga MG</h1>
-      <p class="hero-lead">Sorvete, açaí, picolé e chuchup bem servidos, com aquele capricho de cidade pequena e delivery para toda Ibertioga.</p>
-      <div class="hero-actions">
-        <a class="btn btn-primary" href="#cardapio">
-          <i class="fa-solid fa-list"></i>
-          Ver cardápio
+      <div class="hero-bg-texture"></div>
+      <div class="container hero-grid">
+        <div class="hero-media">
+          <div class="hero-image-wrapper">
+            <img src="3d-maxx-(1).webp" alt="Max Sorvetes Ibertioga" class="owner-photo" width="400" height="520" fetchpriority="high">
+          </div>
+        </div>
+        <div class="hero-content">
+          <span class="hero-tag">✦ Sorveteria Artesanal</span>
+          <h1>O melhor sorvete<br><span class="highlight">de Ibertioga</span></h1>
+          <p class="hero-text">Sorvete, açaí, picolé e chuchup bem servidos, com aquele capricho de cidade pequena e delivery para toda Ibertioga.</p>
+          <div class="hero-buttons">
+            <a href="#cardapio" class="btn btn-primary">Ver Cardápio</a>
+            <a href="https://wa.me/553284442475?text=Oi!%20Vim%20pelo%20site%20da%20Max%20Sorvetes%20Ibertioga%20e%20gostaria%20de%20fazer%20um%20pedido" target="_blank" class="btn btn-whatsapp">
+              <i class="fa-brands fa-whatsapp"></i> Pedir agora
+            </a>
+          </div>
+          <div class="hero-info">
+            <span><i class="fa-solid fa-clock"></i> 7h às 23h</span>
+            <span><i class="fa-solid fa-location-dot"></i> R. Rio de Janeiro, 652</span>
+            <span><i class="fa-solid fa-truck"></i> Delivery grátis*</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    
+
+    <!-- ===== CARDÁPIO ===== -->
+    <section class="menu" id="cardapio">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-tag">✦ Cardápio</span>
+         <h2>O que temos <span class="highlight">por aqui</span></h2>
+        </div>
+
+        <a class="menu-preview" href="#" id="openCardapioModal">
+          <img src="img/cardapio-img/cardapio-max.webp" alt="Cardápio completo da Max Sorvetes">
+          <span><i class="fa-solid fa-up-right-and-down-left-from-center"></i> Ver cardápio completo</span>
         </a>
-        <a class="btn btn-whatsapp" href="https://wa.me/553284442475?text=Oi!%20Vim%20pelo%20site%20da%20Max%20Sorvetes%20Ibertioga%20e%20gostaria%20de%20fazer%20um%20pedido" target="_blank" rel="noopener">
-          <i class="fa-brands fa-whatsapp"></i>
-          Pedir pelo WhatsApp
-        </a>
-      </div>
-      <div class="hero-facts" aria-label="Informações rápidas">
-        <span><i class="fa-solid fa-clock"></i> 7h às 23h</span>
-        <span><i class="fa-solid fa-location-dot"></i> R. Rio de Janeiro, 652</span>
-        <span><i class="fa-solid fa-truck-fast"></i> Delivery grátis*</span>
-      </div>
-    </div>
 
-    <div class="hero-media">
-      <div class="hero-badge">
-        <span class="badge-text">Clientes</span>
-        <span class="badge-label">satisfeitos</span>
-      </div>
-      <img
-        src="3d-maxx-(1).webp"
-        alt="Max Sorvetes Ibertioga"
-        class="owner-photo"
-        width="400"
-        height="520"
-        fetchpriority="high"
-        decoding="async">
-      <div class="hero-card">
-        <i class="fa-solid fa-quote-left"></i>
-        <strong>Ô trem bão, sô!</strong>
-        <span>Experimente o melhor sorvete de Ibertioga.</span>
-      </div>
-    </div>
-  </div>
-</section>
+        <!-- Açaí -->
+        <div class="menu-section">
+          <div class="menu-section-header">
+            <i class="fa-solid fa-bowl-food"></i>
+            <div>
+              <h3>Açaí Cremoso</h3>
+              <p>Até 3 acompanhamentos grátis</p>
+            </div>
+          </div>
 
-<section class="trust-strip" aria-label="Destaques">
-  <div class="container trust-grid">
-    <article>
-      <div class="trust-icon"><i class="fa-solid fa-star"></i></div>
-      <div>
-        <strong>Queridinha da cidade</strong>
-        <span>Sorvetes e açaí bem servidos</span>
-      </div>
-    </article>
-    <article>
-      <div class="trust-icon"><i class="fa-solid fa-motorcycle"></i></div>
-      <div>
-        <strong>Delivery rápido</strong>
-        <span>Em toda Ibertioga</span>
-      </div>
-    </article>
-    <article>
-      <div class="trust-icon"><i class="fa-solid fa-ice-cream"></i></div>
-      <div>
-        <strong>Feito com capricho</strong>
-        <span>Opções para toda família</span>
-      </div>
-    </article>
-    <article>
-      <div class="trust-icon"><i class="fa-solid fa-calendar-check"></i></div>
-      <div>
-        <strong>Todos os dias</strong>
-        <span>Das 07h às 23h</span>
-      </div>
-    </article>
-  </div>
-</section>
+          <div class="menu-items">
+            <div class="menu-item">
+              <img src="img/cardapio-img/acai-300.webp" alt="Açaí 300ml">
+              <div class="menu-item-info">
+                <div>
+                  <span class="item-tag">Popular</span>
+                  <h4>Açaí 300ml</h4>
+                  <p>Porção individual perfeita</p>
+                </div>
+                <div class="item-actions">
+                  <strong>R$ 15,00</strong>
+                  <button data-item="Açaí 300ml - R$15,00" data-acai="1">Pedir</button>
+                </div>
+              </div>
+            </div>
 
-   <section class="section menu-section" id="cardapio">
-  <div class="container">
-    <div class="section-heading">
-      <p class="eyebrow">
-        <span class="eyebrow-line"></span>
-        Escolha seu favorito
-      </p>
-      <h2>Cardápio</h2>
-      <p>Produtos diretos ao ponto, preços visíveis e pedido rápido pelo WhatsApp.</p>
-    </div>
+            <div class="menu-item">
+              <img src="img/cardapio-img/acai-400.webp" alt="Açaí 400ml">
+              <div class="menu-item-info">
+                <div>
+                  <span class="item-tag">Mais pedido</span>
+                  <h4>Açaí 400ml</h4>
+                  <p>Na medida para aquela vontade</p>
+                </div>
+                <div class="item-actions">
+                  <strong>R$ 18,00</strong>
+                  <button data-item="Açaí 400ml - R$18,00" data-acai="1">Pedir</button>
+                </div>
+              </div>
+            </div>
 
-    <a class="menu-preview" href="#" id="openCardapioModal">
-      <img src="img/cardapio-img/cardapio-max.webp" alt="Cardápio completo da Max Sorvetes" loading="lazy">
-      <span><i class="fa-solid fa-up-right-and-down-left-from-center"></i> Ver cardápio completo</span>
-    </a>
+            <div class="menu-item">
+              <img src="img/cardapio-img/acai-500.webp" alt="Açaí 500ml">
+              <div class="menu-item-info">
+                <div>
+                  <span class="item-tag">Família</span>
+                  <h4>Açaí 500ml</h4>
+                  <p>Mais generoso para compartilhar</p>
+                </div>
+                <div class="item-actions">
+                  <strong>R$ 21,00</strong>
+                  <button data-item="Açaí 500ml - R$21,00" data-acai="1">Pedir</button>
+                </div>
+              </div>
+            </div>
+          </div>
 
-    <div class="category">
-      <div class="category-heading">
-        <span class="category-icon"><i class="fa-solid fa-bowl-food"></i></span>
-        <div>
-          <h3>Açaí cremoso</h3>
-          <p>Até 3 acompanhamentos grátis.</p>
-        </div>
-      </div>
-      <div class="product-grid">
-        <article class="product-card">
-          <img src="img/cardapio-img/acai-300.webp" alt="Açaí 300ml" loading="lazy">
-          <div class="product-body">
-            <span class="tag">Popular</span>
-            <h4>Açaí 300ml</h4>
-            <p>Porção individual perfeita para refrescar o dia.</p>
-            <div class="product-footer"><strong>R$ 15,00</strong><button data-item="Açaí 300ml - R$15,00" data-acai="1">Pedir</button></div>
+          <div class="menu-extras">
+            <div>
+              <h4>🧊 Acompanhamentos grátis</h4>
+              <p>Leite em pó, leite condensado, calda de chocolate ou morango</p>
+            </div>
+            <div>
+              <h4>✨ Extras</h4>
+              <p>Paçoca, granulado, granola, fini, morango, banana, kiwi e Nutella</p>
+            </div>
           </div>
-        </article>
-        <article class="product-card">
-          <img src="img/cardapio-img/acai-400.webp" alt="Açaí 400ml" loading="lazy">
-          <div class="product-body">
-            <span class="tag">Mais pedido</span>
-            <h4>Açaí 400ml</h4>
-            <p>Na medida para aquela vontade especial.</p>
-            <div class="product-footer"><strong>R$ 18,00</strong><button data-item="Açaí 400ml - R$18,00" data-acai="1">Pedir</button></div>
-          </div>
-        </article>
-        <article class="product-card">
-          <img src="img/cardapio-img/acai-500.webp" alt="Açaí 500ml" loading="lazy">
-          <div class="product-body">
-            <span class="tag">Família</span>
-            <h4>Açaí 500ml</h4>
-            <p>Mais generoso para compartilhar.</p>
-            <div class="product-footer"><strong>R$ 21,00</strong><button data-item="Açaí 500ml - R$21,00" data-acai="1">Pedir</button></div>
-          </div>
-        </article>
-      </div>
-      <div class="extras-box">
-        <div>
-          <h4>Acompanhamentos grátis</h4>
-          <p>Leite em pó, leite condensado, calda de chocolate ou morango.</p>
         </div>
-        <div>
-          <h4>Extras</h4>
-          <p>Paçoca, granulado, granola, fini, morango, banana, kiwi e Nutella.</p>
-        </div>
-      </div>
-    </div>
 
-    <div class="category">
-      <div class="category-heading">
-        <span class="category-icon"><i class="fa-solid fa-ice-cream"></i></span>
-        <div>
-          <h3>Sorvetes artesanais</h3>
-          <p>Sabores especiais feitos com carinho.</p>
-        </div>
-      </div>
-      <div class="product-grid">
-        <article class="product-card">
-          <img src="img/cardapio-img/sorvete-copinho.webp" alt="Sorvete copinho" loading="lazy">
-          <div class="product-body">
-            <span class="tag">2 sabores</span>
-            <h4>Copinho</h4>
-            <p>Escolha dois sabores diferentes.</p>
-            <div class="product-footer"><strong>R$ 6,00</strong><button data-item="Sorvete Copinho - R$6,00">Pedir</button></div>
+        <!-- Sorvetes -->
+        <div class="menu-section">
+          <div class="menu-section-header">
+            <i class="fa-solid fa-ice-cream"></i>
+            <div>
+              <h3>Sorvetes Artesanais</h3>
+              <p>Sabores especiais feitos com carinho</p>
+            </div>
           </div>
-        </article>
-        <article class="product-card">
-          <img src="img/cardapio-img/sorvete-pote.webp" alt="Sorvete pote" loading="lazy">
-          <div class="product-body">
-            <span class="tag">500ml</span>
-            <h4>Pote</h4>
-            <p>Pote com até quatro sabores.</p>
-            <div class="product-footer"><strong>R$ 8,00</strong><button data-item="Sorvete Pote - R$8,00">Pedir</button></div>
-          </div>
-        </article>
-        <article class="product-card">
-          <img src="img/cardapio-img/sorvete-3bolas.webp" alt="Sorvete três bolas" loading="lazy">
-          <div class="product-body">
-            <span class="tag">Casquinha</span>
-            <h4>3 bolas</h4>
-            <p>Três bolas deliciosas na casquinha.</p>
-            <div class="product-footer"><strong>R$ 12,00</strong><button data-item="Sorvete 3 Bolas - R$12,00">Pedir</button></div>
-          </div>
-        </article>
-      </div>
-    </div>
 
-    <div class="compact-menu">
-      <div class="category">
-        <div class="category-heading">
-          <span class="category-icon"><i class="fa-solid fa-cookie-bite"></i></span>
-          <div><h3>Picolés especiais</h3><p>Refrescantes e saborosos.</p></div>
-        </div>
-        <div class="line-items">
-          <div><img src="img/cardapio-img/picole-frutas.webp" alt="Picolé de frutas" loading="lazy"><span><strong>Picolé de frutas</strong><small>Morango, limão, uva e coco</small></span><b>R$ 2,50</b></div>
-          <div><img src="img/cardapio-img/picole-leite.webp" alt="Picolé ao leite" loading="lazy"><span><strong>Picolé ao leite</strong><small>Chocolate, creme e flocos</small></span><b>R$ 5,50</b></div>
-          <div><img src="img/cardapio-img/picole-trufado.webp" alt="Picolé trufado" loading="lazy"><span><strong>Picolé trufado</strong><small>Com cobertura premium</small></span><b>R$ 7,00</b></div>
-        </div>
-        <button class="wide-order" data-item="Picolé">Pedir picolé</button>
-      </div>
+          <div class="menu-items">
+            <div class="menu-item">
+              <img src="img/cardapio-img/sorvete-copinho.webp" alt="Sorvete copinho">
+              <div class="menu-item-info">
+                <div>
+                  <span class="item-tag">2 sabores</span>
+                  <h4>Copinho</h4>
+                  <p>Escolha dois sabores diferentes</p>
+                </div>
+                <div class="item-actions">
+                  <strong>R$ 6,00</strong>
+                  <button data-item="Sorvete Copinho - R$6,00">Pedir</button>
+                </div>
+              </div>
+            </div>
 
-      <div class="category">
-        <div class="category-heading">
-          <span class="category-icon"><i class="fa-solid fa-candy-cane"></i></span>
-          <div><h3>Chuchup</h3><p>Para todas as idades.</p></div>
-        </div>
-        <div class="line-items">
-          <div><img src="img/cardapio-img/chuchup-pequeno.webp" alt="Chuchup pequeno" loading="lazy"><span><strong>Chuchup pequeno</strong><small>Sabores variados</small></span><b>R$ 0,50</b></div>
-          <div><img src="img/cardapio-img/chuchup-grande.webp" alt="Chuchup grande" loading="lazy"><span><strong>Chuchup grande</strong><small>Com mais sabor</small></span><b>R$ 1,50</b></div>
-          <div><img src="img/cardapio-img/chuchup-leite.webp" alt="Chuchup ao leite" loading="lazy"><span><strong>Chuchup ao leite</strong><small>Chocolate especial</small></span><b>R$ 3,50</b></div>
-        </div>
-        <button class="wide-order" data-item="Chuchup">Pedir chuchup</button>
-      </div>
-    </div>
-  </div>
-</section>
+            <div class="menu-item">
+              <img src="img/cardapio-img/sorvete-pote.webp" alt="Sorvete pote">
+              <div class="menu-item-info">
+                <div>
+                  <span class="item-tag">500ml</span>
+                  <h4>Pote</h4>
+                  <p>Pote com até quatro sabores</p>
+                </div>
+                <div class="item-actions">
+                  <strong>R$ 8,00</strong>
+                  <button data-item="Sorvete Pote - R$8,00">Pedir</button>
+                </div>
+              </div>
+            </div>
 
-   <section class="section" id="estabelecimento">
-  <div class="container">
-    <div class="section-heading">
-      <p class="eyebrow">
-        <span class="eyebrow-line"></span>
-        Nosso cantinho
-      </p>
-      <h2>Estabelecimento</h2>
-      <p>Conheça a Max Sorvetes em Ibertioga, um ambiente pensado para você.</p>
-    </div>
-    <div class="gallery-grid">
-      <div class="gallery-item" data-image="img/galeria1-max.webp" data-title="Freezer de armazenamento">
-        <img src="img/galeria1-max.webp" alt="Freezer de armazenamento" loading="lazy">
-        <div class="gallery-overlay">
-          <i class="fa-solid fa-magnifying-glass-plus"></i>
+            <div class="menu-item">
+              <img src="img/cardapio-img/sorvete-3bolas.webp" alt="Sorvete três bolas">
+              <div class="menu-item-info">
+                <div>
+                  <span class="item-tag">Casquinha</span>
+                  <h4>3 bolas</h4>
+                  <p>Três bolas deliciosas na casquinha</p>
+                </div>
+                <div class="item-actions">
+                  <strong>R$ 12,00</strong>
+                  <button data-item="Sorvete 3 Bolas - R$12,00">Pedir</button>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
-        <span><i class="fa-solid fa-snowflake"></i> Freezer de armazenamento</span>
-      </div>
-      <div class="gallery-item" data-image="img/galeria2-max.webp" data-title="Ambiente interno">
-        <img src="img/galeria2-max.webp" alt="Ambiente interno" loading="lazy">
-        <div class="gallery-overlay">
-          <i class="fa-solid fa-magnifying-glass-plus"></i>
-        </div>
-        <span><i class="fa-solid fa-store"></i> Ambiente interno</span>
-      </div>
-      <div class="gallery-item" data-image="img/galeria3-max.webp" data-title="Balcão de sorvetes">
-        <img src="img/galeria3-max.webp" alt="Balcão de sorvetes" loading="lazy">
-        <div class="gallery-overlay">
-          <i class="fa-solid fa-magnifying-glass-plus"></i>
-        </div>
-        <span><i class="fa-solid fa-ice-cream"></i> Balcão de sorvetes</span>
-      </div>
-      <div class="gallery-item" data-image="img/galeria4-max.webp" data-title="Fachada da sorveteria">
-        <img src="img/galeria4-max.webp" alt="Fachada da sorveteria" loading="lazy">
-        <div class="gallery-overlay">
-          <i class="fa-solid fa-magnifying-glass-plus"></i>
-        </div>
-        <span><i class="fa-solid fa-building"></i> Fachada da sorveteria</span>
-      </div>
-    </div>
-  </div>
-</section>
 
-<!-- Modal da Galeria -->
-<div id="gallery-modal" class="gallery-modal" aria-hidden="true">
-  <div class="modal-overlay" data-close-gallery></div>
-  <div class="modal-content gallery-modal-content">
-    <button class="modal-close gallery-close" type="button" data-close-gallery aria-label="Fechar">
-      <i class="fa-solid fa-xmark"></i>
-    </button>
-    <button class="gallery-nav gallery-prev" id="galleryPrev">
-      <i class="fa-solid fa-chevron-left"></i>
-    </button>
-    <div class="gallery-image-container">
-      <img src="" alt="" id="galleryImage">
-      <div class="gallery-caption" id="galleryCaption"></div>
-    </div>
-    <button class="gallery-nav gallery-next" id="galleryNext">
-      <i class="fa-solid fa-chevron-right"></i>
-    </button>
-  </div>
-</div>
+        <!-- Picolés + Chuchup -->
+        <div class="menu-compact">
+          <div class="menu-section">
+            <div class="menu-section-header">
+              <i class="fa-solid fa-cookie-bite"></i>
+              <div>
+                <h3>Picolés</h3>
+                <p>Refrescantes e saborosos</p>
+              </div>
+            </div>
+            <div class="menu-compact-items">
+              <div><img src="img/cardapio-img/picole-frutas.webp" alt="Picolé frutas"><span><strong>Picolé de frutas</strong><small>Morango, limão, uva e coco</small></span><b>R$ 2,50</b></div>
+              <div><img src="img/cardapio-img/picole-leite.webp" alt="Picolé leite"><span><strong>Picolé ao leite</strong><small>Chocolate, creme e flocos</small></span><b>R$ 5,50</b></div>
+              <div><img src="img/cardapio-img/picole-trufado.webp" alt="Picolé trufado"><span><strong>Picolé trufado</strong><small>Com cobertura premium</small></span><b>R$ 7,00</b></div>
+            </div>
+            <button class="btn-wide" data-item="Picolé">Pedir picolé</button>
+          </div>
 
-    <section class="section delivery-section" id="delivery">
-  <div class="container">
-    <div class="delivery-grid">
-      <div class="delivery-content">
-        <p class="eyebrow">
-          <span class="eyebrow-line"></span>
-          Receba em casa
-        </p>
-        <h2>Delivery <span class="highlight">em toda Ibertioga</span></h2>
-        <p class="delivery-text">Escolha no cardápio, mande pelo WhatsApp e a gente confirma tudo rapidinho antes de preparar. Atendimento rápido e sorvete sempre geladinho!</p>
-        <div class="delivery-features">
-          <div class="delivery-feature">
-            <i class="fa-solid fa-clock"></i>
-            <span>Entrega rápida</span>
-          </div>
-          <div class="delivery-feature">
-            <i class="fa-solid fa-temperature-low"></i>
-            <span>Produto bem gelado</span>
-          </div>
-          <div class="delivery-feature">
-            <i class="fa-solid fa-hand-holding-heart"></i>
-            <span>Atendimento caprichado</span>
+          <div class="menu-section">
+            <div class="menu-section-header">
+              <i class="fa-solid fa-candy-cane"></i>
+              <div>
+                <h3>Chuchup</h3>
+                <p>Para todas as idades</p>
+              </div>
+            </div>
+            <div class="menu-compact-items">
+              <div><img src="img/cardapio-img/chuchup-pequeno.webp" alt="Chuchup pequeno"><span><strong>Chuchup pequeno</strong><small>Sabores variados</small></span><b>R$ 0,50</b></div>
+              <div><img src="img/cardapio-img/chuchup-grande.webp" alt="Chuchup grande"><span><strong>Chuchup grande</strong><small>Com mais sabor</small></span><b>R$ 1,50</b></div>
+              <div><img src="img/cardapio-img/chuchup-leite.webp" alt="Chuchup leite"><span><strong>Chuchup ao leite</strong><small>Chocolate especial</small></span><b>R$ 3,50</b></div>
+            </div>
+            <button class="btn-wide" data-item="Chuchup">Pedir chuchup</button>
           </div>
         </div>
-        <a class="btn-delivery" href="https://wa.me/553284442475?text=Oi!%20Vim%20pelo%20site%20da%20Max%20Sorvetes%20Ibertioga%20e%20gostaria%20de%20fazer%20um%20pedido%20com%20entrega" target="_blank" rel="noopener">
-          <i class="fa-brands fa-whatsapp"></i>
-          Pedir delivery agora
-          <i class="fa-solid fa-arrow-right"></i>
-        </a>
       </div>
-      <div class="steps">
-        <article>
-          <div class="step-number">1</div>
-          <div class="step-content">
-            <strong>Faça seu pedido</strong>
-            <small>Escolha os itens e envie pelo WhatsApp.</small>
+    </section>
+
+    <!-- ===== GALERIA ===== -->
+    <section class="gallery" id="estabelecimento">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-tag">✦ Galeria</span>
+          <h2>Nosso <span class="highlight">espaço</span></h2>
+        </div>
+        <div class="gallery-grid">
+          <div class="gallery-item" data-image="img/galeria1-max.webp" data-title="Freezer de armazenamento">
+            <img src="img/galeria1-max.webp" alt="Freezer" loading="lazy">
+            <div class="gallery-overlay"><i class="fa-solid fa-plus"></i></div>
           </div>
-        </article>
-        <article>
-          <div class="step-number">2</div>
-          <div class="step-content">
-            <strong>Confirmamos</strong>
-            <small>Verificamos disponibilidade e endereço.</small>
+          <div class="gallery-item" data-image="img/galeria2-max.webp" data-title="Ambiente interno">
+            <img src="img/galeria2-max.webp" alt="Ambiente" loading="lazy">
+            <div class="gallery-overlay"><i class="fa-solid fa-plus"></i></div>
           </div>
-        </article>
-        <article>
-          <div class="step-number">3</div>
-          <div class="step-content">
-            <strong>Entregamos</strong>
-            <small>Seu pedido chega geladinho na sua porta.</small>
+          <div class="gallery-item" data-image="img/galeria3-max.webp" data-title="Balcão de sorvetes">
+            <img src="img/galeria3-max.webp" alt="Balcão" loading="lazy">
+            <div class="gallery-overlay"><i class="fa-solid fa-plus"></i></div>
           </div>
-        </article>
-        <div class="delivery-info">
-          <i class="fa-solid fa-truck-fast"></i>
-          <span>📍 Entregamos em todo Ibertioga</span>
+          <div class="gallery-item" data-image="img/galeria4-max.webp" data-title="Fachada da sorveteria">
+            <img src="img/galeria4-max.webp" alt="Fachada" loading="lazy">
+            <div class="gallery-overlay"><i class="fa-solid fa-plus"></i></div>
+          </div>
         </div>
       </div>
-    </div>
-  </div>
-</section>
+    </section>
 
-<section class="section contact-section" id="contato">
-  <div class="container">
-    <div class="section-heading">
-      <p class="eyebrow">
-        <span class="eyebrow-line"></span>
-        Fale com a gente
-      </p>
-      <h2>Contato e <span class="highlight">localização</span></h2>
-      <p>Estamos prontos para atender você da melhor forma possível.</p>
-    </div>
-    <div class="contact-grid">
-      <div class="contact-cards">
-        <article>
-          <div class="contact-icon"><i class="fa-brands fa-whatsapp"></i></div>
-          <div>
-            <strong>WhatsApp</strong>
-            <a href="https://wa.me/553284442475" target="_blank" rel="noopener">(32) 98444-2475</a>
-            <span>Clique e fale conosco</span>
+    <!-- ===== DELIVERY ===== -->
+    <section class="delivery" id="delivery">
+      <div class="container delivery-grid">
+        <div class="delivery-content">
+          <span class="section-tag">✦ Delivery</span>
+          <h2>Receba em <span class="highlight">casa</span></h2>
+          <p>Escolha no cardápio, mande pelo WhatsApp e a gente confirma tudo rapidinho antes de preparar.</p>
+          <div class="delivery-features">
+            <span><i class="fa-solid fa-clock"></i> Entrega rápida</span>
+            <span><i class="fa-solid fa-snowflake"></i> Bem gelado</span>
+            <span><i class="fa-solid fa-heart"></i> Caprichado</span>
           </div>
-        </article>
-        <article>
-          <div class="contact-icon"><i class="fa-solid fa-location-dot"></i></div>
-          <div>
-            <strong>Endereço</strong>
-            <span>R. Rio de Janeiro, 652</span>
-            <span>Ibertioga - MG, 36225-000</span>
+          <a href="https://wa.me/553284442475?text=Oi!%20Vim%20pelo%20site%20da%20Max%20Sorvetes%20Ibertioga%20e%20gostaria%20de%20fazer%20um%20pedido%20com%20entrega" target="_blank" class="btn-delivery">
+            <i class="fa-brands fa-whatsapp"></i> Pedir delivery
+          </a>
+        </div>
+        <div class="delivery-steps">
+          <div class="step">
+            <span class="step-number">1</span>
+            <div><strong>Faça seu pedido</strong><small>Escolha os itens e envie pelo WhatsApp</small></div>
           </div>
-        </article>
-        <article>
-          <div class="contact-icon"><i class="fa-solid fa-clock"></i></div>
-          <div>
-            <strong>Horário de funcionamento</strong>
-            <span>Todos os dias</span>
-            <span>07h às 23h</span>
+          <div class="step">
+            <span class="step-number">2</span>
+            <div><strong>Confirmamos</strong><small>Verificamos disponibilidade e endereço</small></div>
           </div>
-        </article>
+          <div class="step">
+            <span class="step-number">3</span>
+            <div><strong>Entregamos</strong><small>Seu pedido chega geladinho na sua porta</small></div>
+          </div>
+          <div class="delivery-location">
+            <i class="fa-solid fa-location-dot"></i> Entregamos em todo Ibertioga
+          </div>
+        </div>
       </div>
-      <div class="map-card">
-        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3720.983224845625!2d-43.96679252554063!3d-21.4370924018229!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xa1e3005a1fdcb1%3A0xe8e876f701ab11b7!2sMax%20Sorvetes%20Ibertioga!5e0!3m2!1spt-BR!2sbr!4v1743457731693!5m2!1spt-BR!2sbr" title="Localização da Max Sorvetes Ibertioga" loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe>
-        <div class="map-overlay">
-          <a href="https://www.google.com/maps/dir/?api=1&destination=Max+Sorvetes+Ibertioga" target="_blank" class="map-button">
+    </section>
+
+    <!-- ===== CONTATO ===== -->
+    <section class="contact" id="contato">
+      <div class="container contact-grid">
+        <div class="contact-info">
+          <span class="section-tag">✦ Contato</span>
+          <h2>Fale com <span class="highlight">a gente</span></h2>
+
+          <div class="contact-cards">
+            <div class="contact-card">
+              <i class="fa-brands fa-whatsapp"></i>
+              <div>
+                <strong>WhatsApp</strong>
+                <a href="https://wa.me/553284442475" target="_blank">(32) 98444-2475</a>
+                <span>Clique e fale conosco</span>
+              </div>
+            </div>
+            <div class="contact-card">
+              <i class="fa-solid fa-location-dot"></i>
+              <div>
+                <strong>Endereço</strong>
+                <span>R. Rio de Janeiro, 652</span>
+                <span>Ibertioga - MG, 36225-000</span>
+              </div>
+            </div>
+            <div class="contact-card">
+              <i class="fa-solid fa-clock"></i>
+              <div>
+                <strong>Horário</strong>
+                <span>Todos os dias</span>
+                <span>07h às 23h</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="contact-map">
+          <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3720.983224845625!2d-43.96679252554063!3d-21.4370924018229!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xa1e3005a1fdcb1%3A0xe8e876f701ab11b7!2sMax%20Sorvetes%20Ibertioga!5e0!3m2!1spt-BR!2sbr!4v1743457731693!5m2!1spt-BR!2sbr" title="Localização" loading="lazy" allowfullscreen></iframe>
+          <a href="https://www.google.com/maps/dir/?api=1&destination=Max+Sorvetes+Ibertioga" target="_blank" class="map-btn">
             <i class="fa-solid fa-directions"></i> Como chegar
           </a>
         </div>
       </div>
-    </div>
-  </div>
-</section>
+    </section>
   </main>
 
-<footer class="footer">
-  <div class="container">
-    <div class="footer-grid">
-      <div class="footer-brand">
-        <div class="footer-logo">
-          <div class="footer-logo-icon">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M12 2C8.13 2 5 5.13 5 9c0 2.38 1.19 4.47 3 5.74V17c0 .55.45 1 1 1h6c.55 0 1-.45 1-1v-2.26c1.81-1.27 3-3.36 3-5.74 0-3.87-3.13-7-7-7z" fill="currentColor"/>
-              <path d="M9 21c0 .55.45 1 1 1h4c.55 0 1-.45 1-1v-1H9v1z" fill="currentColor"/>
-            </svg>
+  <!-- ===== FOOTER ===== -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <span class="footer-logo">🍦 Max Sorvetes</span>
+          <p>Sorvetes, açaí e picolés com delivery rápido para toda Ibertioga. Qualidade e sabor que conquistam.</p>
+          <div class="footer-social">
+            <a href="https://wa.me/553284442475" target="_blank"><i class="fa-brands fa-whatsapp"></i></a>
           </div>
-          <strong>Max Sorvetes</strong>
         </div>
-        <p>Sorvetes, açaí e picolés com delivery rápido para toda Ibertioga. Qualidade e sabor que conquistam.</p>
-        <div class="footer-social">
-          <a href="https://wa.me/553284442475" target="_blank" rel="noopener" aria-label="WhatsApp">
-            <i class="fa-brands fa-whatsapp"></i>
-          </a>
+        <div class="footer-links">
+          <h4>Navegação</h4>
+          <a href="#home">Início</a>
+          <a href="#cardapio">Cardápio</a>
+          <a href="#estabelecimento">Galeria</a>
+          <a href="#delivery">Delivery</a>
+          <a href="#contato">Contato</a>
+        </div>
+        <div class="footer-info">
+          <h4>Informações</h4>
+          <span><i class="fa-solid fa-location-dot"></i> R. Rio de Janeiro, 652</span>
+          <span><i class="fa-solid fa-phone"></i> (32) 98444-2475</span>
+          <span><i class="fa-solid fa-clock"></i> Seg a Dom - 07h às 23h</span>
         </div>
       </div>
-      
-      <div class="footer-links">
-        <h4>Navegação</h4>
-        <nav>
-          <a href="#home"><i class="fa-solid fa-chevron-right"></i> Início</a>
-          <a href="#cardapio"><i class="fa-solid fa-chevron-right"></i> Cardápio</a>
-          <a href="#estabelecimento"><i class="fa-solid fa-chevron-right"></i> Estabelecimento</a>
-          <a href="#delivery"><i class="fa-solid fa-chevron-right"></i> Delivery</a>
-          <a href="#contato"><i class="fa-solid fa-chevron-right"></i> Contato</a>
-        </nav>
-      </div>
-      
-      <div class="footer-info">
-        <h4>Informações</h4>
-        <div class="footer-contact-item">
-          <i class="fa-solid fa-location-dot"></i>
-          <span>R. Rio de Janeiro, 652<br>Ibertioga - MG</span>
-        </div>
-        <div class="footer-contact-item">
-          <i class="fa-solid fa-phone"></i>
-          <a href="https://wa.me/553284442475">(32) 98444-2475</a>
-        </div>
-        <div class="footer-contact-item">
-          <i class="fa-solid fa-clock"></i>
-          <span>Seg à Dom - 07h às 23h</span>
-        </div>
+      <div class="footer-bottom">
+        <span>&copy; 2026 Max Sorvetes Ibertioga</span>
+        <span>Site por <a href="https://www.pablogdev.com.br/" target="_blank">PabloG.Dev</a></span>
       </div>
     </div>
-    
-    <div class="copyright">
-      <p>&copy; 2026 Max Sorvetes Ibertioga - Todos os direitos reservados.</p>
-      <span class="developer-credit">
-        Site desenvolvido por
-        <a href="https://www.pablogdev.com.br/" target="_blank" rel="noopener noreferrer">
-          PabloG.Dev
-        </a>
-      </span>
+  </footer>
+
+  <!-- ===== MODAIS ===== -->
+  <div id="cardapio-modal" class="modal-cardapio" aria-hidden="true">
+    <div class="modal-overlay" data-close-cardapio></div>
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3>🍽️ Cardápio Max Sorvetes</h3>
+        <button class="modal-close" data-close-cardapio><i class="fa-solid fa-xmark"></i></button>
+      </div>
+      <div class="modal-image">
+        <img src="img/cardapio-img/cardapio-max.webp" alt="Cardápio completo">
+      </div>
     </div>
   </div>
-</footer>
 
-  <!-- Modal do Cardápio -->
-<div id="cardapio-modal" class="cardapio-modal" aria-hidden="true">
-  <div class="modal-overlay" data-close-cardapio></div>
-  <div class="modal-content cardapio-modal-content">
-    <div class="modal-header">
-      <h3>🍽️ Cardápio Max Sorvetes</h3>
-      <button class="modal-close" type="button" data-close-cardapio aria-label="Fechar">
-        <i class="fa-solid fa-xmark"></i>
-      </button>
-    </div>
-    <div class="cardapio-image-container">
-      <img src="img/cardapio-img/cardapio-max.webp" alt="Cardápio completo da Max Sorvetes" id="cardapio-img">
+  <div id="gallery-modal" class="modal-gallery" aria-hidden="true">
+    <div class="modal-overlay" data-close-gallery></div>
+    <div class="modal-content gallery-modal-content">
+      <button class="modal-close gallery-close" data-close-gallery><i class="fa-solid fa-xmark"></i></button>
+      <button class="gallery-nav gallery-prev" id="galleryPrev"><i class="fa-solid fa-chevron-left"></i></button>
+      <div class="gallery-image">
+        <img src="" alt="" id="galleryImage">
+        <div class="gallery-caption" id="galleryCaption"></div>
+      </div>
+      <button class="gallery-nav gallery-next" id="galleryNext"><i class="fa-solid fa-chevron-right"></i></button>
     </div>
   </div>
-</div>
 
-  <div id="acai-modal" class="acai-modal" aria-hidden="true">
+  <div id="acai-modal" class="modal-acai" aria-hidden="true">
     <div class="modal-overlay" data-close-modal></div>
-    <div class="modal-content" role="dialog" aria-modal="true" aria-label="Montar pedido de açaí"></div>
+    <div class="modal-content" role="dialog"></div>
   </div>
 
-  <!-- ===== BOTÃO FLUTUANTE WHATSAPP ===== -->
-  <a href="https://wa.me/553284442475?text=Oi!%20Vim%20pelo%20site%20da%20Max%20Sorvetes%20Ibertioga%20e%20gostaria%20de%20fazer%20um%20pedido" 
-     class="whatsapp-float" 
-     target="_blank" 
-     rel="noopener"
-     aria-label="Fale conosco pelo WhatsApp">
+  <!-- ===== WHATSAPP FLOAT ===== -->
+  <a href="https://wa.me/553284442475?text=Oi!%20Vim%20pelo%20site%20da%20Max%20Sorvetes%20Ibertioga%20e%20gostaria%20de%20fazer%20um%20pedido" class="wpp-float" target="_blank">
     <i class="fa-brands fa-whatsapp"></i>
   </a>
 
