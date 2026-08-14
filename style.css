@@ -1429,7 +1429,7 @@ button { font: inherit; cursor: pointer; border: none; background: none; }
 .modal-gallery {
   position: fixed;
   inset: 0;
-  z-index: 3000;
+  z-index: 9999;
   display: none;
   align-items: center;
   justify-content: center;
@@ -1995,13 +1995,13 @@ button { font: inherit; cursor: pointer; border: none; background: none; }
   .footer-bottom { font-size: 0.65rem; }
 }
 
-/* ===== MODAIS ===== */
+/* ===== MODAIS - TODOS COM Z-INDEX ALTO ===== */
 .modal-cardapio,
 .modal-gallery,
 .modal-acai {
   position: fixed;
   inset: 0;
-  z-index: 3000;
+  z-index: 9999;
   display: none;
   align-items: center;
   justify-content: center;
@@ -2200,7 +2200,7 @@ button { font: inherit; cursor: pointer; border: none; background: none; }
   position: fixed;
   bottom: 28px;
   right: 28px;
-  z-index: 9999;
+  z-index: 1000;
   width: 60px;
   height: 60px;
   border-radius: 50%;
