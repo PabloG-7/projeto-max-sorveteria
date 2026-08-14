@@ -1425,15 +1425,225 @@ button { font: inherit; cursor: pointer; border: none; background: none; }
 
 .gallery-item:hover .gallery-overlay i { transform: scale(1); }
 
+/* ===== GALERIA MODAL - RESPONSIVO ===== */
+.modal-gallery {
+  position: fixed;
+  inset: 0;
+  z-index: 3000;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  background: rgba(0, 0, 0, 0.85);
+}
+
+.modal-gallery.open {
+  display: flex;
+}
+
+.modal-gallery .modal-overlay {
+  position: absolute;
+  inset: 0;
+  background: transparent;
+  cursor: pointer;
+}
+
+.modal-gallery .gallery-modal-content {
+  position: relative;
+  z-index: 1;
+  background: transparent;
+  width: 95vw;
+  max-width: 1200px;
+  height: 90vh;
+  max-height: 800px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+}
+
+/* Botão X (Fechar) */
+.modal-gallery .gallery-close {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  z-index: 10;
+  width: 48px;
+  height: 48px;
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(8px);
+  color: #fff;
+  border-radius: 50%;
+  font-size: 1.5rem;
+  display: grid;
+  place-items: center;
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.modal-gallery .gallery-close:hover {
+  background: rgba(255, 255, 255, 0.2);
+  transform: rotate(90deg);
+  border-color: rgba(255, 255, 255, 0.5);
+}
+
+/* Container da imagem */
+.modal-gallery .gallery-image {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal-gallery .gallery-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  border-radius: 12px;
+  background: rgba(0, 0, 0, 0.3);
+}
+
+/* Legenda */
+.modal-gallery .gallery-caption {
+  position: absolute;
+  bottom: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(8px);
+  color: #fff;
+  padding: 8px 24px;
+  border-radius: 30px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  white-space: nowrap;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Setas de navegação */
+.modal-gallery .gallery-nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 5;
+  width: 52px;
+  height: 52px;
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(8px);
+  color: #fff;
+  border-radius: 50%;
+  font-size: 1.2rem;
+  display: grid;
+  place-items: center;
+  border: 2px solid rgba(255, 255, 255, 0.15);
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.modal-gallery .gallery-nav:hover {
+  background: rgba(255, 255, 255, 0.2);
+  transform: translateY(-50%) scale(1.05);
+}
+
+.modal-gallery .gallery-prev {
+  left: 20px;
+}
+
+.modal-gallery .gallery-next {
+  right: 20px;
+}
+
+/* ===== GALERIA RESPONSIVO ===== */
 @media (max-width: 980px) {
   .gallery-grid { grid-template-columns: repeat(2, 1fr); gap: 16px; }
   .gallery { padding: 60px 0; }
+  
+  .modal-gallery .gallery-modal-content {
+    height: 85vh;
+    max-height: none;
+  }
+}
+
+@media (max-width: 768px) {
+  .modal-gallery {
+    padding: 10px;
+  }
+  
+  .modal-gallery .gallery-modal-content {
+    width: 98vw;
+    height: 92vh;
+    max-height: none;
+  }
+  
+  .modal-gallery .gallery-close {
+    top: 12px;
+    right: 12px;
+    width: 40px;
+    height: 40px;
+    font-size: 1.2rem;
+  }
+  
+  .modal-gallery .gallery-nav {
+    width: 40px;
+    height: 40px;
+    font-size: 0.9rem;
+  }
+  
+  .modal-gallery .gallery-prev {
+    left: 10px;
+  }
+  
+  .modal-gallery .gallery-next {
+    right: 10px;
+  }
+  
+  .modal-gallery .gallery-caption {
+    bottom: 20px;
+    padding: 6px 16px;
+    font-size: 0.75rem;
+    white-space: normal;
+    max-width: 80%;
+  }
 }
 
 @media (max-width: 640px) {
   .gallery-grid { grid-template-columns: 1fr; gap: 14px; }
   .gallery { padding: 40px 0; }
   .gallery-item { aspect-ratio: 1 / 0.7; }
+}
+
+@media (max-width: 480px) {
+  .modal-gallery .gallery-close {
+    top: 8px;
+    right: 8px;
+    width: 36px;
+    height: 36px;
+    font-size: 1rem;
+  }
+  
+  .modal-gallery .gallery-nav {
+    width: 34px;
+    height: 34px;
+    font-size: 0.8rem;
+  }
+  
+  .modal-gallery .gallery-prev {
+    left: 6px;
+  }
+  
+  .modal-gallery .gallery-next {
+    right: 6px;
+  }
+  
+  .modal-gallery .gallery-caption {
+    bottom: 14px;
+    padding: 4px 12px;
+    font-size: 0.65rem;
+    max-width: 90%;
+  }
 }
 
 /* ===== DELIVERY ===== */

@@ -128,8 +128,6 @@
       </div>
     </section>
 
-    
-
     <!-- ===== CARDÁPIO ===== -->
     <section class="menu" id="cardapio">
       <div class="container">
@@ -466,13 +464,19 @@
   <div id="gallery-modal" class="modal-gallery" aria-hidden="true">
     <div class="modal-overlay" data-close-gallery></div>
     <div class="modal-content gallery-modal-content">
-      <button class="modal-close gallery-close" data-close-gallery><i class="fa-solid fa-xmark"></i></button>
-      <button class="gallery-nav gallery-prev" id="galleryPrev"><i class="fa-solid fa-chevron-left"></i></button>
+      <button class="modal-close gallery-close" data-close-gallery aria-label="Fechar galeria">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+      <button class="gallery-nav gallery-prev" id="galleryPrev" aria-label="Imagem anterior">
+        <i class="fa-solid fa-chevron-left"></i>
+      </button>
       <div class="gallery-image">
         <img src="" alt="" id="galleryImage">
         <div class="gallery-caption" id="galleryCaption"></div>
       </div>
-      <button class="gallery-nav gallery-next" id="galleryNext"><i class="fa-solid fa-chevron-right"></i></button>
+      <button class="gallery-nav gallery-next" id="galleryNext" aria-label="Próxima imagem">
+        <i class="fa-solid fa-chevron-right"></i>
+      </button>
     </div>
   </div>
 

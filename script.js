@@ -32,7 +32,6 @@
     if (!menu || !menuToggle) return;
     menu.classList.toggle("open", open);
     menuToggle.setAttribute("aria-expanded", String(open));
-    // CORRIGIDO: fa-regular → fa-solid
     menuToggle.innerHTML = open
       ? '<i class="fa-solid fa-xmark"></i>'
       : '<i class="fa-solid fa-bars"></i>';
@@ -120,6 +119,10 @@
     galleryModal.classList.add("open");
     galleryModal.setAttribute("aria-hidden", "false");
     document.body.classList.add("menu-open");
+    
+    setTimeout(() => {
+      if (galleryImage) galleryImage.focus();
+    }, 100);
   }
 
   function closeGalleryModal() {
@@ -152,6 +155,14 @@
 
   galleryPrev?.addEventListener("click", prevImage);
   galleryNext?.addEventListener("click", nextImage);
+
+  // ===== FECHAR GALERIA - CORRIGIDO =====
+  // Usa um único listener no modal inteiro para capturar qualquer clique em [data-close-gallery]
+  galleryModal?.addEventListener("click", (event) => {
+    if (event.target.closest("[data-close-gallery]")) {
+      closeGalleryModal();
+    }
+  });
 
   // ===== AÇAÍ MODAL =====
   document.addEventListener("click", (event) => {
@@ -326,13 +337,10 @@
     }
   });
 
-  // ===== FECHAR MODAIS =====
+  // ===== FECHAR CARDÁPIO =====
   document.addEventListener("click", (event) => {
     if (event.target.closest("[data-close-cardapio]")) {
       closeCardapioModal();
-    }
-    if (event.target.closest("[data-close-gallery]")) {
-      closeGalleryModal();
     }
   });
 
