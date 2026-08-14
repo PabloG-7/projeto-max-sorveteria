@@ -14,15 +14,7 @@
   let currentImageIndex = 0;
   let galleryImages = [];
 
-  // Fallback para imagens quebradas
-  document.querySelectorAll("img").forEach((image) => {
-    image.addEventListener("error", () => {
-      const fallback = document.createElement("div");
-      fallback.className = "image-fallback";
-      fallback.textContent = image.alt || "Imagem da Max Sorvetes";
-      image.replaceWith(fallback);
-    }, { once: true });
-  });
+  // ❌ FALLBACK DE IMAGENS QUEBRADAS REMOVIDO COMPLETAMENTE ❌
 
   function whatsApp(message) {
     window.open(`https://wa.me/${phone}?text=${encodeURIComponent(message)}`, "_blank", "noopener");
@@ -156,8 +148,7 @@
   galleryPrev?.addEventListener("click", prevImage);
   galleryNext?.addEventListener("click", nextImage);
 
-  // ===== FECHAR GALERIA - CORRIGIDO =====
-  // Usa um único listener no modal inteiro para capturar qualquer clique em [data-close-gallery]
+  // ===== FECHAR GALERIA =====
   galleryModal?.addEventListener("click", (event) => {
     if (event.target.closest("[data-close-gallery]")) {
       closeGalleryModal();
